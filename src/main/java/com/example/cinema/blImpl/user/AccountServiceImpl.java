@@ -34,16 +34,6 @@ public class AccountServiceImpl implements AccountService {
         //TODO
         User user = accountMapper.getAccountByName(userForm.getUsername());
 
-        if(userForm.getUsername().equals("admin")){//TEST
-            user.setLevel(0);//admin
-        }else if(userForm.getUsername().equals("manager")){
-            user.setLevel(1);
-        }else if(userForm.getUsername().equals("staff")){
-            user.setLevel(2);
-        }else{
-            user.setLevel(3);//user
-        }//TEST END
-
         if (null == user || !user.getPassword().equals(userForm.getPassword())) {
             return null;
         }
