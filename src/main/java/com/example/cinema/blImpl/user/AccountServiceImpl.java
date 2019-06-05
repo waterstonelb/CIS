@@ -30,10 +30,11 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public UserVO login(UserForm userForm) {//TODO
+    public UserVO login(UserForm userForm) {
+        //TODO
         User user = accountMapper.getAccountByName(userForm.getUsername());
 
-        if(userForm.getUsername().equals("root")){//TEST
+        if(userForm.getUsername().equals("admin")){//TEST
             user.setLevel(0);//admin
         }else if(userForm.getUsername().equals("manager")){
             user.setLevel(1);
