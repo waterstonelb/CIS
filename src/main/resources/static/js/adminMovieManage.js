@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
     getMovieList();
-
+    showSidebar();
     $("#movie-form-btn").click(function () {
         var formData = getMovieForm();
         if(!validateMovieForm(formData)) {
@@ -86,5 +86,17 @@ $(document).ready(function(){
                 "</li>";
         });
         $('.movie-on-list').append(movieDomStr);
+    }
+
+    function showSidebar(){
+        var level = sessionStorage.getItem("level");
+        var name = sessionStorage.getItem("username");
+        $("p.title").html(name);
+        if(level==0){
+            $("#sidebar").append('<li role="presentation"><a href="/admin/vip/manage"><i class="icon-credit-card"></i> 会员策略</a></li>');
+            $("#sidebar").append('<li role="presentation"><a href="/admin/usermanage/manage"><i class="icon-user"></i> 员工管理</a></li>');
+        }else if(level==1){
+            $("#sidebar").append('<li role="presentation"><a href="/admin/vip/manage"><i class="icon-credit-card"></i> 会员策略</a></li>');
+        }
     }
 });

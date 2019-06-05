@@ -20,6 +20,11 @@ public class ViewController {
         return "signUp";
     }
 
+    @RequestMapping(value = "/admin/vip/manage")
+    public String getVipManage(){
+        return "adminVIPcard";
+    }
+
     @RequestMapping(value = "/admin/movie/manage")
     public String getAdminMovieManage() {
         return "adminMovieManage";
