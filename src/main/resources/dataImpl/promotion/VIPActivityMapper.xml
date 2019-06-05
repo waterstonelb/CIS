@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cinema.data.promotion.VIPActivityMapper">
+    <select id="getCards" resultMap="VIPActivity">
+        select * from vip_activity
+    </select>
+    <resultMap id="VIPActivity" type="com.example.cinema.po.VIPAtivity">
+        <result column="id" property="id"></result>
+        <result column="card_name" property="cardName"></result>
+        <result column="card_price" property="cardPrice"></result>
+        <result column="target_amount" property="targetAmount"></result>
+        <result column="discount_amount" property="discountAmount"></result>
+        <result column="discount" property="discount"></result>
+        <result column="status" property="status"></result>
+    </resultMap>
+
+</mapper>

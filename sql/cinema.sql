@@ -342,9 +342,36 @@ INSERT INTO `vip_card` VALUES (1,15,375,'2019-04-21 13:54:38'),(2,12,660,'2019-0
 UNLOCK TABLES;
 
 --
--- Dumping events for database 'cinema'
+--table structure for table `vip_activity`
+--
+DROP TABLE IF EXISTS `vip_activity`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vip_activity` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `card_name` varchar(50) NOT NULL ,
+  `card_price` double NOT NULL,
+  `target_amount` double NOT NULL,
+  `discount_amount` double NOT NULL,
+  `discount` float NOT NULL,
+  `status` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vip_activity`
 --
 
+LOCK TABLES `vip_activity` WRITE;
+/*!40000 ALTER TABLE `vip_activity` DISABLE KEYS */;
+INSERT INTO `vip_activity` VALUES (1,"测试卡1",100,200,50,0.8,1),(2,"测试卡2",200,500,100,0.7,1);
+/*!40000 ALTER TABLE `vip_activity` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping events for database 'cinema'
+--
 --
 -- Dumping routines for database 'cinema'
 --
