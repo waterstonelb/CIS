@@ -2,6 +2,7 @@ package com.example.cinema.controller.promotion;
 
 import com.example.cinema.bl.promotion.VIPActivityService;
 import com.example.cinema.vo.ResponseVO;
+import com.example.cinema.vo.VIPActivityForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,5 +21,19 @@ public class VIPActivityController{
     @GetMapping("/getAll")
     public ResponseVO getCards(){
         return vipActivityService.getCards();
+    }
+
+    @PostMapping("/updata")
+    public ResponseVO updataVIPActivity(@RequestBody VIPActivityForm vipActivityForm){
+        return vipActivityService.updataVIPActivity(vipActivityForm);
+    }
+
+    @PostMapping("/invalid/{id}")
+    public ResponseVO changeStatusToInvalid(@PathVariable int id){
+        return vipActivityService.changeStatusToInvalid(id);
+    }
+    @PostMapping("/valid/{id}")
+    public ResponseVO changeStatusToValid(@PathVariable int id){
+        return vipActivityService.changeStatusToValid(id);
     }
 }

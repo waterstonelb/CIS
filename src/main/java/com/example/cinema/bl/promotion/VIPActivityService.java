@@ -1,6 +1,8 @@
 package com.example.cinema.bl.promotion;
 
 import com.example.cinema.vo.ResponseVO;
+import com.example.cinema.vo.VIPActivityForm;
+
 
 public interface VIPActivityService{
     /**
@@ -8,4 +10,25 @@ public interface VIPActivityService{
      * @return List<vip_activity>
      */
     ResponseVO getCards();
+
+    /**
+     * 更新对应vip卡
+     * @param vipActivityVO
+     * @return
+     */
+    ResponseVO updataVIPActivity(VIPActivityForm vipActivityForm);
+
+    /**
+     * 将对id的卡标记为失效
+     * @param id
+     * @return
+     */
+    ResponseVO changeStatusToInvalid(int id);
+
+    /**
+     * 将对id的卡标记为有效
+     * @param id
+     * @return
+     */
+    ResponseVO changeStatusToValid(int id);
 }

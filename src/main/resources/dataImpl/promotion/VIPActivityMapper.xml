@@ -4,6 +4,16 @@
     <select id="getCards" resultMap="VIPActivity">
         select * from vip_activity
     </select>
+    <update id="updataVIPActivity" parameterType="com.example.cinema.po.VIPAtivity">
+        update vip_activity set card_name=#{cardName},card_price=#{cardPrice},target_amount=targetAmount,
+         discount_amount=discountAmount,discount=#{discount}  where id=#{id}
+    </update>
+    <update id="changeStatusToInvalid">
+        update vip_activity set status = 0 where id = #{id}
+    </update>
+    <update id="changeStatusToValid">
+        update vip_activity set status = 1 where id = #{id}
+    </update>
     <resultMap id="VIPActivity" type="com.example.cinema.po.VIPAtivity">
         <result column="id" property="id"></result>
         <result column="card_name" property="cardName"></result>
