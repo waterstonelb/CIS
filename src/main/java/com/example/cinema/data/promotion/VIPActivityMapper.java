@@ -15,6 +15,13 @@ public interface VIPActivityMapper {
     List<VIPAtivity> getCards();
 
     /**
+     * 添加新卡
+     * @param vipAtivity
+     * @return
+     */
+    int addNewCard(VIPAtivity vipAtivity);
+
+    /**
      * 更新对应vip卡
      * @param vipAtivity
      * @return

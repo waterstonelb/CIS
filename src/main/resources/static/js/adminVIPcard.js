@@ -45,4 +45,31 @@ $(document).ready(function(){
         });
         $(".content-vipcard").append(innerValidHTML);
     }
+
+    $("#vip-form-btn").click(function () {
+        var form={
+            cardName: $("#vip-name-input").val(),
+            cardPrice: $("#vip-price-input").val(),
+            targetAmount: $("#vip-target-input").val(),
+            discountAmount: $("#vip-discountamount-input").val(),
+            discount: $("#vip-discount-input").val()
+        };
+        postRequest(
+            '/vipactivity/addcard',
+            form,
+            function (res) {
+                if(res.success){
+                    getVIPvard();
+                    $("#vipcardModal").modal('hide');
+                } else {
+                    alert(res.message);
+                }
+            },
+            function (error) {
+                alert(JSON.stringify(error));
+            }
+        );
+    });
+
+
 });

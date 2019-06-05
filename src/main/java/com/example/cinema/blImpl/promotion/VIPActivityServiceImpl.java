@@ -30,6 +30,23 @@ public class VIPActivityServiceImpl implements VIPActivityService {
     }
 
     @Override
+    public ResponseVO addNewCard(VIPActivityForm vipActivityForm){
+        try{
+            VIPAtivity vipAtivity=new VIPAtivity();
+            vipAtivity.setCardName(vipActivityForm.getCardName());
+            vipAtivity.setCardPrice(vipActivityForm.getCardPrice());
+            vipAtivity.setTargetAmount(vipActivityForm.getTargetAmount());
+            vipAtivity.setDiscountAmount(vipActivityForm.getDiscountAmount());
+            vipAtivity.setDiscount(vipActivityForm.getDiscount());
+            vipActivityMapper.addNewCard(vipAtivity);
+            return ResponseVO.buildSuccess();
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseVO.buildFailure("添加新卡失败");
+        }
+    }
+
+    @Override
     public ResponseVO updataVIPActivity(VIPActivityForm vipActivityForm){
         try{
             VIPAtivity vipAtivity=new VIPAtivity();

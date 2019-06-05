@@ -12,8 +12,14 @@ public interface VIPActivityService{
     ResponseVO getCards();
 
     /**
+     * 添加新卡
+     * @param vipActivityForm
+     * @return
+     */
+    ResponseVO addNewCard(VIPActivityForm vipActivityForm);
+    /**
      * 更新对应vip卡
-     * @param vipActivityVO
+     * @param vipActivityForm
      * @return
      */
     ResponseVO updataVIPActivity(VIPActivityForm vipActivityForm);

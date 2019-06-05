@@ -23,6 +23,11 @@ public class VIPActivityController{
         return vipActivityService.getCards();
     }
 
+    @PostMapping("/addcard")
+    public ResponseVO addNewCard(@RequestBody VIPActivityForm vipActivityForm){
+        return vipActivityService.addNewCard(vipActivityForm);
+    }
+
     @PostMapping("/updata")
     public ResponseVO updataVIPActivity(@RequestBody VIPActivityForm vipActivityForm){
         return vipActivityService.updataVIPActivity(vipActivityForm);
