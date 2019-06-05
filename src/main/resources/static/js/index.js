@@ -10,12 +10,20 @@ $(document).ready(function () {
             '/login',
             formData,
             function (res) {
-                if (res.success) {
+                if (res.success) {//TODO
 //                	alert(res);
                     sessionStorage.setItem('username', formData.username);
                     sessionStorage.setItem('id', res.content.id);
-                    if (formData.username == "root") {
+                    sessionStorage.setItem('level',res.content.level);
+                    //sessionStorage.setItem('level',0);
+                    if (sessionStorage.getItem('level') == 0) {
                         sessionStorage.setItem('role', 'admin');
+                        window.location.href = "/admin/movie/manage"
+                    }else if(sessionStorage.getItem('level') == 1){
+                        sessionStorage.setItem('role', 'manager');
+                        window.location.href = "/admin/movie/manage"
+                    }else if(sessionStorage.getItem('level') == 2){
+                        sessionStorage.setItem('role', 'staff');
                         window.location.href = "/admin/movie/manage"
                     } else {
                         sessionStorage.setItem('role', 'user');

@@ -30,12 +30,25 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public UserVO login(UserForm userForm) {
+    public UserVO login(UserForm userForm) {//TODO
         User user = accountMapper.getAccountByName(userForm.getUsername());
+
+        if(userForm.getUsername().equals("root")){//TEST
+            user.setLevel(0);//admin
+        }else{
+            user.setLevel(3);//user
+        }//TEST END
+
         if (null == user || !user.getPassword().equals(userForm.getPassword())) {
             return null;
         }
-        return new UserVO(user);
+
+        UserVO userVO = new UserVO();
+        userVO.setId(user.getId());
+        userVO.setLevel(user.getLevel());
+        userVO.setPassword(user.getPassword());
+        userVO.setUsername(user.getUsername());
+        return userVO;
     }
 
 }
