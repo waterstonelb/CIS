@@ -11,4 +11,7 @@ $(document).ready(function(){
             $("#sidebar").append('<li role="presentation" class="active"><a href="#"><i class="icon-credit-card"></i> 会员策略</a></li>');
         }
     }
+    function getVIPvard() {
+    
+    }
 });
