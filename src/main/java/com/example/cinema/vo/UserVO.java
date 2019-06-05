@@ -10,13 +10,23 @@ public class UserVO {
     private Integer id;
     private String username;
     private String password;
+    private Integer level;
 
     public UserVO(User user){
         this.id = user.getId();
         this.username = user.getUsername();
         this.password = user.getPassword();
     }
+    public UserVO(){
+        
+    }
 
+    public Integer getLevel(){
+        return level;
+    }
+    public void setLevel(Integer level){
+        this.level = level;
+    }
     public Integer getId() {
         return id;
     }
