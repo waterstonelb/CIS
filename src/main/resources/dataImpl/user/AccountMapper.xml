@@ -3,7 +3,7 @@
 <mapper namespace="com.example.cinema.data.user.AccountMapper">
     <insert id="createNewAccount" useGeneratedKeys="true" keyProperty="id">
         insert into user(username,password,level)
-        values(#{username},#{password},3)
+        values(#{username},#{password},#{level})
     </insert>
     <select id="getAccountByName" resultMap="User">
         select * from user where username=#{username}

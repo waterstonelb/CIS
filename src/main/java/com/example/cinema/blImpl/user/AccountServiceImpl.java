@@ -22,7 +22,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public ResponseVO registerAccount(UserForm userForm) {
         try {
-            accountMapper.createNewAccount(userForm.getUsername(), userForm.getPassword());
+            accountMapper.createNewAccount(userForm.getUsername(), userForm.getPassword(),3);
         } catch (Exception e) {
             return ResponseVO.buildFailure(ACCOUNT_EXIST);
         }
