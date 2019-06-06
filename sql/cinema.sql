@@ -394,7 +394,7 @@ CREATE TABLE `user_charge` (
 
 LOCK TABLES `user_charge` WRITE;
 /*!40000 ALTER TABLE `user_charge` DISABLE KEYS */;
-INSERT INTO `user_charge` VALUES (1,15,1000),(1,15,200);
+INSERT INTO `user_charge` VALUES (1,15,1000),(2,15,200);
 /*!40000 ALTER TABLE `user_charge` ENABLE KEYS */;
 UNLOCK TABLES;
 --

@@ -23,6 +23,9 @@ public class VIPActivityController{
         return vipActivityService.getCards();
     }
 
+    @GetMapping("/getValid")
+    public ResponseVO getValidVIPCards(){ return vipActivityService.getValidVIPCards();}
+
     @PostMapping("/addcard")
     public ResponseVO addNewCard(@RequestBody VIPActivityForm vipActivityForm){
         return vipActivityService.addNewCard(vipActivityForm);

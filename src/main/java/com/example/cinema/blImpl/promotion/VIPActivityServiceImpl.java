@@ -19,10 +19,10 @@ public class VIPActivityServiceImpl implements VIPActivityService {
     VIPActivityMapper vipActivityMapper;
 
     @Override
-    public ResponseVO getCards(){
-        try{
+    public ResponseVO getCards() {
+        try {
             return ResponseVO.buildSuccess(POListToVOList(vipActivityMapper.getCards()));
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("fail");
         }
@@ -30,9 +30,25 @@ public class VIPActivityServiceImpl implements VIPActivityService {
     }
 
     @Override
-    public ResponseVO addNewCard(VIPActivityForm vipActivityForm){
-        try{
-            VIPAtivity vipAtivity=new VIPAtivity();
+    public ResponseVO getValidVIPCards() {
+        try {
+            List<VIPAtivity> vipAtivityList = vipActivityMapper.getCards();
+            List<VIPAtivity> validList=new ArrayList<>();
+            for (VIPAtivity vip : vipAtivityList) {
+                if(vip.getStatus()==1)
+                    validList.add(vip);
+            }
+            return ResponseVO.buildSuccess(POListToVOList(validList));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseVO.buildFailure("获取有效会员卡失败");
+        }
+    }
+
+    @Override
+    public ResponseVO addNewCard(VIPActivityForm vipActivityForm) {
+        try {
+            VIPAtivity vipAtivity = new VIPAtivity();
             vipAtivity.setCardName(vipActivityForm.getCardName());
             vipAtivity.setCardPrice(vipActivityForm.getCardPrice());
             vipAtivity.setTargetAmount(vipActivityForm.getTargetAmount());
@@ -41,16 +57,16 @@ public class VIPActivityServiceImpl implements VIPActivityService {
             vipAtivity.setStatus(1);
             vipActivityMapper.addNewCard(vipAtivity);
             return ResponseVO.buildSuccess();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("添加新卡失败");
         }
     }
 
     @Override
-    public ResponseVO updataVIPActivity(VIPActivityForm vipActivityForm){
-        try{
-            VIPAtivity vipAtivity=new VIPAtivity();
+    public ResponseVO updataVIPActivity(VIPActivityForm vipActivityForm) {
+        try {
+            VIPAtivity vipAtivity = new VIPAtivity();
             vipAtivity.setId(vipActivityForm.getId());
             vipAtivity.setCardName(vipActivityForm.getCardName());
             vipAtivity.setCardPrice(vipActivityForm.getCardPrice());
@@ -60,38 +76,38 @@ public class VIPActivityServiceImpl implements VIPActivityService {
             vipAtivity.setStatus(1);
             vipActivityMapper.updataVIPActivity(vipAtivity);
             return ResponseVO.buildSuccess();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("更新会员卡失败");
         }
     }
 
     @Override
-    public  ResponseVO changeStatusToInvalid(int id){
-        try{
+    public ResponseVO changeStatusToInvalid(int id) {
+        try {
             vipActivityMapper.changeStatusToInvalid(id);
             return ResponseVO.buildSuccess();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("更新失败");
         }
     }
 
     @Override
-    public  ResponseVO changeStatusToValid(int id){
-        try{
+    public ResponseVO changeStatusToValid(int id) {
+        try {
             vipActivityMapper.changeStatusToValid(id);
             return ResponseVO.buildSuccess();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("更新失败");
         }
     }
 
 
-    private List<VIPActivityVO> POListToVOList(List<VIPAtivity> POlist){
-        List<VIPActivityVO> VOlist=new ArrayList<>();
-        for (VIPAtivity vip: POlist) {
+    private List<VIPActivityVO> POListToVOList(List<VIPAtivity> POlist) {
+        List<VIPActivityVO> VOlist = new ArrayList<>();
+        for (VIPAtivity vip : POlist) {
             VOlist.add(new VIPActivityVO(vip));
         }
         return VOlist;

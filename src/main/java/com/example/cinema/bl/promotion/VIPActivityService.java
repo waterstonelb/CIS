@@ -12,6 +12,12 @@ public interface VIPActivityService{
     ResponseVO getCards();
 
     /**
+     * 查找所有有效卡
+     * @return
+     */
+    ResponseVO getValidVIPCards();
+
+    /**
      * 添加新卡
      * @param vipActivityForm
      * @return

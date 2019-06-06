@@ -1,11 +1,35 @@
 $(document).ready(function () {
     getVIP();
     getCoupon();
+    getVIPCards();
 });
 
 var isBuyState = true;
 var vipCardId;
 
+function getVIPCards() {
+    getRequest(
+        '/vipactivity/getValid',
+        function (res) {
+            renderVIPCards(res.content);
+        }
+    );
+}
+function renderVIPCards(list) {
+    $("#user-vip-list").empty();
+    var innerHTML="";
+    list.forEach(function (card) {
+        innerHTML+="<div class='info'>"+
+            "            <div class='card-id'>" +card.cardName+
+            "<span class=\"label label-warning\">ID:"+card.id+"</span>"+
+            "            </div>"+
+            "            <div class=\"price\"><b id=\"member-buy-price\">"+card.cardPrice+"</b>元/张</div>" +
+            "            <div id=\"member-buy-description\" class=\"description\">"+"充值优惠:满"+card.targetAmount+"送"+card.discountAmount+"</div>" +
+            "            <div class='description'> 购票打"+card.discount*10+"折</div> "+
+            "            <button onclick=\"buyClick()\">立即购买</button>"+"</div>"
+    });
+    $("#user-vip-list").append(innerHTML);
+}
 function getVIP() {
     getRequest(
         '/vip/' + sessionStorage.getItem('id') + '/get',
@@ -29,7 +53,7 @@ function getVIP() {
         function (error) {
             alert(error);
         });
-
+    /**
     getRequest(
         '/vip/getVIPInfo',
         function (res) {
@@ -44,19 +68,19 @@ function getVIP() {
         },
         function (error) {
             alert(error);
-        });
+        });*/
 }
 
 function buyClick() {
     clearForm();
-    $('#buyModal').modal('show')
+    $('#buyModal').modal('show');
     $("#userMember-amount-group").css("display", "none");
     isBuyState = true;
 }
 
 function chargeClick() {
     clearForm();
-    $('#buyModal').modal('show')
+    $('#buyModal').modal('show');
     $("#userMember-amount-group").css("display", "");
     isBuyState = false;
 }
