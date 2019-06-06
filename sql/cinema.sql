@@ -384,6 +384,7 @@ CREATE TABLE `user_charge` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `charge` double NOT NULL,
+  `charge_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -394,7 +395,7 @@ CREATE TABLE `user_charge` (
 
 LOCK TABLES `user_charge` WRITE;
 /*!40000 ALTER TABLE `user_charge` DISABLE KEYS */;
-INSERT INTO `user_charge` VALUES (1,15,1000),(2,15,200);
+INSERT INTO `user_charge` VALUES (1,15,1000,'2019-04-21 13:54:38'),(2,15,200,'2019-05-21 13:54:38');
 /*!40000 ALTER TABLE `user_charge` ENABLE KEYS */;
 UNLOCK TABLES;
 --
