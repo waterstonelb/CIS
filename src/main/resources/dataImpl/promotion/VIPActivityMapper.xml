@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cinema.data.promotion.VIPActivityMapper">
+    <select id="getCards" resultMap="VIPActivity">
+        select * from vip_activity
+    </select>
+    <insert id="addNewCard" parameterType="com.example.cinema.po.VIPAtivity" useGeneratedKeys="true" keyProperty="id">
+        insert into vip_activity(card_name,card_price,target_amount,discount_amount,discount,status)
+        values (#{cardName},#{cardPrice},#{targetAmount},#{discountAmount},#{discount},#{status})
+    </insert>
+    <update id="updataVIPActivity" parameterType="com.example.cinema.po.VIPAtivity">
+        update vip_activity set card_name=#{cardName},card_price=#{cardPrice},target_amount=#{targetAmount},
+         discount_amount=#{discountAmount},discount=#{discount}  where id=#{id}
+    </update>
+    <update id="changeStatusToInvalid">
+        update vip_activity set status = 0 where id = #{id}
+    </update>
+    <update id="changeStatusToValid">
+        update vip_activity set status = 1 where id = #{id}
+    </update>
+    <resultMap id="VIPActivity" type="com.example.cinema.po.VIPAtivity">
+        <result column="id" property="id"></result>
+        <result column="card_name" property="cardName"></result>
+        <result column="card_price" property="cardPrice"></result>
+        <result column="target_amount" property="targetAmount"></result>
+        <result column="discount_amount" property="discountAmount"></result>
+        <result column="discount" property="discount"></result>
+        <result column="status" property="status"></result>
+    </resultMap>
+
+</mapper>

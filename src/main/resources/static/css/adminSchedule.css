@@ -38,3 +38,7 @@
     width: 150px;
     text-align: center;
 }
+
+input::-webkit-search-cancel-button{
+    display: none;
+  }

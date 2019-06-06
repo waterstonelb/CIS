@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>人员管理</title>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/adminUser.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"/>
+
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/request.js"></script>
+    <script src="/js/adminUserManage.js"></script>
+
+</head>
+<body>
+<div class="main-container">
+    <div class="nav-left-container">
+        <div class="nav-user-container" style="margin-bottom: 50px;">
+            <img class="avatar-lg" src="/images/defaultAvatar.jpg" />
+            <p class="title"></p>
+        </div>
+        <ul class="nav nav-pills nav-stacked" id="sidebar">
+                <li role="presentation"><a href="/admin/movie/manage"><i class="icon-film"></i> 电影管理</a></li>
+                <li role="presentation"><a href="/admin/session/manage"><i class="icon-calendar"></i> 排片管理</a></li>
+                <li role="presentation"><a href="/admin/promotion/manage"><i class="icon-gift"></i> 活动管理</a></li>
+                <li role="presentation"><a href="/admin/cinema/manage"><i class="icon-cogs"></i> 影院管理</a></li>
+                <li role="presentation"><a href="/admin/cinema/statistic"><i class="icon-bar-chart"></i> 影院统计</a></li>
+        </ul>
+    </div>
+    <div class="content-container">
+        <div class="content-header">
+            <span class="title gray-text">员工管理</span>
+            <button type="button" class="btn btn-primary" data-backdrop="static" data-toggle="modal" data-target="#userAdd"><i class="icon-plus-sign"></i> 新增员工</button>
+            <!-- <button type="button" class="btn btn-primary" data-backdrop="static" data-toggle="modal" data-target="#userModify"><i class="icon-plus-sign"></i> 修改员工信息</button>
+            <button type="button" class="btn btn-primary" data-backdrop="static" data-toggle="modal" data-target="#userDelete"><i class="icon-plus-sign"></i> 删除员工信息</button> -->
+        </div>
+        <div class="um-blk">
+            <div class="um-blk-header">经理</div>
+            <ul class="um-blk-list" id="manager">
+                <li class="card">
+                    <div class="um-card-info">
+                        用户名：<span>haha</span> 密码：<span>123456</span>
+                    </div>
+                    <button type="button">修改</button>
+                    <button type="button">删除</button>
+                </li>
+            </ul>
+        </div>
+        <div class="um-blk">
+            <div class="um-blk-header">员工</div>
+            <ul class="um-blk-list" id="staff">
+                <li class="card">
+                    <div class="um-card-info">
+                        用户名：<span>sky</span> 密码：<span>123456</span>
+                    </div>
+                    <button type="button">修改</button>
+                    <button type="button">删除</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="modal fade" id="userAdd" tabindex="-1" role="dialog" aria-labelledby="userAddModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="userAddModalLabel">增添员工</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="user-name-input"><span class="error-text">*</span>用户名</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="user-name-input" placeholder="请输入用户名">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="user-password-input"><span class="error-text">*</span>密码</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="user-password-input" placeholder="请输入密码">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="password-again-input"><span class="error-text">*</span>再次输入</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="password-again-input" placeholder="请再次输入密码">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="user-form-btn">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

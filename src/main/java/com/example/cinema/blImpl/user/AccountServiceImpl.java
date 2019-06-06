@@ -22,7 +22,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public ResponseVO registerAccount(UserForm userForm) {
         try {
-            accountMapper.createNewAccount(userForm.getUsername(), userForm.getPassword());
+            accountMapper.createNewAccount(userForm.getUsername(), userForm.getPassword(),3);
         } catch (Exception e) {
             return ResponseVO.buildFailure(ACCOUNT_EXIST);
         }
@@ -31,11 +31,19 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public UserVO login(UserForm userForm) {
+        //TODO
         User user = accountMapper.getAccountByName(userForm.getUsername());
+
         if (null == user || !user.getPassword().equals(userForm.getPassword())) {
             return null;
         }
-        return new UserVO(user);
+
+        UserVO userVO = new UserVO();
+        userVO.setId(user.getId());
+        userVO.setLevel(user.getLevel());
+        userVO.setPassword(user.getPassword());
+        userVO.setUsername(user.getUsername());
+        return userVO;
     }
 
 }

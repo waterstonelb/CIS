@@ -141,7 +141,7 @@ $(document).ready(function(){
                 getMovie();
             },
             function (error) {
-                alert(error);
+                alert(error.message);
             });
     });
 
