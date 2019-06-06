@@ -11,6 +11,8 @@ $(document).ready(function() {
 
     getPolularMovie();
 
+    showSidebar();
+
     function getScheduleRate() {
 
         getRequest(
@@ -73,6 +75,17 @@ $(document).ready(function() {
                 alert(JSON.stringify(error));
             }
         );
+    }
+     function showSidebar(){
+        var level = sessionStorage.getItem("level");
+        var name = sessionStorage.getItem("username");
+        $("p.title").html(name);
+        if(level==0){
+            $("#sidebar").append('<li role="presentation"><a href="/admin/vip/manage"><i class="icon-credit-card"></i> 会员策略</a></li>');
+            $("#sidebar").append('<li role="presentation"><a href="/admin/usermanage/manage"><i class="icon-user"></i> 员工管理</a></li>');
+        }else if(level==1){
+            $("#sidebar").append('<li role="presentation"><a href="/admin/vip/manage"><i class="icon-credit-card"></i> 会员策略</a></li>');
+        }
     }
 
     function getBoxOffice() {
@@ -151,14 +164,14 @@ $(document).ready(function() {
     // TODO:
     function getPlacingRate() {
         getRequest(
-            'statistics/PlacingRate',
+            '/statistics/placing/rate',
             function (res) {
                 var data = res.content || [];
                 var tableData = data.map(function (item) {
-                    return item.price;
+                    return item.placingrate;
                 });
                 var nameList = data.map(function (item) {
-                    return formatDate(new Date(item.date));
+                    return item.name;
                 });
                 var option = {
                     title : {
@@ -174,7 +187,7 @@ $(document).ready(function() {
                     },
                     series: [{
                         data: tableData,
-                        type: 'line'
+                        type: 'bar'
                     }]
                 };
                 var scheduleRateChart = echarts.init($("#place-rate-container")[0]);
@@ -235,5 +248,7 @@ $(document).ready(function() {
         $('#popular-movie-container').remove();
         $('#actionform').after('<div class="card table-container" id="popular-movie-container"></div>');
         getPolularMovie();
-     });
-});
+     
+    })
+    
+})

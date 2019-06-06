@@ -52,7 +52,8 @@ public interface StatisticsMapper {
     /**
      *查询上座率 
      *@param date
+     * @param nextDate 
      *@return
      */
-    List<PlacingRate> selectPlacingRate(@Param("date") Date date);
+    List<PlacingRate> selectPlacingRate(@Param("date") Date date, @Param("nextdata")Date nextDate);
 }

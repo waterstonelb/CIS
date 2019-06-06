@@ -5,34 +5,25 @@ package com.example.cinema.po;
  * @date 2019/5/14 ?:?? AM
  */
 public class PlacingRate {
-    private Integer movieId;
+    private Double placingrate;
     /**
      * 票房(单位：元)，(PS:如果后续数据量大，可自行处理单位，如改成单位：万元)
      */
-    private Integer boxOffice;
     private String name;
 
-    public Integer getMovieId() {
-        return movieId;
+    public Double getplacingrate() {
+        return placingrate;
     }
 
-    public void setMovieId(Integer movieId) {
-        this.movieId = movieId;
+    public void setplacingrate(double placingrate) {
+        this.placingrate = placingrate;
     }
 
-    public Integer getBoxOffice() {
-        return boxOffice;
-    }
-
-    public void setBoxOffice(Integer boxOffice) {
-        this.boxOffice = boxOffice;
-    }
-
-    public String getName() {
+    public String getname () {
         return name;
     }
 
-    public void setName(String name) {
+    public void setname(String name) {
         this.name = name;
     }
 }

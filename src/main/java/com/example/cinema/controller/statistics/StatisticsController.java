@@ -6,6 +6,8 @@ import com.example.cinema.vo.ResponseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -34,9 +36,17 @@ public class StatisticsController {
         return statisticsService.getAudiencePriceSevenDays();
     }
 
-    @RequestMapping(value = "statistics/PlacingRate", method = RequestMethod.GET)
-    public ResponseVO getMoviePlacingRateByDate(@RequestParam Date date){
-        return statisticsService.getMoviePlacingRateByDate(date);
+    @RequestMapping(value = "statistics/placing/rate", method = RequestMethod.GET)
+    public ResponseVO getMoviePlacingRateByDate(@RequestParam(required = false) Date date){
+    	Date requireDate = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+			requireDate = simpleDateFormat.parse(simpleDateFormat.format(requireDate));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
+        return statisticsService.getMoviePlacingRateByDate(requireDate);
     }
 
     @RequestMapping(value = "statistics/popular/movie", method = RequestMethod.GET)

@@ -5,10 +5,12 @@ import com.example.cinema.data.statistics.StatisticsMapper;
 import com.example.cinema.po.AudiencePrice;
 import com.example.cinema.po.MovieScheduleTime;
 import com.example.cinema.po.MovieTotalBoxOffice;
+import com.example.cinema.po.PlacingRate;
 import com.example.cinema.po.PopularMovies;
 import com.example.cinema.vo.AudiencePriceVO;
 import com.example.cinema.vo.MovieScheduleTimeVO;
 import com.example.cinema.vo.MovieTotalBoxOfficeVO;
+import com.example.cinema.vo.PlacingRateVO;
 import com.example.cinema.vo.PopularMoviesVO;
 import com.example.cinema.vo.ResponseVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,8 +86,19 @@ public class StatisticsServiceImpl implements StatisticsService {
 
     @Override
     public ResponseVO getMoviePlacingRateByDate(Date date) {
-        //要求见接口说明
-        return null;
+        try {
+            Date requireDate = date;
+            if(requireDate == null){
+                requireDate = new Date();
+            }
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            requireDate = simpleDateFormat.parse(simpleDateFormat.format(requireDate));
+            Date nextDate = getNumDayAfterDate(requireDate, 1);
+            return ResponseVO.buildSuccess(PlacingRateList2MovieTotalBoxOfficeVOList(statisticsMapper.selectPlacingRate(requireDate,nextDate)));
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseVO.buildFailure("失败");
+        }
     }
 
     @Override
@@ -143,5 +156,13 @@ public class StatisticsServiceImpl implements StatisticsService {
         	PopularMoviesVOList.add(new PopularMoviesVO(popularMovies));
         }
         return PopularMoviesVOList;
+    }
+    
+    private List<PlacingRateVO> PlacingRateList2MovieTotalBoxOfficeVOList(List<PlacingRate> datas){
+        List<PlacingRateVO> PlacingRateVOList = new ArrayList<>();
+        for(PlacingRate placingrate : datas){
+        	PlacingRateVOList.add(new PlacingRateVO(placingrate));
+        }
+        return PlacingRateVOList;
     }
 }
