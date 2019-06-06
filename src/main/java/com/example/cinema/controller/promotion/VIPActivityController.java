@@ -33,11 +33,11 @@ public class VIPActivityController{
         return vipActivityService.updataVIPActivity(vipActivityForm);
     }
 
-    @PostMapping("/invalid/{id}")
+    @GetMapping("/invalid/{id}")
     public ResponseVO changeStatusToInvalid(@PathVariable int id){
         return vipActivityService.changeStatusToInvalid(id);
     }
-    @PostMapping("/valid/{id}")
+    @GetMapping("/valid/{id}")
     public ResponseVO changeStatusToValid(@PathVariable int id){
         return vipActivityService.changeStatusToValid(id);
     }

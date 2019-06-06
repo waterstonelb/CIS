@@ -34,6 +34,16 @@ public class VIPActivityVO {
      */
     private float discount;
 
+    private int status;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     public VIPActivityVO(VIPAtivity vipAtivity){
         this.id=vipAtivity.getId();
         this.targetAmount=vipAtivity.getTargetAmount();
@@ -41,6 +51,7 @@ public class VIPActivityVO {
         this.discount=vipAtivity.getDiscount();
         this.cardName=vipAtivity.getCardName();
         this.cardPrice=vipAtivity.getCardPrice();
+        this.status=vipAtivity.getStatus();
     }
 
     public String getCardName() {

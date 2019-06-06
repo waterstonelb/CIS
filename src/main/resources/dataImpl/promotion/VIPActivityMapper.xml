@@ -9,8 +9,8 @@
         values (#{cardName},#{cardPrice},#{targetAmount},#{discountAmount},#{discount},#{status})
     </insert>
     <update id="updataVIPActivity" parameterType="com.example.cinema.po.VIPAtivity">
-        update vip_activity set card_name=#{cardName},card_price=#{cardPrice},target_amount=targetAmount,
-         discount_amount=discountAmount,discount=#{discount}  where id=#{id}
+        update vip_activity set card_name=#{cardName},card_price=#{cardPrice},target_amount=#{targetAmount},
+         discount_amount=#{discountAmount},discount=#{discount}  where id=#{id}
     </update>
     <update id="changeStatusToInvalid">
         update vip_activity set status = 0 where id = #{id}

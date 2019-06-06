@@ -38,6 +38,7 @@ public class VIPActivityServiceImpl implements VIPActivityService {
             vipAtivity.setTargetAmount(vipActivityForm.getTargetAmount());
             vipAtivity.setDiscountAmount(vipActivityForm.getDiscountAmount());
             vipAtivity.setDiscount(vipActivityForm.getDiscount());
+            vipAtivity.setStatus(1);
             vipActivityMapper.addNewCard(vipAtivity);
             return ResponseVO.buildSuccess();
         }catch (Exception e){
@@ -50,11 +51,13 @@ public class VIPActivityServiceImpl implements VIPActivityService {
     public ResponseVO updataVIPActivity(VIPActivityForm vipActivityForm){
         try{
             VIPAtivity vipAtivity=new VIPAtivity();
+            vipAtivity.setId(vipActivityForm.getId());
             vipAtivity.setCardName(vipActivityForm.getCardName());
             vipAtivity.setCardPrice(vipActivityForm.getCardPrice());
             vipAtivity.setTargetAmount(vipActivityForm.getTargetAmount());
             vipAtivity.setDiscountAmount(vipActivityForm.getDiscountAmount());
             vipAtivity.setDiscount(vipActivityForm.getDiscount());
+            vipAtivity.setStatus(1);
             vipActivityMapper.updataVIPActivity(vipAtivity);
             return ResponseVO.buildSuccess();
         }catch (Exception e){
