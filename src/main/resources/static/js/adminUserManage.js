@@ -49,9 +49,7 @@ $(document).ready(function(){
         }
     }
 });
-function getThisName(data){
-    return (data.parentNode.children[0].children[0].innerHTML);
-}
+
 function modifyUser(data){
     var username = getThisName(data);
     $("#userModifyModalLabel").html("当前员工:"+username);
@@ -129,12 +127,14 @@ function renderManagerList(list){
     var mlDomStr = "";
     list.forEach(element => {
         mlDomStr+=
-        '<li class="card">'+
+        '<li class="um-card">'+
             '<div class="um-card-info">'+
-                '用户名：<span>'+element.username+'</span> 密码：<span>'+element.password+'</span>'+
+                '<span class="um-username">用户名：'+element.username+'</span> <span class="um-password">密码：'+element.password+'</span>'+
             '</div>'+
-            '<button type="button" onclick="modifyUser(this)" data-backdrop="static" data-toggle="modal" data-target="#userModify"">修改</button>'+
-            '<button type="button" onclick="deleteUser(this)">删除</button>'+
+            '<div class="button-div">'+
+            '<button type="button" class="user-button" onclick="modifyUser(this)" data-backdrop="static" data-toggle="modal" data-target="#userModify"">修改</button>'+
+            '<button type="button" class="user-button" onclick="deleteUser(this)">删除</button>'+
+            '</div>'+
         '</li>'
     });
     $('#manager').append(mlDomStr);
@@ -144,13 +144,18 @@ function renderStaffList(list){
     var slDomStr = "";
     list.forEach(element => {
         slDomStr+=
-        '<li class="card">'+
+        '<li class="um-card">'+
             '<div class="um-card-info">'+
-                '用户名：<span>'+element.username+'</span> 密码：<span>'+element.password+'</span>'+
+            '<span class="um-username">用户名：'+element.username+'</span> <span class="um-password">密码：'+element.password+'</span>'+
             '</div>'+
-            '<button type="button" onclick="modifyUser(this)" data-backdrop="static" data-toggle="modal" data-target="#userModify">修改</button>'+
-            '<button type="button" onclick="deleteUser(this)">删除</button>'+
+            '<div class="button-div">'+
+            '<button type="button" class="user-button" onclick="modifyUser(this)" data-backdrop="static" data-toggle="modal" data-target="#userModify">修改</button>'+
+            '<button type="button" class="user-button" onclick="deleteUser(this)">删除</button>'+
+            '</div>'+
         '</li>'
     });
     $('#staff').append(slDomStr);
+}
+function getThisName(data){
+    return (data.parentNode.parentNode.children[0].children[0].innerHTML.split("：")[1]);
 }
