@@ -38,9 +38,10 @@
     </select>
     <select id="selectPlacingRate" resultType="com.example.cinema.po.PlacingRate">
         select name as name,seatnum as placingrate from
+        (select * from
           (select movie_id,(sum(audienceNum)/sum(seatSum)) as seatnum from 
             (select * from
-              (select schedule_id,count(*) as audienceNum from ticket where state = 1 group by schedule_id)p
+              (select schedule_id,count(*) as audienceNum from ticket where state = 1 and time between #{date} and #{nextdate} group by schedule_id)p
               left join
               (select id,hall_id,movie_id from schedule)q
               on p.schedule_id = q.id)r
@@ -49,6 +50,6 @@
           on u.hall_id=r.hall_id group by movie_id)b
           left join
           (select id,name from movie)s
-          on b.movie_id=s.id
+          on b.movie_id=s.id)c where c.name is not NULL and c.seatnum is not NULL
     </select>
 </mapper>

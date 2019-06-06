@@ -85,14 +85,17 @@ public class StatisticsServiceImpl implements StatisticsService {
     }
 
     @Override
-    public ResponseVO getMoviePlacingRateByDate(Date date) {
+    public ResponseVO getMoviePlacingRateByDate(String date) {
         try {
-            Date requireDate = date;
-            if(requireDate == null){
+            Date requireDate = null;
+            if(date == ""){
                 requireDate = new Date();
             }
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            requireDate = simpleDateFormat.parse(simpleDateFormat.format(requireDate));
+            else
+            {
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                requireDate = simpleDateFormat.parse(date);
+            }
             Date nextDate = getNumDayAfterDate(requireDate, 1);
             return ResponseVO.buildSuccess(PlacingRateList2MovieTotalBoxOfficeVOList(statisticsMapper.selectPlacingRate(requireDate,nextDate)));
         }catch (Exception e){

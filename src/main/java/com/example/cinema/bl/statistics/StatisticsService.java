@@ -37,7 +37,7 @@ public interface StatisticsService {
      * @param date
      * @return
      */
-    ResponseVO getMoviePlacingRateByDate(Date date);
+    ResponseVO getMoviePlacingRateByDate(String date);
 
     /**
      * TODO:获取最近days天内，最受欢迎的movieNum个电影(可以简单理解为最近days内票房越高的电影越受欢迎)

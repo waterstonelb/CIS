@@ -37,16 +37,8 @@ public class StatisticsController {
     }
 
     @RequestMapping(value = "statistics/placing/rate", method = RequestMethod.GET)
-    public ResponseVO getMoviePlacingRateByDate(@RequestParam(required = false) Date date){
-    	Date requireDate = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-			requireDate = simpleDateFormat.parse(simpleDateFormat.format(requireDate));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		};
-        return statisticsService.getMoviePlacingRateByDate(requireDate);
+    public ResponseVO getMoviePlacingRateByDate(@RequestParam(required = false) String date){
+        return statisticsService.getMoviePlacingRateByDate(date);
     }
 
     @RequestMapping(value = "statistics/popular/movie", method = RequestMethod.GET)

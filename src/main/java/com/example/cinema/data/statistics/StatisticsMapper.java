@@ -55,5 +55,5 @@ public interface StatisticsMapper {
      * @param nextDate 
      *@return
      */
-    List<PlacingRate> selectPlacingRate(@Param("date") Date date, @Param("nextdata")Date nextDate);
+    List<PlacingRate> selectPlacingRate(@Param("date") Date date, @Param("nextdate")Date nextdate);
 }

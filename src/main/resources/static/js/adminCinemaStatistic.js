@@ -151,8 +151,9 @@ $(document).ready(function() {
     }
     // TODO:
     function getPlacingRate() {
+        var date = $("#date").val();
         getRequest(
-            '/statistics/placing/rate',
+            '/statistics/placing/rate?date='+date,
             function (res) {
                 var data = res.content || [];
                 var tableData = data.map(function (item) {
@@ -228,6 +229,11 @@ $(document).ready(function() {
                 alert(JSON.stringify(error));
             });
     }
+    $('#datesubmit').click(function () {
+        getPlacingRate();
+     });
+
+
     $('#submit').click(function () {
         if(isNaN($('#days').val()) || isNaN($('#movieNum').val())){
             alert('请输入数字！')
