@@ -36,8 +36,30 @@
             <!-- <button type="button" class="btn btn-primary" data-backdrop="static" data-toggle="modal" data-target="#userModify"><i class="icon-plus-sign"></i> 修改员工信息</button>
             <button type="button" class="btn btn-primary" data-backdrop="static" data-toggle="modal" data-target="#userDelete"><i class="icon-plus-sign"></i> 删除员工信息</button> -->
         </div>
-        <ul class="user-on-list">
-        </ul>
+        <div class="um-blk">
+            <div class="um-blk-header">经理</div>
+            <ul class="um-blk-list" id="manager">
+                <li class="card">
+                    <div class="um-card-info">
+                        用户名：<span>haha</span> 密码：<span>123456</span>
+                    </div>
+                    <button type="button">修改</button>
+                    <button type="button">删除</button>
+                </li>
+            </ul>
+        </div>
+        <div class="um-blk">
+            <div class="um-blk-header">员工</div>
+            <ul class="um-blk-list" id="staff">
+                <li class="card">
+                    <div class="um-card-info">
+                        用户名：<span>sky</span> 密码：<span>123456</span>
+                    </div>
+                    <button type="button">修改</button>
+                    <button type="button">删除</button>
+                </li>
+            </ul>
+        </div>
     </div>
 
     <div class="modal fade" id="userAdd" tabindex="-1" role="dialog" aria-labelledby="userAddModalLabel">
