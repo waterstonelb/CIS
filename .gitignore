@@ -8,6 +8,7 @@ target/
 .project
 .settings
 .springBeans
+src/main/resources/application.yml
 
 ### IntelliJ IDEA ###
 .idea
@@ -22,3 +23,7 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+.vscode/launch.json
+.vscode/settings.json
+Usermanager.md
+.gitignore
