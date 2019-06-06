@@ -33,6 +33,16 @@ public class VIPCard {
      */
     private Timestamp joinDate;
 
+    public int getCardId() {
+        return cardId;
+    }
+
+    public void setCardId(int cardId) {
+        this.cardId = cardId;
+    }
+
+    private int cardId;
+
 
     public VIPCard() {
 
@@ -71,8 +81,8 @@ public class VIPCard {
         this.joinDate = joinDate;
     }
 
-    public double calculate(double amount) {
-        return (int)(amount/200)*30+amount;
+    public double calculate(double amount,double targetAmount,double discountAmount) {
+        return (int)(amount/targetAmount)*discountAmount+amount;
 
     }
 }

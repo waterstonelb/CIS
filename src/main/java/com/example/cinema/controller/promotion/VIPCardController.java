@@ -15,9 +15,9 @@ public class VIPCardController {
     @Autowired
     VIPService vipService;
 
-    @PostMapping("/add")
-    public ResponseVO addVIP(@RequestParam int userId){
-        return vipService.addVIPCard(userId);
+    @GetMapping("/add")
+    public ResponseVO addVIP(@RequestParam int userId ,@RequestParam int cardId){
+        return vipService.addVIPCard(userId,cardId);
     }
     @GetMapping("{userId}/get")
     public ResponseVO getVIP(@PathVariable int userId){

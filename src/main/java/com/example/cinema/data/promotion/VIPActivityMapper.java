@@ -14,6 +14,8 @@ public interface VIPActivityMapper {
      */
     List<VIPAtivity> getCards();
 
+    VIPAtivity getCardById(int cardId);
+
     /**
      * 添加新卡
      * @param vipAtivity

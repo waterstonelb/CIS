@@ -11,7 +11,7 @@ import com.example.cinema.vo.ResponseVO;
 
 public interface VIPService {
 
-    ResponseVO addVIPCard(int userId);
+    ResponseVO addVIPCard(int userId,int cardId);
 
     ResponseVO getCardById(int id);
 
