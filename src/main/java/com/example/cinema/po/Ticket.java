@@ -40,6 +40,8 @@ public class Ticket {
 
     private Timestamp time;
 
+    private double realPay;
+
     public Timestamp getTime() {
         return time;
     }
@@ -51,12 +53,13 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(int userId, int scheduleId, int columnIndex, int rowIndex, int state) {
+    public Ticket(int userId, int scheduleId, int columnIndex, int rowIndex, int state,double realPay) {
         this.userId = userId;
         this.scheduleId = scheduleId;
         this.columnIndex = columnIndex;
         this.rowIndex = rowIndex;
         this.state = state;
+        this.realPay=realPay;
     }
 
     public TicketVO getVO() {
