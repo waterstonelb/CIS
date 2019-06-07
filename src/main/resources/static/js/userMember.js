@@ -105,6 +105,10 @@ function chargeClick() {
     isBuyState = false;
 }
 
+function upCard() {
+    alert("测试");
+}
+
 function clearForm() {
     $('#userMember-form input').val("");
     $('#userMember-form .form-group').removeClass("has-error");
