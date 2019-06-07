@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
     public ResponseVO deleteEmployee(String username) {
         try {
             int ret = uMapper.deleteUser(username);
-            // System.out.println(username);
+            System.out.println(username);
             if(ret>0)
                 return ResponseVO.buildSuccess();
             else
