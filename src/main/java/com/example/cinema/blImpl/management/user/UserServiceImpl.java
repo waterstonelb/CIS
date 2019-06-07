@@ -6,7 +6,6 @@ import java.util.List;
 import com.example.cinema.bl.management.UserService;
 import com.example.cinema.data.management.UserMapper;
 import com.example.cinema.vo.ResponseVO;
-import com.example.cinema.vo.UserForm;
 import com.example.cinema.vo.UserVO;
 
 import com.example.cinema.vo.UserWithLevelForm;
