@@ -59,7 +59,7 @@ $(document).ready(function () {
     document.addEventListener("error", function (e) {
         var elem = e.target;
         if (elem.tagName.toLowerCase() == 'img') {
-            elem.src = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553356290635&di=cdb69a78db5e09ccef02a56fc4973e30&imgtype=0&src=http%3A%2F%2Fatt2.citysbs.com%2Fhangzhou%2F2012%2F06%2F07%2F15%2Fmiddle_151704_kmmuadil_37e045321c34acd13b3b68f3ccff04c5.jpg";
+            elem.src = "/images/defaultAvatar.jpg";
         }
     }, true);
 

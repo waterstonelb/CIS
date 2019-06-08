@@ -31,7 +31,6 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public UserVO login(UserForm userForm) {
-        //TODO
         User user = accountMapper.getAccountByName(userForm.getUsername());
 
         if (null == user || !user.getPassword().equals(userForm.getPassword())) {

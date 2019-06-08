@@ -4,6 +4,8 @@ import com.example.cinema.po.AudiencePrice;
 import com.example.cinema.po.MovieScheduleTime;
 import com.example.cinema.po.MovieTotalBoxOffice;
 import com.example.cinema.po.PopularMovies;
+import com.example.cinema.po.UserBuyRecord;
+import com.example.cinema.po.UserChargeRecord;
 import com.example.cinema.po.PlacingRate;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -56,4 +58,16 @@ public interface StatisticsMapper {
      *@return
      */
     List<PlacingRate> selectPlacingRate(@Param("date") Date date, @Param("nextdate")Date nextdate);
+	/**
+     * 查询购买记录
+     * @param date
+     * @return
+     */
+    List<UserBuyRecord> SelectBuyRecord();
+    /**
+     * 查询充值记录
+     * @param 
+     * @return
+     */
+    List<UserChargeRecord> SelectChargeRecord();
 }
