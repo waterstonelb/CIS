@@ -1,5 +1,6 @@
 $(document).ready(function(){
-
+    showSidebar();
+    
     var movieId = parseInt(window.location.href.split('?')[1].split('&')[0].split('=')[1]);
     var userId = sessionStorage.getItem('id');
     var isLike = false;
@@ -180,5 +181,17 @@ $(document).ready(function(){
             alert("请输入上映日期")
         }
         return isValidate;
+    }
+
+    function showSidebar(){
+        var level = sessionStorage.getItem("level");
+        var name = sessionStorage.getItem("username");
+        $("p.title").html(name);
+        if(level==0){
+            $("#sidebar").append('<li role="presentation"><a href="/admin/vip/manage"><i class="icon-credit-card"></i> 会员策略</a></li>');
+            $("#sidebar").append('<li role="presentation"><a href="/admin/usermanage/manage"><i class="icon-user"></i> 员工管理</a></li>');
+        }else if(level==1){
+            $("#sidebar").append('<li role="presentation"><a href="/admin/vip/manage"><i class="icon-credit-card"></i> 会员策略</a></li>');
+        }
     }
 });
