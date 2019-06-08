@@ -92,4 +92,9 @@ public class ViewController {
     public String getUserMember() {
         return "userMember";
     }
+
+    @RequestMapping(value = "/user/record")
+    public String getUserrecord() {
+        return "userrecord";
+    }
 }

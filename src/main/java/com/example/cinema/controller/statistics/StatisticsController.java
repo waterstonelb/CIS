@@ -2,6 +2,7 @@
 
 import com.example.cinema.bl.statistics.MovieLikeService;
 import com.example.cinema.bl.statistics.StatisticsService;
+import com.example.cinema.bl.statistics.UserStatisticsService;
 import com.example.cinema.vo.ResponseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,8 @@ import java.util.Date;
 public class StatisticsController {
     @Autowired
     private StatisticsService statisticsService;
-    public MovieLikeService movielikeservice;
+    @Autowired
+    private MovieLikeService movielikeService;
 
     @RequestMapping(value = "statistics/scheduleRate", method = RequestMethod.GET)
     public ResponseVO getScheduleRateByDate(@RequestParam(required = false) Date date){
@@ -46,13 +48,20 @@ public class StatisticsController {
         return statisticsService.getPopularMovies(days, movieNum);
     }
 
-
-
-
-
-
-
-
+    @RequestMapping(value = "userstatistics/BuyRecord", method = RequestMethod.GET)
+    public ResponseVO getUserBuyRecord(){
+        return statisticsService.getUserBuyRecord();
+    }
+    
+    @RequestMapping(value = "userstatistics/ChargeRecord", method = RequestMethod.GET)
+    public ResponseVO getUserChargeRecord(){
+        return statisticsService.getUserChargeRecord();
+    }
+    
+    @RequestMapping(value = "statistics/userlike", method = RequestMethod.GET)
+    public ResponseVO getLikeMovieList(){
+        return movielikeService.getlikemovielist();
+        }
 
 
 }

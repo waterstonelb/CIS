@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cinema.data.statistics.UserStatisticsMapper">
+    <select id="SelectBuyRecord" resultType="com.example.cinema.po.UserBuyRecord">
+        select real_pay,time,name from ticket
+        left join
+            (select name,schedule_ids from movie
+            left join 
+            (select id as schedule_ids,movie_id from schedule)s
+            on movie.id = s.movie_id)t
+        on ticket.schedule_id = t.schedule_ids
+
+    </select>
+
+    <select id="SelectChargeRecord" resultType="com.example.cinema.po.UserChargeRecord">
+        select charge_time as time,charge as chargeNum from user_charge
+    </select>
+</mapper>
