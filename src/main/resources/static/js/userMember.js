@@ -1,14 +1,11 @@
 $(document).ready(function () {
-    getVIP();
     getCoupon();
     getVIPCards();
+    showVIPinfo();
 });
 
 var isBuyState = true;
-var vipCardId;
-var cardId;
-var targetAmount;
-var discountAmount;
+
 
 function getVIPCards() {
     getRequest(
@@ -33,63 +30,24 @@ function renderVIPCards(list) {
     });
     $("#user-vip-list").append(innerHTML);
 }
-function getVIP() {
-    getRequest(
-        '/vip/' + sessionStorage.getItem('id') + '/get',
-        function (res) {
-            if (res.success) {
-                // 是会员
-                $("#member-card").css("visibility", "visible");
-                $("#member-card").css("display", "");
-                $("#nonmember-card").css("display", "none");
-                $("#member-id").text(res.content.id);
-                $("#member-joinDate").text(res.content.joinDate.substring(0,10));
-                $("#member-balance").text(res.content.balance.toFixed(2));
-                sessionStorage.setItem('cardId',res.content.cardId);
-                sessionStorage.setItem('vipId',res.content.id);
-                cardId=res.content.cardId;
-                vipCardId = res.content.id;
-                getUserVIPCard(res.content.cardId);
-            } else {
-                // 非会员
-                $("#member-card").css("display", "none");
-                $("#nonmember-card").css("display", "");
-            }
-        },
-        function (error) {
-            alert(error);
-        });
-    function getUserVIPCard(cardId) {
-        getRequest(
-            '/vipactivity/getbyid?cardId='+cardId,
-            function (res) {
-                if(res.success){
-                    $("#member-name").text(res.content.cardName);
-                    $("#member-description").text("充值满"+res.content.targetAmount+"送"+res.content.discountAmount);
-                    $("#member-discount").text("购票享"+res.content.discount*10+"折优惠");
-                    targetAmount=res.content.targetAmount;
-                    discountAmount=res.content.discountAmount;
-                }
-            }
-        )
-    }
-    /**
-    getRequest(
-        '/vip/getVIPInfo',
-        function (res) {
-            if (res.success) {
-                $("#member-buy-price").text(res.content.price);
-                $("#member-buy-description").text("充值优惠：" + res.content.description + "。永久有效");
-                $("#member-description").text(res.content.description);
-            } else {
-                alert(res.content);
-            }
 
-        },
-        function (error) {
-            alert(error);
-        });*/
+function showVIPinfo() {
+    if(sessionStorage.getItem('isVIP')=='1'){
+        $("#member-card").css("visibility", "visible");
+        $("#member-card").css("display", "");
+        $("#nonmember-card").css("display", "none");
+        $("#member-id").text(sessionStorage.getItem('vipId'));
+        $("#member-joinDate").text(sessionStorage.getItem('joinDate').substring(0,10));
+        $("#member-balance").text(sessionStorage.getItem('balance'));
+        $("#member-name").text(sessionStorage.getItem('cardName'));
+        $("#member-description").text("充值满"+sessionStorage.getItem('targetAmount')+"送"+sessionStorage.getItem('discountAmount'));
+        $("#member-discount").text("购票享"+sessionStorage.getItem('discount')*10+"折优惠");
+    }else {
+        $("#member-card").css("display", "none");
+        $("#nonmember-card").css("display", "");
+    }
 }
+
 
 function buyClick(obj) {
     clearForm();
@@ -127,6 +85,7 @@ function confirmCommit() {
                         $('#buyModal').modal('hide');
                         alert("购买会员卡成功");
                         getVIP();
+                        location.reload();
                     },
                     function (error) {
                         alert(error);
@@ -134,11 +93,12 @@ function confirmCommit() {
             } else {
                 postRequest(
                     '/vip/charge',
-                    {vipId: sessionStorage.getItem('vipId'), cardId:sessionStorage.getItem('cardId') ,targetAmount:targetAmount,discountAmount:discountAmount,amount: parseInt($('#userMember-amount').val())},
+                    {vipId: sessionStorage.getItem('vipId'), cardId:sessionStorage.getItem('cardId') ,targetAmount:sessionStorage.getItem('targetAmount'),discountAmount:sessionStorage.getItem('discountAmount'),amount: parseInt($('#userMember-amount').val())},
                     function (res) {
                         $('#buyModal').modal('hide');
                         alert("充值成功");
-                        getVIP();
+                        sessionStorage.setItem('balance',res.content.balance);
+                        location.reload();
                     },
                     function (error) {
                         alert(error);
@@ -150,6 +110,41 @@ function confirmCommit() {
     }
 }
 
+function getVIP() {
+    getRequest(
+        '/vip/' + sessionStorage.getItem('id') + '/get',
+        function (res) {
+            if (res.success) {
+                // 是会员
+                sessionStorage.setItem('isVIP', '1');
+                sessionStorage.setItem('cardId', res.content.cardId);
+                sessionStorage.setItem('vipId', res.content.id);
+                sessionStorage.setItem('joinDate',res.content.joinDate);
+                sessionStorage.setItem('balance',res.content.balance);
+                getUserVIPCard(res.content.cardId);
+            } else {
+                // 非会员
+                sessionStorage.setItem('isVIP', '0');
+            }
+        },
+        function (error) {
+            alert(error);
+        });
+
+    function getUserVIPCard(cardId) {
+        getRequest(
+            '/vipactivity/getbyid?cardId=' + cardId,
+            function (res) {
+                if (res.success) {
+                    sessionStorage.setItem('targetAmount', res.content.targetAmount);
+                    sessionStorage.setItem('discountAmount',res.content.discountAmount);
+                    sessionStorage.setItem('discount',res.content.discount);
+                    sessionStorage.setItem('cardName',res.content.cardName);
+                }
+            }
+        )
+    }
+}
 function validateForm() {
     var isValidate = true;
     if (!$('#userMember-cardNum').val()) {
