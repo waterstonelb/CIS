@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class ViewController {
+    @RequestMapping(value = "/admin/refund/manage")
+    public String getRefundManage() {
+        return "adminTicketRefund";
+    }
+
     @RequestMapping(value = "/index")
     public String getIndex() {
         return "index";

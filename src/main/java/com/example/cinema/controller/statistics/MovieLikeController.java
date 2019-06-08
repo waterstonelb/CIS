@@ -15,7 +15,7 @@ public class MovieLikeController {
     @Autowired
     public MovieLikeService movielikeservice;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "statistics/mostFavourite", method = RequestMethod.GET)
     public ResponseVO getLikeMovieList(){
         return movielikeservice.getlikemovielist();
     }
