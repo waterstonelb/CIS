@@ -176,9 +176,9 @@ public class StatisticsServiceImpl implements StatisticsService {
     
     
     
-	public ResponseVO getUserBuyRecord() {
+	public ResponseVO getUserBuyRecord(int id) {
         try {
-            return ResponseVO.buildSuccess(buyRecordList2buyRecordVOList(statisticsMapper.SelectBuyRecord()));
+            return ResponseVO.buildSuccess(buyRecordList2buyRecordVOList(statisticsMapper.SelectBuyRecord(id)));
         }catch (Exception e){
             e.printStackTrace();
             return ResponseVO.buildFailure("失败");
@@ -194,9 +194,9 @@ public class StatisticsServiceImpl implements StatisticsService {
 	}
 
 	@Override
-	public ResponseVO getUserChargeRecord() {
+	public ResponseVO getUserChargeRecord(int id) {
         try {
-            return ResponseVO.buildSuccess(chargeRecordList2buyRecordVOList(statisticsMapper.SelectChargeRecord()));
+            return ResponseVO.buildSuccess(chargeRecordList2buyRecordVOList(statisticsMapper.SelectChargeRecord(id)));
         }catch (Exception e){
             e.printStackTrace();
             return ResponseVO.buildFailure("失败");

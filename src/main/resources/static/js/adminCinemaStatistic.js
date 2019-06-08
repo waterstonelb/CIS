@@ -190,7 +190,7 @@ $(document).ready(function() {
     function getPolularMovie() {
         var Day = $("#days").val();
         var MovieNum = $("#movieNum").val();
-        if(Day==''){ day=30;}
+        if(Day==''){ day=60;}
         else {day=parseInt(Day);}
         if(MovieNum==''){movieNum=3;}
         else {movieNum =parseInt(MovieNum);}
@@ -240,7 +240,7 @@ $(document).ready(function() {
             return
         }
         $('#popular-movie-container').remove();
-        $('#actionform').after('<div class="card table-container" id="popular-movie-container"></div>');
+        $('#actionform2').after('<div class="card table-container" id="popular-movie-container"></div>');
         getPolularMovie();
      });
 

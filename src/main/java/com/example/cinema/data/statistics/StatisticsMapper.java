@@ -60,14 +60,16 @@ public interface StatisticsMapper {
     List<PlacingRate> selectPlacingRate(@Param("date") Date date, @Param("nextdate")Date nextdate);
 	/**
      * 查询购买记录
+	 * @param id 
      * @param date
      * @return
      */
-    List<UserBuyRecord> SelectBuyRecord();
+    List<UserBuyRecord> SelectBuyRecord(@Param("id") int id);
     /**
      * 查询充值记录
+     * @param id 
      * @param 
      * @return
      */
-    List<UserChargeRecord> SelectChargeRecord();
+    List<UserChargeRecord> SelectChargeRecord(@Param("id") int id);
 }

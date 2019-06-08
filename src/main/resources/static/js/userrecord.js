@@ -3,8 +3,9 @@ var cancelTickets=[];
 $(document).ready(function () {
     getUserBuy();
     function getUserBuy() {
+        var id = sessionStorage.getItem('id');
         getRequest(
-            '/userstatistics/BuyRecord',
+            '/userstatistics/BuyRecord?id='+id,
             function (res) {
                 ticketList=res.content;
                 renderTicketList(res.content);
@@ -28,8 +29,9 @@ $(document).ready(function () {
 
     getUserCharge();
     function getUserCharge() {
+        var id = sessionStorage.getItem('id');
         getRequest(
-            '/userstatistics/ChargeRecord',
+            '/userstatistics/ChargeRecord?id='+id,
             function (res) {
                 ticketList=res.content;
                 renderTicketList2(res.content);

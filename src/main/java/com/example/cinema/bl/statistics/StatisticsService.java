@@ -49,14 +49,16 @@ public interface StatisticsService {
     ResponseVO getPopularMovies(int days, int movieNum);
     /**
      * 获取购票记录
+     * @param id 
      * @param date
      * @return
      */
-    ResponseVO getUserBuyRecord();
+    ResponseVO getUserBuyRecord(int id);
 
     /**
      * 获取充值记录
+     * @param id 
      * @return
      */
-    ResponseVO getUserChargeRecord();
+    ResponseVO getUserChargeRecord(int id);
 }

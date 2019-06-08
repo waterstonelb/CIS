@@ -3,6 +3,7 @@
 import com.example.cinema.bl.statistics.MovieLikeService;
 import com.example.cinema.bl.statistics.StatisticsService;
 import com.example.cinema.bl.statistics.UserStatisticsService;
+import com.example.cinema.config.InterceptorConfiguration;
 import com.example.cinema.vo.ResponseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author fjj
@@ -49,13 +53,13 @@ public class StatisticsController {
     }
 
     @RequestMapping(value = "userstatistics/BuyRecord", method = RequestMethod.GET)
-    public ResponseVO getUserBuyRecord(){
-        return statisticsService.getUserBuyRecord();
+    public ResponseVO getUserBuyRecord(@RequestParam int id){
+        return statisticsService.getUserBuyRecord(id);
     }
     
     @RequestMapping(value = "userstatistics/ChargeRecord", method = RequestMethod.GET)
-    public ResponseVO getUserChargeRecord(){
-        return statisticsService.getUserChargeRecord();
+    public ResponseVO getUserChargeRecord(@RequestParam int id){
+        return statisticsService.getUserChargeRecord(id);
     }
     
     @RequestMapping(value = "statistics/userlike", method = RequestMethod.GET)
