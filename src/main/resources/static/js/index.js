@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+    sessionStorage.clear();
     $("#login-btn").click(function () {
         var formData = getLoginForm();
         if (!validateLoginForm(formData)) {

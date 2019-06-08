@@ -9,13 +9,20 @@
     </select>
     <insert id="addNewHall" parameterType="com.example.cinema.po.Hall"
             useGeneratedKeys="true" keyProperty="id">
-        insert into hall(name,colum,row)
+        insert into hall(hall_name,hall_column,hall_row)
         values (#{name},#{column},#{row})
     </insert>
     <update id="updataHall" parameterType="com.example.cinema.po.Hall">
-        update hall set name=#{name},colum=#{column},row=#{row} where id=#{id}
+        update hall set hall_name=#{name},hall_column=#{column},hall_row=#{row} where id=#{id}
     </update>
+    <delete id="deleteHall">
+        delete from hall where id=#{id}
+    </delete>
     <resultMap id="Hall" type="com.example.cinema.po.Hall">
+        <result column="id" property="id"></result>
+        <result column="hall_name" property="name"></result>
+        <result column="hall_column" property="column"></result>
+        <result column="hall_row" property="row"></result>
     </resultMap>
 
 </mapper>

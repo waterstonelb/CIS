@@ -1,9 +1,7 @@
 package com.example.cinema.blImpl.sales;
 
 import com.example.cinema.bl.management.ScheduleService;
-import com.example.cinema.bl.promotion.ActivityService;
-import com.example.cinema.bl.promotion.CouponService;
-import com.example.cinema.bl.promotion.VIPService;
+import com.example.cinema.bl.promotion.*;
 import com.example.cinema.bl.sales.TicketService;
 import com.example.cinema.blImpl.management.hall.HallServiceForBl;
 import com.example.cinema.blImpl.management.schedule.ScheduleServiceForBl;
@@ -41,7 +39,9 @@ public class TicketServiceImpl implements TicketService {
     @Autowired
     CouponServiceForBl couponServiceForBl;
     @Autowired
-    VIPService vipService;
+    VIPServiceForBl vipServiceForBl;
+    @Autowired
+    VIPActivityServiceForBl vipActivityServiceForBl;
     @Autowired
     ActivityServiceForBl activityServiceForBl;
     @Transactional
@@ -54,9 +54,7 @@ public class TicketServiceImpl implements TicketService {
                 ticketList.add(ticket);
             }
             ticketMapper.insertTickets(ticketList);
-            //获取coupon数据
-            @SuppressWarnings("unchecked")
-            List<Coupon> coupons = (List<Coupon>) couponService.getCouponsByUser(ticketForm.getUserId()).getContent();//获取activity数据
+
             //获取totals数据
             ScheduleItem scheduleItem = scheduleService.getScheduleItemById(ticketForm.getScheduleId());
             double totals = scheduleItem.getFare() * ticketForm.getSeats().size();
@@ -65,10 +63,17 @@ public class TicketServiceImpl implements TicketService {
                 Ticket nticket = ticketMapper.selectTicketByScheduleIdAndSeat(ticketForm.getScheduleId(), ticketForm.getSeats().get(i).getColumnIndex(), ticketForm.getSeats().get(i).getRowIndex());
                 ticketVOList.add(nticket.getVO());
             }
-
+            //获取coupon数据
+            @SuppressWarnings("unchecked")
+            List<Coupon> coupons = (List<Coupon>) couponService.getCouponsByUser(ticketForm.getUserId()).getContent();//获取activity数据
+            List<Coupon> rescoupons=new ArrayList<>();
+            for(Coupon coupon:coupons){
+                if(coupon.getTargetAmount()<totals)
+                    rescoupons.add(coupon);
+            }
             TicketWithCouponVO twc = new TicketWithCouponVO();
             twc.setActivities(null);
-            twc.setCoupons(coupons);
+            twc.setCoupons(rescoupons);
             twc.setTicketVOList(ticketVOList);
             twc.setTotal(totals);
             return ResponseVO.buildSuccess(twc);
@@ -82,10 +87,12 @@ public class TicketServiceImpl implements TicketService {
     @Transactional
     public ResponseVO completeTicket(TicketBuyForm ticketBuyForm) {//校验优惠券和根据优惠活动赠送优惠券
         try {
+            double total=useCoupon(ticketBuyForm.getTicketId().get(0),ticketBuyForm.getCouponId(),ticketBuyForm.getTicketId().size());//扣款金额，暂不处理
+            total=total/ticketBuyForm.getTicketId().size();
             for (Integer ticketId : ticketBuyForm.getTicketId()) {
                 ticketMapper.updateTicketState(ticketId, 1);
+                ticketMapper.setRealPay(total,ticketId);
             }
-            double total=useCoupon(ticketBuyForm.getTicketId().get(0),ticketBuyForm.getCouponId(),ticketBuyForm.getTicketId().size());//扣款金额，暂不处理
             int numOfCoupon=userGetCoupons(ticketBuyForm.getTicketId().get(0));
             return ResponseVO.buildSuccess(numOfCoupon);
         } catch (Exception e) {
@@ -142,13 +149,19 @@ public class TicketServiceImpl implements TicketService {
     @Transactional
     public ResponseVO completeByVIPCard(TicketVIPBuyForm ticketVIPBuyForm) {
         try{
+            double totals=useCoupon(ticketVIPBuyForm.getTicketId().get(0),ticketVIPBuyForm.getCouponId(),ticketVIPBuyForm.getTicketId().size());
+            VIPAtivity vipAtivity=vipActivityServiceForBl.getVIPActivity(vipServiceForBl.getCardId(ticketVIPBuyForm.getUserId()));
+            totals=totals*vipAtivity.getDiscount();
+            double total=totals/ticketVIPBuyForm.getTicketId().size();
+
             for (Integer ticketId : ticketVIPBuyForm.getTicketId()) {
                 ticketMapper.updateTicketState(ticketId, 1);
+                ticketMapper.setRealPay(total,ticketId);
             }
-            double total=useCoupon(ticketVIPBuyForm.getTicketId().get(0),ticketVIPBuyForm.getCouponId(),ticketVIPBuyForm.getTicketId().size());//扣款金额，暂不处理
-            VIPCard vipCard=(VIPCard) vipService.buyTicket(ticketVIPBuyForm.getUserId(),total).getContent();
+            vipServiceForBl.buyTicket(ticketVIPBuyForm.getUserId(),totals);
             userGetCoupons(ticketVIPBuyForm.getTicketId().get(0));
-            return ResponseVO.buildSuccess(vipCard);
+            double balance=vipServiceForBl.getBalance(ticketVIPBuyForm.getUserId());
+            return ResponseVO.buildSuccess(balance);
         }catch (Exception e){
             return ResponseVO.buildFailure("vip购票失败");
         }
@@ -166,6 +179,11 @@ public class TicketServiceImpl implements TicketService {
         }
     }
 
+    /**
+     * 优惠券发放
+     * @param ticketId
+     * @return
+     */
     private int userGetCoupons(int ticketId ){
         Ticket ticket=ticketMapper.selectTicketById(ticketId);
         int scheduleId=ticket.getScheduleId();
@@ -187,10 +205,18 @@ public class TicketServiceImpl implements TicketService {
         try {
             Ticket ticket = ticketMapper.selectTicketById(ticketId);
             double oneMoive = scheduleService.getScheduleItemById(ticket.getScheduleId()).getFare();
-            boolean isDelete = couponServiceForBl.deleteUserCoupon(ticket.getUserId(), couponId);
-            double total = isDelete?oneMoive * numOfTicket - couponServiceForBl.getCoupon(couponId).getDiscountAmount():oneMoive * numOfTicket;
+            List<Coupon> coupons=couponServiceForBl.getTicketCoupons(ticket.getUserId(),oneMoive*numOfTicket);
+            boolean haveCoupon=false;
+            for(Coupon coupon:coupons){
+                if (coupon.getId()==couponId) {
+                    haveCoupon = true;
+                    couponServiceForBl.deleteUserCoupon(ticket.getUserId(), couponId);
+                }
+            }
+            double total = haveCoupon?oneMoive * numOfTicket - couponServiceForBl.getCoupon(couponId).getDiscountAmount():oneMoive * numOfTicket;
             return total;
         }catch (Exception e){
+            e.printStackTrace();
             return 0;
         }
     }

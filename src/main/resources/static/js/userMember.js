@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    getVIP();
     getCoupon();
     getVIPCards();
     showVIPinfo();
