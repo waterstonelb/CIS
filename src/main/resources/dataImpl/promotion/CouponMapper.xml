@@ -3,8 +3,8 @@
 <mapper namespace="com.example.cinema.data.promotion.CouponMapper">
     <insert id="insertCoupon" parameterType="com.example.cinema.po.Coupon"
             useGeneratedKeys="true" keyProperty="id">
-        insert into coupon(description,name,target_amount,discount_amount,start_time,end_time)
-        values(#{description},#{name},#{targetAmount},#{discountAmount},#{startTime},#{endTime})
+        insert into coupon(description,name,target_amount,discount_amount,start_time,end_time,level)
+        values(#{description},#{name},#{targetAmount},#{discountAmount},#{startTime},#{endTime},#{level})
     </insert>
     <insert id="insertCouponUser">
         insert into coupon_user(coupon_id,user_id)

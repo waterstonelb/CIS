@@ -39,6 +39,7 @@ public class CouponServiceImpl implements CouponService,CouponServiceForBl {
             coupon.setDiscountAmount(couponForm.getDiscountAmount());
             coupon.setStartTime(couponForm.getStartTime());
             coupon.setEndTime(couponForm.getEndTime());
+            coupon.setLevel(couponForm.getLevel());
             couponMapper.insertCoupon(coupon);
             return ResponseVO.buildSuccess(coupon);
         } catch (Exception e) {
