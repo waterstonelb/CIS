@@ -130,9 +130,9 @@ DROP TABLE IF EXISTS `hall`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `hall` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `column` int(11) DEFAULT NULL,
-  `row` int(11) DEFAULT NULL,
+  `hall_name` varchar(255) DEFAULT NULL,
+  `hall_column` int(11) DEFAULT NULL,
+  `hall_row` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -143,7 +143,7 @@ CREATE TABLE `hall` (
 
 LOCK TABLES `hall` WRITE;
 /*!40000 ALTER TABLE `hall` DISABLE KEYS */;
-INSERT INTO `hall` VALUES (1,'1号厅',10,5),(2,'2号厅',12,8);
+INSERT INTO `hall` VALUES (1,'IMAX厅',10,5),(2,'8D厅',12,8);
 /*!40000 ALTER TABLE `hall` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -341,7 +341,7 @@ CREATE TABLE `vip_card` (
 
 LOCK TABLES `vip_card` WRITE;
 /*!40000 ALTER TABLE `vip_card` DISABLE KEYS */;
-INSERT INTO `vip_card` VALUES (1,15,375,'2019-04-21 13:54:38',0),(2,12,660,'2019-04-17 18:47:42',0);
+INSERT INTO `vip_card` VALUES (1,15,375,'2019-04-21 13:54:38',1),(2,12,660,'2019-04-17 18:47:42',2);
 /*!40000 ALTER TABLE `vip_card` ENABLE KEYS */;
 UNLOCK TABLES;
 
