@@ -45,6 +45,8 @@ function getVIP() {
                 $("#member-id").text(res.content.id);
                 $("#member-joinDate").text(res.content.joinDate.substring(0,10));
                 $("#member-balance").text(res.content.balance.toFixed(2));
+                sessionStorage.setItem('cardId',res.content.cardId);
+                sessionStorage.setItem('vipId',res.content.id);
                 cardId=res.content.cardId;
                 vipCardId = res.content.id;
                 getUserVIPCard(res.content.cardId);
@@ -101,7 +103,7 @@ function chargeClick() {
     clearForm();
     $('#buyModal').modal('show');
     $("#userMember-amount-group").css("display", "");
-    $("#vip-card-id").text($("#member-id").text());
+    $("#vip-card-id").text(sessionStorage.getItem('vipId'));
     isBuyState = false;
 }
 
@@ -132,7 +134,7 @@ function confirmCommit() {
             } else {
                 postRequest(
                     '/vip/charge',
-                    {vipId: vipCardId, cardId:cardId ,targetAmount:targetAmount,discountAmount:discountAmount,amount: parseInt($('#userMember-amount').val())},
+                    {vipId: sessionStorage.getItem('vipId'), cardId:sessionStorage.getItem('cardId') ,targetAmount:targetAmount,discountAmount:discountAmount,amount: parseInt($('#userMember-amount').val())},
                     function (res) {
                         $('#buyModal').modal('hide');
                         alert("充值成功");
