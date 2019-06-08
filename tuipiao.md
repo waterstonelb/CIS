@@ -5,3 +5,9 @@
    3. 在开场前1天前可退{自定义}
 # 用户端
 在退票的界面选择退票电影后查询是否可退票，如果是会员则钱要退到会员卡余额，普通用户不管，由后端进行退的钱的计算
+
+# 流程
+## admin
+- 建立html文件 adminTicketRefund.html
+- 
+- 建立并编写 adminTicketRefund.js  
