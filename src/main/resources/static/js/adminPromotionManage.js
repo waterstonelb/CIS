@@ -24,6 +24,7 @@ $(document).ready(function() {
         var activitiesDomStr = "";
 
         activities.forEach(function (activity) {
+            var isVIPlimit=activity.coupon.level==0?"（面向大众）":"（会员限定）";
             var movieDomStr = "";
             if(activity.movieList.length){
                 activity.movieList.forEach(function (movie) {
@@ -51,7 +52,7 @@ $(document).ready(function() {
                 "    <div class='activity-coupon primary-bg'>" +
                 "        <span class='title'>优惠券："+activity.coupon.name+"</span>" +
                 "        <span class='title'>满"+activity.coupon.targetAmount+"减<span class='error-text title'>"+activity.coupon.discountAmount+"</span></span>" +
-                "        <span class='gray-text'>"+activity.coupon.description+"</span>" +
+                "        <span class='gray-text'>"+activity.coupon.description+isVIPlimit+"</span>" +
                 "    </div>" +
                 "</div>";
         });
@@ -87,7 +88,8 @@ $(document).ready(function() {
                targetAmount: $("#coupon-target-input").val(),
                discountAmount: $("#coupon-discount-input").val(),
                startTime: $("#activity-start-date-input").val(),
-               endTime: $("#activity-end-date-input").val()
+               endTime: $("#activity-end-date-input").val(),
+               level:$("#coupon-level-input").val()
            }
        };
 

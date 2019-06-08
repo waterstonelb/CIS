@@ -33,6 +33,13 @@ public interface HallMapper {
     int updataHall(Hall hall);
 
     /**
+     * 删除影厅
+     * @param hallId
+     * @return
+     */
+    int deleteHall(int hallId);
+
+    /**
      * 根据id查询影厅
      * @return
      */

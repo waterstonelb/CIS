@@ -15,6 +15,9 @@
     <update id="updataHall" parameterType="com.example.cinema.po.Hall">
         update hall set name=#{name},colum=#{column},row=#{row} where id=#{id}
     </update>
+    <delete id="deleteHall">
+        delete from hall where id=#{id}
+    </delete>
     <resultMap id="Hall" type="com.example.cinema.po.Hall">
     </resultMap>
 
