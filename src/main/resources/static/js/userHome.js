@@ -20,6 +20,7 @@ $(document).ready(function () {
                 } else {
                     // 非会员
                     sessionStorage.setItem('isVIP', '0');
+                    sessionStorage.setItem('discount','1');
                 }
             },
             function (error) {

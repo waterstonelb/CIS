@@ -254,13 +254,14 @@ function renderOrder(orderInfo) {
     var total = orderInfo.total.toFixed(2);
     $('#order-total').text(total);
     $('#order-footer-total').text("总金额： ¥" + total);
-
+    if(sessionStorage.getItem('isVIP')=='1')
+        $('#order-discount-total').text("会员折后价: ￥"+ total*sessionStorage.getItem('discount'));
 
     var couponTicketStr = "";
     if (orderInfo.coupons.length == 0) {
         $('#order-discount').text("优惠金额：无");
-        $('#order-actual-total').text(" ¥" + total);
-        $('#pay-amount').html("<div><b>金额：</b>" + total + "元</div>");
+        $('#order-actual-total').text(" ¥" + total*sessionStorage.getItem('discount'));
+        $('#pay-amount').html("<div><b>金额：</b>" + total*sessionStorage.getItem('discount') + "元</div>");
     } else {
         coupons = orderInfo.coupons;
         for (let coupon of coupons) {

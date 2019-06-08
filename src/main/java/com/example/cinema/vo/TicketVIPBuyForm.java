@@ -8,6 +8,7 @@ public class TicketVIPBuyForm {
     private int couponId;
     private double totals;
     private int userId;
+    private int cardId;
 
     public List<Integer> getTicketId() {
         return ticketId;

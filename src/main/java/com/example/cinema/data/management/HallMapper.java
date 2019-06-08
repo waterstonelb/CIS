@@ -19,6 +19,20 @@ public interface HallMapper {
     List<Hall> selectAllHall();
 
     /**
+     * 增加影厅
+     * @param hall
+     * @return
+     */
+    int addNewHall(Hall hall);
+
+    /**
+     * 更新影厅
+     * @param hall
+     * @return
+     */
+    int updataHall(Hall hall);
+
+    /**
      * 根据id查询影厅
      * @return
      */
