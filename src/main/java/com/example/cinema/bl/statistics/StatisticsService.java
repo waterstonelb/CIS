@@ -47,4 +47,16 @@ public interface StatisticsService {
      * @return
      */
     ResponseVO getPopularMovies(int days, int movieNum);
+    /**
+     * 获取购票记录
+     * @param date
+     * @return
+     */
+    ResponseVO getUserBuyRecord();
+
+    /**
+     * 获取充值记录
+     * @return
+     */
+    ResponseVO getUserChargeRecord();
 }
