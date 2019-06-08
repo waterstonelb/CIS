@@ -63,8 +63,8 @@ $(document).ready(function() {
         var movieDomStr = '';
         for(i=0;i<favouriteList.length&&10;i++){
             movieDomStr +=
-                "<div class='statistic-item'>" +
-                "<span>"+topList[i].moviename+"</span>"+
+            "<div class='statistic-item' id='"+favouriteList[i].movieid+"'>" +
+                "<span>"+favouriteList[i].moviename+"</span>"+
                 "<span>"+(favouriteList[i].likeNum || 0)+"</span>"+
                 "</div>";
         }
