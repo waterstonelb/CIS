@@ -10,7 +10,7 @@
     border-radius: 20px;
     padding-bottom: 7px;
     margin-top: 35px;
-    box-shadow: 7px 7px 12px 0px #cecece;
+    box-shadow: 0px 0px 20px 10px #cecece;
     margin-left: 10%;
     margin-right: 10%;
 
@@ -24,7 +24,7 @@
 }
 .um-blk-list{
     margin-top: 10px;
-    border-top: 3px dashed #fff;
+    border-top: 1px #fff;
 }
 .um-card-info{
     display: inline-block;
@@ -47,7 +47,8 @@
     width:90px;
     height:34px;
     /* background: #65c7fe75; */
-    background-color: #7ae3d4;
+    /* background-color: #7ae3d4; */
+    background-color: #1caf9a;
     border-radius:4px;
     font-size: 17px;
     text-align:center;
@@ -55,7 +56,8 @@
     line-height:34px;
     cursor:pointer;
     margin-right:10px;
-    border-color: oldlace;
+    /* border-color: oldlace; */
+    border:0px;
     box-shadow: 3px 1px 4px 0px #a4acb0;
     border-radius: 20px;
 }
@@ -66,7 +68,7 @@
 .um-card{
     display: flex;
     justify-content: space-between;
-    border-bottom: 3px dashed #fff;
+    border-bottom: 1px #fff;
     padding-top: 8px;
     padding-bottom: 5px;
 }

@@ -23,11 +23,12 @@
     </select>
 
     <select id="getMovieLikeNum" resultType="com.example.cinema.po.MovieLikePO">
-        select likenum as likeNum,name as moviename from movie
+        select likenum as likeNum,name as moviename,id from movie
         right join
         (select movie_id as movieid,count(*) as Likenum from movie_like group by movie_like.movie_id) s
         on s.movieid=movie.id
-        group by movie.id;
+        group by movie.id
+        order by likeNum desc
     </select>
 
     <resultMap id="MovieLike" type="com.example.cinema.po.DateLike">

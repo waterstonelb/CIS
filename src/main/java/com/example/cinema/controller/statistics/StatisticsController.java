@@ -46,6 +46,15 @@ public class StatisticsController {
         return statisticsService.getPopularMovies(days, movieNum);
     }
 
+    @RequestMapping(value = "userstatistics/BuyRecord", method = RequestMethod.GET)
+    public ResponseVO getUserBuyRecord(){
+        return statisticsService.getUserBuyRecord();
+    }
+    
+    @RequestMapping(value = "userstatistics/ChargeRecord", method = RequestMethod.GET)
+    public ResponseVO getUserChargeRecord(){
+        return statisticsService.getUserChargeRecord();
+    }
 
 
 

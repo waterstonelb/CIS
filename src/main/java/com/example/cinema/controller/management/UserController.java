@@ -26,11 +26,11 @@ public class UserController {
         return uService.searchAllStaff();
     }
     @RequestMapping(value = "/usermanage/add",method=RequestMethod.POST)
-    public ResponseVO addUser(@RequestBody UserWithLevelForm uLevelForm){//TODO
+    public ResponseVO addUser(@RequestBody UserWithLevelForm uLevelForm){
         return uService.insertEmployee(uLevelForm);
     }
     @RequestMapping(value = "/usermanage/modify",method=RequestMethod.POST)
-    public ResponseVO updateUser(@RequestBody UserWithLevelForm uLevelForm){//TODO
+    public ResponseVO updateUser(@RequestBody UserWithLevelForm uLevelForm){
         return uService.updateEmployee(uLevelForm);
     }
     @RequestMapping(value = "/usermanage/delete",method=RequestMethod.POST)

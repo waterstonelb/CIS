@@ -1,7 +1,5 @@
 package com.example.cinema.bl.management;
 
-import com.example.cinema.vo.UserVO;
-import com.example.cinema.vo.UserForm;
 import com.example.cinema.vo.ResponseVO;
 import com.example.cinema.vo.UserWithLevelForm;
 

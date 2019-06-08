@@ -18,9 +18,11 @@ public class MovieLikeVO {
      * 电影名称
      */
     private String moviename;
+    private int movieid;
 
     public MovieLikeVO(MovieLikePO movielike){
         this.likeNum = movielike.getLikeNum();
+        this.movieid = movielike.getmovieid();
         this.moviename = movielike.getmoviename();
     }
 
@@ -30,6 +32,14 @@ public class MovieLikeVO {
 
     public void setLikeNum(int likeNum) {
         this.likeNum = likeNum;
+    }
+    
+    public int getmovieid() {
+        return movieid;
+    }
+
+    public void setmovieid(int movieid) {
+        this.movieid = movieid;
     }
 
 

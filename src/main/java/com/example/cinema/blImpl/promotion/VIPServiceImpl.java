@@ -58,7 +58,7 @@ public class VIPServiceImpl implements VIPService {
         if (vipCard == null) {
             return ResponseVO.buildFailure("会员卡不存在");
         }
-        double balance = vipCard.calculate(vipCardForm.getAmount(),vipCardForm.getTargetAmount(),vipCardForm.getDiscountSmount());
+        double balance = vipCard.calculate(vipCardForm.getAmount(),vipCardForm.getTargetAmount(),vipCardForm.getDiscountAmount());
         vipCard.setBalance(vipCard.getBalance() + balance);
         try {
             vipCardMapper.updateCardBalance(vipCardForm.getVipId(), vipCard.getBalance());
