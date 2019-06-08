@@ -21,7 +21,5 @@ public interface VIPService {
 
     ResponseVO getCardByUserId(int userId);
 
-    ResponseVO buyTicket(int userId,double tatals);
-
 
 }

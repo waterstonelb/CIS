@@ -19,6 +19,8 @@ public interface TicketMapper {
 
     void deleteTicket(int ticketId);
 
+    int setRealPay(double realPay,int ticketId);
+
     void updateTicketState(@Param("ticketId") int ticketId, @Param("state") int state);
 
     List<Ticket> selectTicketsBySchedule(int scheduleId);

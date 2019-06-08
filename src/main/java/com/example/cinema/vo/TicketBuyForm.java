@@ -5,12 +5,30 @@ import java.util.List;
 public class TicketBuyForm {
     private List<Integer> ticketId;
 
+    private int userId;
+
     public List<Integer> getTicketId() {
         return ticketId;
     }
 
     public int getCouponId() {
         return couponId;
+    }
+
+    public void setTicketId(List<Integer> ticketId) {
+        this.ticketId = ticketId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public void setCouponId(int couponId) {
+        this.couponId = couponId;
     }
 
     private int couponId;

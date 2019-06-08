@@ -6,9 +6,20 @@ public class TicketVIPBuyForm {
 
     private List<Integer> ticketId;
     private int couponId;
-    private double totals;
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     private int userId;
-    private int cardId;
+
+    public void setTicketId(List<Integer> ticketId) {
+        this.ticketId = ticketId;
+    }
+
+    public void setCouponId(int couponId) {
+        this.couponId = couponId;
+    }
 
     public List<Integer> getTicketId() {
         return ticketId;
@@ -18,9 +29,6 @@ public class TicketVIPBuyForm {
         return couponId;
     }
 
-    public double getTotals() {
-        return totals;
-    }
 
     public int getUserId() {
         return userId;

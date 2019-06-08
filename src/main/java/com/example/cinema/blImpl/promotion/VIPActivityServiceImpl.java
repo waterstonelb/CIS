@@ -1,6 +1,7 @@
 package com.example.cinema.blImpl.promotion;
 
 import com.example.cinema.bl.promotion.VIPActivityService;
+import com.example.cinema.bl.promotion.VIPActivityServiceForBl;
 import com.example.cinema.po.VIPAtivity;
 import com.example.cinema.vo.ResponseVO;
 import com.example.cinema.vo.VIPActivityForm;
@@ -13,10 +14,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class VIPActivityServiceImpl implements VIPActivityService {
+public class VIPActivityServiceImpl implements VIPActivityService, VIPActivityServiceForBl {
 
     @Autowired
     VIPActivityMapper vipActivityMapper;
+
+    @Override
+    public VIPAtivity getVIPActivity(int cardId){
+        try{
+            return vipActivityMapper.getCardById(cardId);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     @Override
     public ResponseVO getCards() {

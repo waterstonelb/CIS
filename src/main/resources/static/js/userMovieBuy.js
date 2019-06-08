@@ -1,6 +1,6 @@
 var selectedSeats = [];
 var scheduleId;
-var order = {ticketId: [], couponId: 0};
+var order = {ticketId: [], couponId: 0, userId: 0};
 var coupons = [];
 var isVIP = false;
 var useVIP = true;
@@ -286,6 +286,7 @@ function payConfirmClick() {
     } else {
         if (validateForm()) {
             if ($('#userBuy-cardNum').val() === "123123123" && $('#userBuy-cardPwd').val() === "123123") {
+                order.userId=sessionStorage.getItem('id');
                 postPayRequest();
             } else {
                 alert("银行卡号或密码错误");
@@ -299,17 +300,16 @@ function postPayRequest() {
     $('#order-state').css("display", "none");
     $('#success-state').css("display", "");
     $('#buyModal').modal('hide');
-    var $total=$('#pay-amount').text().substring(3);
     if(useVIP){
         postRequest(
             "/ticket/vip/buy",
             {
                 ticketId: order.ticketId,
                 couponId: order.couponId,
-                totals: parseFloat($total),
                 userId: sessionStorage.getItem("id")
             },
-            function () {
+            function (res) {
+                sessionStorage['balance']=res.content;
             },
             function () {
             }

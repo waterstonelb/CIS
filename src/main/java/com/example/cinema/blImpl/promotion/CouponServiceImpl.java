@@ -8,6 +8,8 @@ import com.example.cinema.vo.ResponseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by liying on 2019/4/17.
  */
@@ -73,6 +75,15 @@ public class CouponServiceImpl implements CouponService,CouponServiceForBl {
            return couponMapper.selectById(couponId);
         }catch (Exception e){
             System.out.println(e);
+            return null;
+        }
+    }
+    @Override
+    public List<Coupon> getTicketCoupons(int userId,double amount){
+        try{
+            return couponMapper.selectCouponByUserAndAmount(userId,amount);
+        }catch (Exception e){
+            e.printStackTrace();
             return null;
         }
     }
