@@ -10,11 +10,41 @@ public class VIPCardForm {
      */
     private int vipId;
 
+    private int cardId;
+
+    private double targetAmount;
+
+    private double discountAmount;
+
     /**
      * 付款金额
      */
     private int amount;
 
+    public double getDiscountAmount() {
+        return discountAmount;
+    }
+
+    public void setDiscountAmount(double discountAmount) {
+        this.discountAmount = discountAmount;
+    }
+
+    public int getCardId() {
+        return cardId;
+    }
+
+    public double getTargetAmount() {
+        return targetAmount;
+    }
+
+    public void setTargetAmount(double targetAmount) {
+        this.targetAmount = targetAmount;
+    }
+
+
+    public void setCardId(int cardId) {
+        this.cardId = cardId;
+    }
 
     public int getVipId() {
         return vipId;

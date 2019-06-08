@@ -11,6 +11,8 @@ public interface VIPActivityService{
      */
     ResponseVO getCards();
 
+    ResponseVO getCardById(int cardId);
+
     /**
      * 查找所有有效卡
      * @return

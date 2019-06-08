@@ -3,14 +3,87 @@
     justify-content: space-between;
 }
 .um-blk{
+    padding-top: 23px;
+    margin-bottom: 10px;
+    /* background-color: #c6e4f2; */
+    background-color: #89e9dc54;
+    border-radius: 20px;
+    padding-bottom: 7px;
+    margin-top: 35px;
+    box-shadow: 0px 0px 20px 10px #cecece;
+    margin-left: 10%;
+    margin-right: 10%;
 
 }
 .um-blk-header{
-
+    background-color: white;
+    /* background-color: #59c4ffe3; */
+    background-color: #48bfae;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 .um-blk-list{
-
+    margin-top: 10px;
+    border-top: 1px #fff;
 }
 .um-card-info{
-    
+    display: inline-block;
+    min-width: 45%;
+    height:34px;
+    /* background: #65c7fecc; */
+    background-color: #3bbdaaed;
+    border-radius:4px;
+    font-size: px;
+    text-align:center;
+    color:#fff;
+    line-height:34px;
+    box-shadow: 4px 2px 5px 0px #c6caccbf;
+    border-radius: 20px;
+    margin-left: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.user-button{
+    width:90px;
+    height:34px;
+    /* background: #65c7fe75; */
+    /* background-color: #7ae3d4; */
+    background-color: #1caf9a;
+    border-radius:4px;
+    font-size: 17px;
+    text-align:center;
+    color:#fff;
+    line-height:34px;
+    cursor:pointer;
+    margin-right:10px;
+    /* border-color: oldlace; */
+    border:0px;
+    box-shadow: 3px 1px 4px 0px #a4acb0;
+    border-radius: 20px;
+}
+.button-div{
+    display: inline-block;
+    padding-right: 30px;
+}
+.um-card{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px #fff;
+    padding-top: 8px;
+    padding-bottom: 5px;
+}
+.um-username{
+    padding-right: 15px;
+    font-size: initial;
+}
+.um-password{
+    font-size: initial;
+}
+.um-header-innode{
+    font-size: 21px;
+    font-weight: 600;
+    /* text-shadow: 3px 2px 7px #087ccc; */
+    text-shadow: 3px 2px 7px #1a774c;
+    color: white;
+    padding-left: 20px;
 }

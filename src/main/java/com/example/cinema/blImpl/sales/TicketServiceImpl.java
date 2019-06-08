@@ -50,7 +50,7 @@ public class TicketServiceImpl implements TicketService {
             List<Ticket> ticketList = new ArrayList<>();
             for (int i = 0; i < ticketForm.getSeats().size(); i++) {
                 Ticket ticket = new Ticket(ticketForm.getUserId(), ticketForm.getScheduleId(),
-                        ticketForm.getSeats().get(i).getColumnIndex(), ticketForm.getSeats().get(i).getRowIndex(), 0);
+                        ticketForm.getSeats().get(i).getColumnIndex(), ticketForm.getSeats().get(i).getRowIndex(), 0,0);
                 ticketList.add(ticket);
             }
             ticketMapper.insertTickets(ticketList);

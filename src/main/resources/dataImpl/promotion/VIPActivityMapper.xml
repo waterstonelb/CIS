@@ -4,6 +4,9 @@
     <select id="getCards" resultMap="VIPActivity">
         select * from vip_activity
     </select>
+    <select id="getCardById" resultMap="VIPActivity">
+        select * from vip_activity where id=#{cardId}
+    </select>
     <insert id="addNewCard" parameterType="com.example.cinema.po.VIPAtivity" useGeneratedKeys="true" keyProperty="id">
         insert into vip_activity(card_name,card_price,target_amount,discount_amount,discount,status)
         values (#{cardName},#{cardPrice},#{targetAmount},#{discountAmount},#{discount},#{status})

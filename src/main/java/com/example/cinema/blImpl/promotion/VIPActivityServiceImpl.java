@@ -30,6 +30,16 @@ public class VIPActivityServiceImpl implements VIPActivityService {
     }
 
     @Override
+    public ResponseVO getCardById(int cardId){
+        try {
+            return ResponseVO.buildSuccess(new VIPActivityVO(vipActivityMapper.getCardById(cardId)));
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseVO.buildFailure("查询失败");
+        }
+    }
+
+    @Override
     public ResponseVO getValidVIPCards() {
         try {
             List<VIPAtivity> vipAtivityList = vipActivityMapper.getCards();

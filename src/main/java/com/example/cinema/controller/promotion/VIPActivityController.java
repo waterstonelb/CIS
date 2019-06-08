@@ -23,6 +23,11 @@ public class VIPActivityController{
         return vipActivityService.getCards();
     }
 
+    @GetMapping("/getbyid")
+    public ResponseVO getCardById(@RequestParam int cardId){
+        return vipActivityService.getCardById(cardId);
+    }
+
     @GetMapping("/getValid")
     public ResponseVO getValidVIPCards(){ return vipActivityService.getValidVIPCards();}
 

@@ -6,9 +6,9 @@ import java.util.List;
 import com.example.cinema.bl.management.UserService;
 import com.example.cinema.data.management.UserMapper;
 import com.example.cinema.vo.ResponseVO;
-import com.example.cinema.vo.UserForm;
 import com.example.cinema.vo.UserVO;
 
+import com.example.cinema.vo.UserWithLevelForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,5 +60,42 @@ public class UserServiceImpl implements UserService {
             return ResponseVO.buildFailure("搜索员工失败");
         }
     }
-    
+
+    @Override
+    public ResponseVO insertEmployee(UserWithLevelForm userForm) {
+        try{
+            uMapper.addUser(userForm.getUsername(), userForm.getPassword(), userForm.getLevel());
+            return ResponseVO.buildSuccess();
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseVO.buildFailure("增添员工失败");
+        }
+    }
+
+    @Override
+    public ResponseVO deleteEmployee(String username) {
+        try {
+            int ret = uMapper.deleteUser(username);
+            System.out.println(username);
+            if(ret>0)
+                return ResponseVO.buildSuccess();
+            else
+                return ResponseVO.buildFailure("删除员工失败");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseVO.buildFailure("删除员工失败");
+        }
+    }
+
+    @Override
+    public ResponseVO updateEmployee(UserWithLevelForm userForm) {
+        try {
+            uMapper.updateUser(userForm.getUsername(), userForm.getPassword(), userForm.getLevel());
+            return ResponseVO.buildSuccess();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseVO.buildFailure("更新员工信息失败");
+        }
+    }
+
 }

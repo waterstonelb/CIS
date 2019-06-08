@@ -3,16 +3,16 @@
 <mapper namespace="com.example.cinema.data.sales.TicketMapper">
     <insert id="insertTicket" parameterType="com.example.cinema.po.Ticket"
             useGeneratedKeys="true" keyProperty="id">
-        insert into ticket(user_id,schedule_id,column_index,row_index,state)
-        values(#{userId}, #{scheduleId},#{columnIndex},#{rowIndex},#{state})
+        insert into ticket(user_id,schedule_id,column_index,row_index,state,real_pay)
+        values(#{userId}, #{scheduleId},#{columnIndex},#{rowIndex},#{state},#{realPay})
     </insert>
     <insert id="insertTickets" parameterType="java.util.List"
             useGeneratedKeys="true" keyProperty="id">
-        insert into ticket(user_id,schedule_id,column_index,row_index,state)
+        insert into ticket(user_id,schedule_id,column_index,row_index,state,real_pay)
         values
         <foreach collection="list" item="item" index="index"
                  separator=",">
-            (#{item.userId}, #{item.scheduleId},#{item.columnIndex},#{item.rowIndex},#{item.state})
+            (#{item.userId}, #{item.scheduleId},#{item.columnIndex},#{item.rowIndex},#{item.state},#{item.realPay})
         </foreach>
 
     </insert>
@@ -49,6 +49,7 @@
         <result column="column_index" property="columnIndex"></result>
         <result column="row_index" property="rowIndex"></result>
         <result column="state" property="state"></result>
+        <result column="real_pay" property="realPay"></result>
         <result column="time" property="time"></result>
     </resultMap>
 

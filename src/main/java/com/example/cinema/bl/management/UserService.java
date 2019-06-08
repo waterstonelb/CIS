@@ -1,8 +1,7 @@
 package com.example.cinema.bl.management;
 
-import com.example.cinema.vo.UserVO;
-import com.example.cinema.vo.UserForm;
 import com.example.cinema.vo.ResponseVO;
+import com.example.cinema.vo.UserWithLevelForm;
 
 /**
  * @author sky
@@ -19,4 +18,19 @@ public interface UserService{
      * 搜索全部员工
      */
     ResponseVO searchAllStaff();
+
+    /**
+     * 增添员工
+     */
+    ResponseVO insertEmployee(UserWithLevelForm userLForm);
+
+    /**
+     * 删除员工
+     */
+    ResponseVO deleteEmployee(String username);
+
+    /**
+     * 更新员工信息
+     */
+    ResponseVO updateEmployee(UserWithLevelForm userLForm);
 }
