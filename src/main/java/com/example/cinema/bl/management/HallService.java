@@ -1,6 +1,7 @@
 package com.example.cinema.bl.management;
 
 import com.example.cinema.vo.ResponseVO;
+import com.example.cinema.vo.HallVO;
 
 /**
  * @author fjj
@@ -12,4 +13,14 @@ public interface HallService {
      * @return
      */
     ResponseVO searchAllHall();
+    /**
+     * 添加影厅
+     * @return
+     */
+    ResponseVO addHall(HallVO hall);
+    /**
+     * 更新影厅
+     * @return
+     */
+    ResponseVO updateHall(HallVO hall);
 }

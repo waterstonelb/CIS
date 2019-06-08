@@ -41,11 +41,42 @@ public class HallServiceImpl implements HallService, HallServiceForBl {
 
     }
 
+    @Override
+    public ResponseVO addHall(HallVO halVO){
+        try {
+            hallMapper.addNewHall(hallVO2hallPO(halVO));
+            return ResponseVO.buildSuccess();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseVO.buildFailure("失败");
+        }
+    }
+
+    @Override
+    public ResponseVO updateHall(HallVO halVO){
+        try {
+            hallMapper.updataHall(hallVO2hallPO(halVO));
+            return ResponseVO.buildSuccess();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseVO.buildFailure("失败");
+        }
+    }
+
+
     private List<HallVO> hallList2HallVOList(List<Hall> hallList){
         List<HallVO> hallVOList = new ArrayList<>();
         for(Hall hall : hallList){
             hallVOList.add(new HallVO(hall));
         }
         return hallVOList;
+    }
+    Hall hall = new Hall();
+    private Hall hallVO2hallPO(HallVO hallvo){ 
+        hall.setId(hallvo.getId());
+        hall.setColumn(hallvo.getColumn());
+        hall.setRow(hallvo.getRow());
+        hall.setName(hallvo.getName());
+        return hall;
     }
 }
