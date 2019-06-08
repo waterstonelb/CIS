@@ -1,0 +1,44 @@
+.content-header {
+    display: flex;
+    justify-content: space-between;
+}
+.content-refund{
+    box-shadow: 0px 0px 20px 9px #999999;
+    margin-left: 150px;
+    width: 800px;
+    height: 60%;
+    margin-top: 50px;
+    background-color: #1caf9a;
+    border-radius: 30px;
+    margin-right: 60px;
+}
+
+.refund-head{
+   padding-top: 30px;
+    /* background-color: #efccbc; */
+    background-color: #158373;
+    border-top-width: 30px;
+    margin-top: 0px;
+    border-radius: 30px 30px 0 0;
+    font-size: 40px;
+    color: #ffffff;
+    /* align-content: center; */
+    padding-left: 40px;
+    padding-bottom: 10px; 
+}
+    
+.div1{
+    padding-left: 20px;
+    color: #fcf8e3;
+    height: 60px;
+    margin-top: 60px;
+}
+    
+.refund-txt{
+    font-size: xx-large;
+}
+    
+.refund-propo{
+    font-size: xx-large;
+}
+    

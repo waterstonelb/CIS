@@ -415,3 +415,17 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2019-04-24 21:20:52
+
+DROP TABLE IF EXISTS `refund_policy`;
+
+CREATE TABLE `refund_policy` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `refund_day` double NOT NULL,
+  `refund_hour` double NOT NULL,
+  `issue_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+LOCK TABLES `refund_policy` WRITE;
+INSERT INTO `refund_policy` VALUES (1,'0.90','0.55','2019-06-8 18:03:38');
+UNLOCK TABLES;

@@ -1,8 +1,8 @@
 package com.example.cinema.controller.management;
 
-import com.example.cinema.bl.management.UserService;
+import com.example.cinema.bl.management.RefundService;
+import com.example.cinema.vo.RefundPolicyVO;
 import com.example.cinema.vo.ResponseVO;
-import com.example.cinema.vo.UserWithLevelForm;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,13 +14,17 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class RefundController {
-    // @Autowired
-    // private UserService uService;
+    @Autowired
+    private RefundService rService;
 
-    @RequestMapping(value = "/",method=RequestMethod.GET)
-    public ResponseVO getManagers(){
-        return null;
+    @RequestMapping(value = "/refund/manage/update",method=RequestMethod.POST)
+    public ResponseVO updateRefundPolicy(@RequestBody RefundPolicyVO rForm){
+        return rService.update(rForm.getRefund_day(),rForm.getRefund_hour());
     }
-
+    //'/refund/manage/refundpolicy'
+    @RequestMapping(value = "/refund/manage/refundpolicy",method=RequestMethod.GET)
+    public ResponseVO getRefundPolicy(){
+        return rService.getRefundPolicy();
+    }
 
 }

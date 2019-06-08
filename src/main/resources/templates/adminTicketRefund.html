@@ -5,7 +5,7 @@
     <title>电影详情</title>
     <!-- 引入css样式文件 -->
     <link rel="stylesheet" type="text/css" href="/css/common.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/movieDetail.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/adminRefund.css"/>
     <!-- Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
     <!-- font-asesome图标库 -->
@@ -39,7 +39,52 @@
         </ul>
     </div>
     <div class="content-container">
+        <div class="content-header">
+                <span class="title gray-text">退票管理</span>
+                <button type="button" class="btn btn-primary" data-backdrop="static" data-toggle="modal" data-target="#refundModal">修改退票策略</button>
+        </div>
+        <div class="content-refund">
+            <div class="refund-head">当前退票政策</div>
+            <div class="div1">
+                <span class="refund-txt">距放映1天前退票：</span><span class="refund-propo" id="r-day"></span>
+            </div>
+            <div class="div1">
+                <span class="refund-txt">距放映1小时前退票：</span><span class="refund-propo" id="r-hour"></span>
+            </div>
+        </div>
     </div>
+    <div class="modal fade" id="refundModal" tabindex="-1" role="dialog" aria-labelledby="refundModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="refundModalLabel">修改退票策略</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="refund-hour"><span class="error-text">*</span>开场前1小时可退</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="refund-hour" placeholder="请输入退还比例（如：0.8）">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="refund-day"><span class="error-text">*</span>开场前1天可退</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="refund-day" placeholder="请输入退还比例（如：0.9）">
+                                    </div>
+                                </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary" id="refund-form-btn">确认</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 </div>
 </body>
 </html>
