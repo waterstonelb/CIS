@@ -2,7 +2,7 @@ $(document).ready(function() {
     var movieList;
     getMovies();
     getTopBox();
-   // getMostFavourite();
+    getMostFavourite();
     function getMovies() {
         getRequest(
             "/movie/all/exclude/off",
@@ -26,7 +26,7 @@ $(document).ready(function() {
     }
     function getMostFavourite(){
         getRequest(
-            "/statistics/mostFavourite",
+            "/statistics/userlike",
             function (res) {
                 favouriteList=res.content;
                 renderMostFavourite(favouriteList)
