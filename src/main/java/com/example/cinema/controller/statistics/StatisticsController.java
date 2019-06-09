@@ -66,8 +66,9 @@ public class StatisticsController {
     public ResponseVO getLikeMovieList(){
         return movielikeService.getlikemovielist();
         }
+
     @RequestMapping(value = "statistics/amount",method = RequestMethod.GET)
-    public ResponseVO getAmountHistory(@RequestParam(required = false) String startDate, @RequestParam(required = false) String endDate){
+    public ResponseVO getAmountHistory(@RequestParam String startDate, @RequestParam String endDate){
         return statisticsService.getAmountHistory(startDate,endDate);
     }
 

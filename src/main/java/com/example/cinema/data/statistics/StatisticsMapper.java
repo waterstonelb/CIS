@@ -67,5 +67,5 @@ public interface StatisticsMapper {
      */
     List<UserChargeRecord> SelectChargeRecord(@Param("id") int id);
 
-    List<AdminUserBuyRecord> AdminSelectBuyRecord(@Param("data") Date data,@Param("nextdata")Date nextdata);
+    List<AdminUserBuyRecord> AdminSelectBuyRecord(@Param("date") Date date,@Param("nextdate")Date nextdate);
 }

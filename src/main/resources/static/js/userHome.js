@@ -76,7 +76,22 @@ $(document).ready(function () {
     }
 
     function renderMovie(movieList) {
-        $('.movie-on-list').empty();
+        $("#movie-show").empty();
+        $("#movie-choose").empty();
+        var movieDomStr='';
+        var movieChoose='';
+        var count=0;
+        movieList.forEach(function (movie) {
+            movieDomStr+="<div class='item "+(count==0?"active":"")+"' >" +
+                "                        <img src='"+movie.posterUrl+"' alt='成功' class='img-show'>" +
+                "                        <div class='carousel-caption'>" +movie.name+"</div>" +
+                "                    </div>";
+            movieChoose+="<li data-target='#carousel-example-generic' data-slide-to='"+count+"'></li>"
+            count=count+1;
+        });
+        $("#movie-show").append(movieDomStr);
+        $("#movie-choose").append(movieChoose);
+        /**$('.movie-on-list').empty();
         var movieDomStr = '';
         movieList.forEach(function (movie) {
             movie.description = movie.description || '';
@@ -86,7 +101,7 @@ $(document).ready(function () {
                 "<div>" + movie.name + "</div>" +
                 "</li>";
         });
-        $('.movie-on-list').append(movieDomStr);
+        $('.movie-on-list').append(movieDomStr);*/
     }
 
     function renderTopBox(topList) {

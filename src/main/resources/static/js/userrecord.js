@@ -21,7 +21,7 @@ $(document).ready(function () {
         for(let scheduleItemwithSeats of list) {
             strhtml+= "<tr>"+"<td>" + scheduleItemwithSeats.name + "</td>" +
                 "<td>" + scheduleItemwithSeats.time + "</td>" +
-                "<td>" + scheduleItemwithSeats.realPrice + "</td>"+"</tr>";
+                "<td>" + scheduleItemwithSeats.realPrice.toFixed(2) + "</td>"+"</tr>";
         }
         $('#schedule-info').append(strhtml)
     }

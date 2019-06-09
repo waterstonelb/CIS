@@ -73,6 +73,35 @@
         select charge_time as time,charge as chargeNum from user_charge where user_id=#{id}
     </select>
 
+    <select id="AdminSelectChargeRecord" resultType="com.example.cinema.po.AdminChargeRecord">
+        select nid as userId,sum(charge) as chargeNum from
+            (select user_id as nid,charge from user_charge where charge_time between #{date} and #{nextdate})t
+            right join 
+                (select * from VIP_card)x
+                on x.user_id = t.nid
+        where nid is not NULL
+        group by user_id 
+        order by chargeNum desc
+    </select>
+
+    <select id="AdminSelectBuyRecord" resultType="com.example.cinema.po.AdminUserBuyRecord">
+        select sum(real_pay) as realPrice,uid as userId from
+        (select * from
+            (select user_id as uid from vip_card)h,
+                (select * from
+                    (select * from ticket where time between #{date} and #{nextdate})u
+                    left join
+                    (select name,schedule_ids from movie
+                    left join 
+                    (select id as schedule_ids,movie_id from schedule)s
+                    on movie.id = s.movie_id)t
+                on u.schedule_id = t.schedule_ids)l
+            where h.uid = l.user_id)x
+        where real_pay is not NULL and user_id is not NULL
+        group by uid
+        order by realPrice desc
+
+    </select>
 
 
 </mapper>
