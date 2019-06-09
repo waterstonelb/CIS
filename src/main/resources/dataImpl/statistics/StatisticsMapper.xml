@@ -79,7 +79,7 @@
     </select>
 
     <select id="AdminSelectBuyRecord" resultType="com.example.cinema.po.AdminUserBuyRecord">
-        select sum(real_pay) as realPrice,user_id from
+        select sum(real_pay) as realPrice,user_id as userId from
         (select * from ticket where time between #{date} and #{nextdate})u
                 left join
                 (select name,schedule_ids from movie

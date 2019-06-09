@@ -61,4 +61,12 @@ public interface StatisticsService {
      * @return
      */
     ResponseVO getUserChargeRecord(int id);
+
+    /**
+     * 获取用户消费排名
+     * @param startData
+     * @param endData
+     * @return
+     */
+    ResponseVO getAmountHistory(String startDate,String endDate);
 }

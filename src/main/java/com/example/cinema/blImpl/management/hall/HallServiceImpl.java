@@ -1,6 +1,7 @@
 package com.example.cinema.blImpl.management.hall;
 
 import com.example.cinema.bl.management.HallService;
+import com.example.cinema.blImpl.management.schedule.ScheduleServiceForBl;
 import com.example.cinema.data.management.HallMapper;
 import com.example.cinema.po.Hall;
 import com.example.cinema.vo.HallVO;
@@ -18,7 +19,9 @@ import java.util.List;
 @Service
 public class HallServiceImpl implements HallService, HallServiceForBl {
     @Autowired
-    private HallMapper hallMapper;
+    HallMapper hallMapper;
+    @Autowired
+    ScheduleServiceForBl scheduleServiceForBl;
 
     @Override
     public ResponseVO searchAllHall() {
@@ -42,9 +45,9 @@ public class HallServiceImpl implements HallService, HallServiceForBl {
     }
 
     @Override
-    public ResponseVO addHall(HallVO halVO){
+    public ResponseVO addHall(HallVO hallVO) {
         try {
-            hallMapper.addNewHall(hallVO2hallPO(halVO));
+            hallMapper.addNewHall(hallVO2hallPO(hallVO));
             return ResponseVO.buildSuccess();
         } catch (Exception e) {
             e.printStackTrace();
@@ -53,10 +56,14 @@ public class HallServiceImpl implements HallService, HallServiceForBl {
     }
 
     @Override
-    public ResponseVO updateHall(HallVO halVO){
+    public ResponseVO updateHall(HallVO hallVO) {
         try {
-            hallMapper.updataHall(hallVO2hallPO(halVO));
-            return ResponseVO.buildSuccess();
+            if (scheduleServiceForBl.judgeScheduleByHallId(hallVO.getId())) {
+                hallMapper.updataHall(hallVO2hallPO(hallVO));
+                return ResponseVO.buildSuccess();
+            }else {
+                return ResponseVO.buildFailure("已有此影厅的排片，不可修改或删除");
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("失败");
@@ -64,10 +71,14 @@ public class HallServiceImpl implements HallService, HallServiceForBl {
     }
 
     @Override
-    public ResponseVO delHall(HallVO halVO){
+    public ResponseVO delHall(HallVO hallVO) {
         try {
-            hallMapper.deleteHall(halVO.getId());
-            return ResponseVO.buildSuccess();
+            if (scheduleServiceForBl.judgeScheduleByHallId(hallVO.getId())) {
+                hallMapper.deleteHall(hallVO.getId());
+                return ResponseVO.buildSuccess();
+            }else {
+                return ResponseVO.buildFailure("已有此影厅的排片，不可修改或删除");
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("失败");
@@ -75,14 +86,15 @@ public class HallServiceImpl implements HallService, HallServiceForBl {
     }
 
 
-    private List<HallVO> hallList2HallVOList(List<Hall> hallList){
+    private List<HallVO> hallList2HallVOList(List<Hall> hallList) {
         List<HallVO> hallVOList = new ArrayList<>();
-        for(Hall hall : hallList){
+        for (Hall hall : hallList) {
             hallVOList.add(new HallVO(hall));
         }
         return hallVOList;
     }
-    private Hall hallVO2hallPO(HallVO hallvo){ 
+
+    private Hall hallVO2hallPO(HallVO hallvo) {
         Hall hall = new Hall();
         hall.setId(hallvo.getId());
         hall.setColumn(hallvo.getColumn());

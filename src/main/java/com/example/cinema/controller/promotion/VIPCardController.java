@@ -2,6 +2,7 @@ package com.example.cinema.controller.promotion;
 
 import com.example.cinema.bl.promotion.VIPService;
 import com.example.cinema.vo.VIPCardForm;
+import com.example.cinema.vo.vipCoupon;
 import com.example.cinema.vo.ResponseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +35,8 @@ public class VIPCardController {
         return vipService.charge(vipCardForm);
     }
 
-
+    @PostMapping("/coupon")
+    public ResponseVO sendCoupon(@RequestBody vipCoupon vipCoupon){return vipService.sendCoupon(vipCoupon);}
 
 
 }

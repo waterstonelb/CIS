@@ -29,6 +29,6 @@ public interface ScheduleServiceForBl {
      * @param id
      * @return
      */
-    //List<ScheduleItem> getScheduleItemByHall(int id);
+    boolean judgeScheduleByHallId(int hallId);
     
 }
