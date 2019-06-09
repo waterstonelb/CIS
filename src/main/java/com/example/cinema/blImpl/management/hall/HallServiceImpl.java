@@ -63,6 +63,17 @@ public class HallServiceImpl implements HallService, HallServiceForBl {
         }
     }
 
+    @Override
+    public ResponseVO delHall(HallVO halVO){
+        try {
+            hallMapper.deleteHall(halVO.getId());
+            return ResponseVO.buildSuccess();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseVO.buildFailure("失败");
+        }
+    }
+
 
     private List<HallVO> hallList2HallVOList(List<Hall> hallList){
         List<HallVO> hallVOList = new ArrayList<>();
@@ -71,8 +82,8 @@ public class HallServiceImpl implements HallService, HallServiceForBl {
         }
         return hallVOList;
     }
-    Hall hall = new Hall();
     private Hall hallVO2hallPO(HallVO hallvo){ 
+        Hall hall = new Hall();
         hall.setId(hallvo.getId());
         hall.setColumn(hallvo.getColumn());
         hall.setRow(hallvo.getRow());

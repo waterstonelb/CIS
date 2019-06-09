@@ -15,12 +15,20 @@ public interface HallService {
     ResponseVO searchAllHall();
     /**
      * 添加影厅
+     * @param HallVO
      * @return
      */
     ResponseVO addHall(HallVO hall);
     /**
      * 更新影厅
+     * @param HallVO
      * @return
      */
     ResponseVO updateHall(HallVO hall);
+    /**
+     * 删除影厅
+     * @param HallVO
+     * @return
+     */
+    ResponseVO delHall(HallVO hall);
 }

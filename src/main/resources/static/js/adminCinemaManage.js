@@ -22,6 +22,7 @@ $(document).ready(function() {
 
     function renderHall(halls){
         $('#hall-card').empty();
+        $('.selector').empty();
         var hallDomStr = "";
         halls.forEach(function (hall) {
             $('.selector').append("<option value="+ hall.id +">"+hall.name+"</option>");
@@ -155,7 +156,7 @@ $(document).ready(function() {
     });
     $('#del-hall-btn').click(function () {
         var form = {
-            id: $("#del-hall-id").children('option:selected').val(),
+            id: $("#del-hall-id").children('option:selected').val()
         };
         //TODO: 需要做一下表单验证？
 

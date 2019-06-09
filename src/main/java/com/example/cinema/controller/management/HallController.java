@@ -27,12 +27,10 @@ public class HallController {
 
     @RequestMapping(value = "hall/add", method = RequestMethod.POST)
     public ResponseVO addHall(@RequestBody HallVO addHall){
-        return hallService.updateHall(addHall);
+        return hallService.addHall(addHall);
     }
-    /*
-    @RequestMapping(value = "hall/test", method = RequestMethod.GET)
-    public int test(){
-        return 3;
+    @RequestMapping(value = "hall/del", method = RequestMethod.POST)
+    public ResponseVO delHall(@RequestBody HallVO delHall){
+        return hallService.delHall(delHall);
     }
-    */
 }
