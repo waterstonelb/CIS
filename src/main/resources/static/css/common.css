@@ -19,8 +19,9 @@ ul {
 }
 .card {
     background: #fff;
-    border-radius: 2px;
-    box-shadow: #ccc 1px 0 0 0;
+    border-radius: 20px;
+    box-shadow: #ccc 0 0 20px 10px;
+
 }
 .title {
     font-size: 24px;

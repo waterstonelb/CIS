@@ -111,9 +111,12 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
     }
 
     @Override
-    public double getBalance(int userId) catch (Exception e){
+    public double getBalance(int userId){
+        try{
+            return vipCardMapper.selectCardByUserId(userId).getBalance();
+        } catch(Exception e){
             e.printStackTrace();
-            return  0;
+            return 0;
         }
     }
     @Override

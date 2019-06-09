@@ -47,7 +47,42 @@
         <div class="content-vipcard">
 
         </div>
+        <div class="card">
+            <div style="display: flex;justify-content: space-between">
+                <div>
+                    <span>开始日期 </span>
+                    <input type="date" class="form-control" id="start-date" style="display: inline-block;width: 180px;">
+                    <span>截止日期 </span>
+                    <input type="date" class="form-control" id="end-date" style="display: inline-block;width: 180px;">
+                    <span>选择赠送优惠券</span>
+                    <select class="form-control" id="coupon-list" style="display: inline-block;width: 180px;"></select>
+                </div>
+                <button id="datesubmit" type="button" class="btn btn-primary">查询</button>
+            </div>
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Panel heading</div>
+                <div class="panel-body">
+                    <p>用户消费排名</p>
+                </div>
+
+                <!-- Table -->
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>消费者ID</th>
+                        <th>会员卡种类</th>
+                        <th>历史消费总额</th>
+                    </tr>
+                    </thead>
+                    <tbody id="amount-history">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+
 </div>
 <div class="modal fade" id="vipcardModal" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel">
     <div class="modal-dialog" role="document">
@@ -186,39 +221,6 @@
         </div>
     </div>
 </div>
-<div class="card">
-    <div style="display: flex;justify-content: space-between">
-        <div>
-            <span>开始日期 </span>
-            <input type="date" class="form-control" id="start-date" style="display: inline-block;width: 180px;">
-            <span>截止日期 </span>
-            <input type="date" class="form-control" id="end-date" style="display: inline-block;width: 180px;">
-            <span>选择赠送优惠券</span>
-            <select class="form-control" id="coupon-list" style="display: inline-block;width: 180px;"></select>
-        </div>
-        <button id="datesubmit" type="button" class="btn btn-primary">查询</button>
-    </div>
-    <div class="panel panel-default">
-        <!-- Default panel contents -->
-        <div class="panel-heading">Panel heading</div>
-        <div class="panel-body">
-            <p>用户消费排名</p>
-        </div>
 
-        <!-- Table -->
-        <table class="table">
-            <thead>
-            <tr>
-                <th>消费者ID</th>
-                <th>会员卡种类</th>
-                <th>历史消费总额</th>
-            </tr>
-            </thead>
-            <tbody id="amount-history">
-
-            </tbody>
-        </table>
-    </div>
-</div>
 </body>
 </html>
