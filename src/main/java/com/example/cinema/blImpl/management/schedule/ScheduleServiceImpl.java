@@ -151,16 +151,17 @@ public class ScheduleServiceImpl implements ScheduleService, ScheduleServiceForB
         }
     }
 
-    @Override
-    public ScheduleItem getScheduleItemByHall(int id) {
+    /*
+    //@Override
+    public List<ScheduleItem> getScheduleItemByHall(int id) {
         try {
-            return scheduleMapper.selectScheduleById(id);
+            return scheduleMapper.selectScheduleByHall(id);
         }catch (Exception e){
             e.printStackTrace();
             return null;
         }
     }
-
+    */
     @Override
     public ResponseVO searchScheduleSevenDays(int hallId, Date startDate) {
         try {
