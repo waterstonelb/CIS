@@ -46,7 +46,7 @@
               (select id,hall_id,movie_id from schedule)q
               on p.schedule_id = q.id)r
           right join
-          (select id as hall_id,`row`*`column` as seatSum from hall)u
+          (select id as hall_id,hall_row*hall_column as seatSum from hall)u
           on u.hall_id=r.hall_id group by movie_id)b
           left join
           (select id,name from movie)s
@@ -66,7 +66,38 @@
 
     </select>
 
+    <select id="SelectBuyRecord" resultType="com.example.cinema.po.UserBuyRecord">
+        select real_pay as realPrice,time,name from
+        ((select * from ticket where ticket.user_id = #{id})u
+                left join
+                (select name,schedule_ids from movie
+                left join 
+                (select id as schedule_ids,movie_id from schedule)s
+                on movie.id = s.movie_id)t
+             on u.schedule_id = t.schedule_ids)
+
+    </select>
+
+    <select id="AdminSelectBuyRecord" resultType="com.example.cinema.po.AdminUserBuyRecord">
+        select sum(real_pay) as realPrice,user_id from
+        (select * from ticket where time between #{date} and #{nextdate})u
+                left join
+                (select name,schedule_ids from movie
+                left join 
+                (select id as schedule_ids,movie_id from schedule)s
+                on movie.id = s.movie_id)t
+             on u.schedule_id = t.schedule_ids
+        group by user_id
+        order by realPrice desc
+
+    </select>
+
     <select id="SelectChargeRecord" resultType="com.example.cinema.po.UserChargeRecord">
         select charge_time as time,charge as chargeNum from user_charge where user_id=#{id}
     </select>
+
+    <select id="AdminSelectChargeRecord" resultType="com.example.cinema.po.AdminChargeRecord">
+        select id,sum(charge) as chargeNum from user_charge where charge_time between #{date} and #{nextdate} group by user_id order by chargeNum desc
+    </select>
+
 </mapper>
