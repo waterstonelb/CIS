@@ -48,7 +48,7 @@
 
         </div>
         <div class="card">
-            <div style="display: flex;justify-content: space-between">
+            <div style="display: flex;justify-content: space-between padding:15px">
                 <div>
                     <span>开始日期 </span>
                     <input type="date" class="form-control" id="start-date" style="display: inline-block;width: 180px;">
@@ -59,20 +59,16 @@
                 </div>
                 <button id="date-submit" type="button" class="btn btn-primary">查询</button>
             </div>
-            <div class="panel panel-default">
+            <div class="panel panel-default" style="border-radius: 20px">
                 <!-- Default panel contents -->
-                <div class="panel-heading">Panel heading</div>
-                <div class="panel-body">
-                    <p>用户消费排名</p>
-                </div>
-
-                <!-- Table -->
-                <table class="table">
+                <div class="panel-heading">用户消费排名</div>
+                <table class="table" style="border-radius: 20px">
                     <thead>
                     <tr>
                         <th>消费者ID</th>
                         <th>会员卡种类</th>
                         <th>历史消费总额</th>
+                        <th>操作</th>>
                     </tr>
                     </thead>
                     <tbody id="amount-history">
