@@ -1,11 +1,47 @@
 $(document).ready(function(){
-    getAmountHistory();
     showSidebar();
     getVIPvard();
     getVIPCoupon();
+    getVIPinfo();
+    function getVIPinfo() {
+        getRequest(
+            '/vip/' + sessionStorage.getItem('id') + '/get',
+            function (res) {
+                if (res.success) {
+                    // 是会员
+                    sessionStorage.setItem('isVIP', '1');
+                    sessionStorage.setItem('cardId', res.content.cardId);
+                    sessionStorage.setItem('vipId', res.content.id);
+                    sessionStorage.setItem('joinDate',res.content.joinDate);
+                    sessionStorage.setItem('balance',res.content.balance);
+                    getUserVIPCard(res.content.cardId);
+                } else {
+                    // 非会员
+                    sessionStorage.setItem('isVIP', '0');
+                    sessionStorage.setItem('discount','1');
+                }
+            },
+            function (error) {
+                alert(error);
+            });
+
+        function getUserVIPCard(cardId) {
+            getRequest(
+                '/vipactivity/getbyid?cardId=' + cardId,
+                function (res) {
+                    if (res.success) {
+                        sessionStorage.setItem('targetAmount', res.content.targetAmount);
+                        sessionStorage.setItem('discountAmount',res.content.discountAmount);
+                        sessionStorage.setItem('discount',res.content.discount);
+                        sessionStorage.setItem('cardName',res.content.cardName);
+                    }
+                }
+            )
+        }
+    }
     function getVIPCoupon() {
         getRequest(
-            'activity/get',
+            'http://localhost:8080/activity/get',
             function (res) {
                 activities=res.content;
                 activities.forEach(function (activity) {
@@ -16,29 +52,10 @@ $(document).ready(function(){
             }
         )
     }
-    function sendCoupon(obj) {
-        var userId=$(obj).parent().parent().children().eq(0).text();
-        var couponId=$("#coupon-list").val();
-        postRequest(
-            'vipactivity/coupon',
-            {
-                userId:userId,
-                coupunId:couponId
-            },
-            function (res) {
-                if(res.success)
-                    alert("赠送成功");
-                else
-                    alert("赠送失败");
-            },
-            function (error) {
-                alert(JSON.stringify(error));
-            }
-        )
-    }
-    function getAmountHistory() {
+
+    $("#date-submit").click(function () {
         getRequest(
-            'statistics/amount?startDate?'+$("#start-date").val()+"&&endDate?"+$("#end-date").val(),
+            'http://localhost:8080/statistics/amount?startDate='+$("#start-date").val()+"&&endDate="+$("#end-date").val(),
             function (res) {
                 renderAmount(res.content);
             },
@@ -46,19 +63,21 @@ $(document).ready(function(){
                 alert(error)
             }
         )
-    }
+    })
     function renderAmount(list) {
+        $("#amount-history").empty();
         var innerHTML="";
         if(list.length>0){
             list.forEach(function (every) {
                 innerHTML+="<tr>"+
                     "<td>"+every.userId+"</td>"+
                     "<td>"+every.cardId+"</td>"+
-                    "<td>"+every.realPrice+"</td>"+
+                    "<td>"+every.realPrice.toFixed(2)+"</td>"+
                     "<td>"+"<button class='btn btn-primary' onclick='sendCoupon(this)'>赠送</button>"+"</td>"+
                     "</tr>"
             })
         }
+        $("#amount-history").append(innerHTML);
     }
     function showSidebar(){
         var level = sessionStorage.getItem("level");
@@ -175,3 +194,23 @@ $(document).ready(function(){
 
 
 });
+function sendCoupon(obj) {
+    var userId=$(obj).parent().parent().children().eq(0).text();
+    var couponId=$("#coupon-list").val();
+    postRequest(
+        '/vip/coupon',
+        {
+            userId:userId,
+            couponId:couponId
+        },
+        function (res) {
+            if(res.success)
+                alert("赠送成功");
+            else
+                alert("赠送失败");
+        },
+        function (error) {
+            alert(JSON.stringify(error));
+        }
+    )
+}

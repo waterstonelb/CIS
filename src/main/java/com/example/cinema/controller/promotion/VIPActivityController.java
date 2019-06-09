@@ -49,4 +49,6 @@ public class VIPActivityController{
     public ResponseVO changeStatusToValid(@PathVariable int id){
         return vipActivityService.changeStatusToValid(id);
     }
+
+
 }

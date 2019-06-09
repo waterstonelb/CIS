@@ -87,7 +87,7 @@
     <select id="AdminSelectBuyRecord" resultType="com.example.cinema.po.AdminUserBuyRecord">
         select sum(real_pay) as realPrice,uid as userId from
         (select * from
-            (select user_id as uid from VIP_card)h,
+            (select user_id as uid from vip_card)h,
                 (select * from
                     (select * from ticket where time between #{date} and #{nextdate})u
                     left join
