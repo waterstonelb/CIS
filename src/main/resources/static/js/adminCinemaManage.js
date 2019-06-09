@@ -22,8 +22,10 @@ $(document).ready(function() {
 
     function renderHall(halls){
         $('#hall-card').empty();
+        $('.selector').empty();
         var hallDomStr = "";
         halls.forEach(function (hall) {
+            $('.selector').append("<option value="+ hall.id +">"+hall.name+"</option>");
             var seat = "";
             for(var i =0;i<hall.row;i++){
                 var temp = ""
@@ -103,4 +105,75 @@ $(document).ready(function() {
             $("#sidebar").append('<li role="presentation"><a href="/admin/vip/manage"><i class="icon-credit-card"></i> 会员策略</a></li>');
         }
     }
+    $('#edit-hall-btn').click(function () {
+        var form = {
+            id: $("#select-hall-id").children('option:selected').val(),
+            column : $("#edit-column").val(),
+            row: $("#edit-row").val(),
+            name: $("#edit-name").val()
+        };
+        //TODO: 需要做一下表单验证？
+
+        postRequest(
+            '/hall/update',
+            form,
+            function (res) {
+                if(res.success){
+                    getCinemaHalls();
+                    $("#editModal").modal('hide');
+                } else {
+                    alert(res.message);
+                }
+            },
+            function (error) {
+                alert(JSON.stringify(error));
+            }
+        );
+    });
+    $('#add-hall-btn').click(function () {
+        var form = {
+            column : $("#add-column").val(),
+            row: $("#add-row").val(),
+            name: $("#add-name").val()
+        };
+        //TODO: 需要做一下表单验证？
+
+        postRequest(
+            '/hall/add',
+            form,
+            function (res) {
+                if(res.success){
+                    getCinemaHalls();
+                    $("#addModal").modal('hide');
+                } else {
+                    alert(res.message);
+                }
+            },
+            function (error) {
+                alert(JSON.stringify(error));
+            }
+        );
+    });
+    $('#del-hall-btn').click(function () {
+        var form = {
+            id: $("#del-hall-id").children('option:selected').val()
+        };
+        //TODO: 需要做一下表单验证？
+
+        postRequest(
+            '/hall/del',
+            form,
+            function (res) {
+                if(res.success){
+                    getCinemaHalls();
+                    $("#delModal").modal('hide');
+                } else {
+                    alert(res.message);
+                }
+            },
+            function (error) {
+                alert(JSON.stringify(error));
+            }
+        );
+    });
 });

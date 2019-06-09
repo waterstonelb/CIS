@@ -14,14 +14,14 @@ import java.util.List;
 public interface HallMapper {
     /**
      * 查询所有影厅信息
-     * @return
+     * @return List hall
      */
     List<Hall> selectAllHall();
 
     /**
      * 增加影厅
      * @param hall
-     * @return
+     * @return null
      */
     int addNewHall(Hall hall);
 

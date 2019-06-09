@@ -1,14 +1,9 @@
 package com.example.cinema.blImpl.statistics;
 
+import com.example.cinema.bl.promotion.VIPServiceForBl;
 import com.example.cinema.bl.statistics.StatisticsService;
 import com.example.cinema.data.statistics.StatisticsMapper;
-import com.example.cinema.po.AudiencePrice;
-import com.example.cinema.po.MovieScheduleTime;
-import com.example.cinema.po.MovieTotalBoxOffice;
-import com.example.cinema.po.PlacingRate;
-import com.example.cinema.po.PopularMovies;
-import com.example.cinema.po.UserBuyRecord;
-import com.example.cinema.po.UserChargeRecord;
+import com.example.cinema.po.*;
 import com.example.cinema.vo.AudiencePriceVO;
 import com.example.cinema.vo.MovieScheduleTimeVO;
 import com.example.cinema.vo.MovieTotalBoxOfficeVO;
@@ -17,6 +12,7 @@ import com.example.cinema.vo.PopularMoviesVO;
 import com.example.cinema.vo.ResponseVO;
 import com.example.cinema.vo.UserBuyRecordVO;
 import com.example.cinema.vo.UserChargeRecordVO;
+import com.example.cinema.vo.amountVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,11 +31,14 @@ import java.util.List;
 public class StatisticsServiceImpl implements StatisticsService {
     @Autowired
     private StatisticsMapper statisticsMapper;
+    @Autowired
+    VIPServiceForBl vipServiceForBl;
+
     @Override
     public ResponseVO getScheduleRateByDate(Date date) {
-        try{
+        try {
             Date requireDate = date;
-            if(requireDate == null){
+            if (requireDate == null) {
                 requireDate = new Date();
             }
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -50,7 +49,7 @@ public class StatisticsServiceImpl implements StatisticsService {
             //selectmoviescheduletime 返回所有电影票房
             //然后那个长不辣叽得转vo
             //最后返回vo 得到id 时间 片名
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("失败");
         }
@@ -60,7 +59,7 @@ public class StatisticsServiceImpl implements StatisticsService {
     public ResponseVO getTotalBoxOffice() {
         try {
             return ResponseVO.buildSuccess(movieTotalBoxOfficeList2MovieTotalBoxOfficeVOList(statisticsMapper.selectMovieTotalBoxOffice()));
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("失败");
         }
@@ -73,7 +72,7 @@ public class StatisticsServiceImpl implements StatisticsService {
             Date today = simpleDateFormat.parse(simpleDateFormat.format(new Date()));
             Date startDate = getNumDayAfterDate(today, -6);
             List<AudiencePriceVO> audiencePriceVOList = new ArrayList<>();
-            for(int i = 0; i < 7; i++){
+            for (int i = 0; i < 7; i++) {
                 AudiencePriceVO audiencePriceVO = new AudiencePriceVO();
                 Date date = getNumDayAfterDate(startDate, i);
                 audiencePriceVO.setDate(date);
@@ -83,7 +82,7 @@ public class StatisticsServiceImpl implements StatisticsService {
                 audiencePriceVOList.add(audiencePriceVO);
             }
             return ResponseVO.buildSuccess(audiencePriceVOList);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("失败");
         }
@@ -93,32 +92,59 @@ public class StatisticsServiceImpl implements StatisticsService {
     public ResponseVO getMoviePlacingRateByDate(String date) {
         try {
             Date requireDate = null;
-            if(date == ""){
+            if (date == "") {
                 requireDate = new Date();
-            }
-            else
-            {
+            } else {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 requireDate = simpleDateFormat.parse(date);
             }
             Date nextDate = getNumDayAfterDate(requireDate, 1);
-            return ResponseVO.buildSuccess(PlacingRateList2MovieTotalBoxOfficeVOList(statisticsMapper.selectPlacingRate(requireDate,nextDate)));
-        }catch (Exception e){
+            return ResponseVO.buildSuccess(PlacingRateList2MovieTotalBoxOfficeVOList(statisticsMapper.selectPlacingRate(requireDate, nextDate)));
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("失败");
         }
     }
 
     @Override
+    public ResponseVO getAmountHistory(String startDate, String endDate) {
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date startdata = simpleDateFormat.parse(startDate);
+            Date enddate = simpleDateFormat.parse(endDate);
+            return ResponseVO.buildSuccess(amountPO2VO(statisticsMapper.AdminSelectBuyRecord(startdata, enddate)));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseVO.buildFailure("查询历史消费总额失败排名");
+        }
+    }
+
+    private List<amountVO> amountPO2VO(List<AdminUserBuyRecord> list) {
+        try {
+            List<amountVO> amountVOS = new ArrayList<>();
+            for (AdminUserBuyRecord adminUserBuyRecord : list) {
+                amountVO amountvo = new amountVO();
+                amountvo.setUserId(adminUserBuyRecord.getUserId());
+                amountvo.setRealPrice(adminUserBuyRecord.getRealPrice());
+                amountvo.setCardId(vipServiceForBl.getCardId(adminUserBuyRecord.getUserId()));
+                amountVOS.add(amountvo);
+            }
+            return amountVOS;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
     public ResponseVO getPopularMovies(int days, int movieNum) {
-    	try {
+        try {
             Date requireDate = new Date();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             requireDate = simpleDateFormat.parse(simpleDateFormat.format(requireDate));
-            Date nextDate = getNumDayAfterDate(requireDate, -1*days);
-            List<PopularMovies> datas = statisticsMapper.selectPopularMovies(requireDate,nextDate,movieNum);
-    		return ResponseVO.buildSuccess(PopularMoviesList2MovieTotalBoxOfficeVOList(datas));
-    	}catch(Exception e){
+            Date nextDate = getNumDayAfterDate(requireDate, -1 * days);
+            List<PopularMovies> datas = statisticsMapper.selectPopularMovies(requireDate, nextDate, movieNum);
+            return ResponseVO.buildSuccess(PopularMoviesList2MovieTotalBoxOfficeVOList(datas));
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("失败");
         }
@@ -128,11 +154,12 @@ public class StatisticsServiceImpl implements StatisticsService {
 
     /**
      * 获得num天后的日期
+     *
      * @param oldDate
      * @param num
      * @return
      */
-    Date getNumDayAfterDate(Date oldDate, int num){
+    Date getNumDayAfterDate(Date oldDate, int num) {
         Calendar calendarTime = Calendar.getInstance();
         calendarTime.setTime(oldDate);
         calendarTime.add(Calendar.DAY_OF_YEAR, num);
@@ -140,74 +167,74 @@ public class StatisticsServiceImpl implements StatisticsService {
     }
 
 
-
-    private List<MovieScheduleTimeVO> movieScheduleTimeList2MovieScheduleTimeVOList(List<MovieScheduleTime> movieScheduleTimeList){
+    private List<MovieScheduleTimeVO> movieScheduleTimeList2MovieScheduleTimeVOList(List<MovieScheduleTime> movieScheduleTimeList) {
         List<MovieScheduleTimeVO> movieScheduleTimeVOList = new ArrayList<>();
-        for(MovieScheduleTime movieScheduleTime : movieScheduleTimeList){
+        for (MovieScheduleTime movieScheduleTime : movieScheduleTimeList) {
             movieScheduleTimeVOList.add(new MovieScheduleTimeVO(movieScheduleTime));
         }
         return movieScheduleTimeVOList;
     }
 
 
-    private List<MovieTotalBoxOfficeVO> movieTotalBoxOfficeList2MovieTotalBoxOfficeVOList(List<MovieTotalBoxOffice> movieTotalBoxOfficeList){
+    private List<MovieTotalBoxOfficeVO> movieTotalBoxOfficeList2MovieTotalBoxOfficeVOList(List<MovieTotalBoxOffice> movieTotalBoxOfficeList) {
         List<MovieTotalBoxOfficeVO> movieTotalBoxOfficeVOList = new ArrayList<>();
-        for(MovieTotalBoxOffice movieTotalBoxOffice : movieTotalBoxOfficeList){
+        for (MovieTotalBoxOffice movieTotalBoxOffice : movieTotalBoxOfficeList) {
             movieTotalBoxOfficeVOList.add(new MovieTotalBoxOfficeVO(movieTotalBoxOffice));
         }
         return movieTotalBoxOfficeVOList;
     }
-    
-    private List<PopularMoviesVO> PopularMoviesList2MovieTotalBoxOfficeVOList(List<PopularMovies> datas){
+
+    private List<PopularMoviesVO> PopularMoviesList2MovieTotalBoxOfficeVOList(List<PopularMovies> datas) {
         List<PopularMoviesVO> PopularMoviesVOList = new ArrayList<>();
-        for(PopularMovies popularMovies : datas){
-        	PopularMoviesVOList.add(new PopularMoviesVO(popularMovies));
+        for (PopularMovies popularMovies : datas) {
+            PopularMoviesVOList.add(new PopularMoviesVO(popularMovies));
         }
         return PopularMoviesVOList;
     }
-    
-    private List<PlacingRateVO> PlacingRateList2MovieTotalBoxOfficeVOList(List<PlacingRate> datas){
+
+    private List<PlacingRateVO> PlacingRateList2MovieTotalBoxOfficeVOList(List<PlacingRate> datas) {
         List<PlacingRateVO> PlacingRateVOList = new ArrayList<>();
-        for(PlacingRate placingrate : datas){
-        	PlacingRateVOList.add(new PlacingRateVO(placingrate));
+        for (PlacingRate placingrate : datas) {
+            PlacingRateVOList.add(new PlacingRateVO(placingrate));
         }
         return PlacingRateVOList;
     }
-    
-    
-    
-	public ResponseVO getUserBuyRecord(int id) {
+
+
+    public ResponseVO getUserBuyRecord(int id) {
         try {
             return ResponseVO.buildSuccess(buyRecordList2buyRecordVOList(statisticsMapper.SelectBuyRecord(id)));
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("失败");
         }
-	}
+    }
 
-	private List<UserBuyRecordVO> buyRecordList2buyRecordVOList(List<UserBuyRecord> userBuyRecord) {
+    private List<UserBuyRecordVO> buyRecordList2buyRecordVOList(List<UserBuyRecord> userBuyRecord) {
         List<UserBuyRecordVO> UserBuyRecordVOList = new ArrayList<>();
-        for(UserBuyRecord userbuyRecord : userBuyRecord){
-        	UserBuyRecordVOList.add(new UserBuyRecordVO(userbuyRecord));
+        for (UserBuyRecord userbuyRecord : userBuyRecord) {
+            UserBuyRecordVOList.add(new UserBuyRecordVO(userbuyRecord));
         }
         return UserBuyRecordVOList;
-	}
+    }
 
-	@Override
-	public ResponseVO getUserChargeRecord(int id) {
+    @Override
+    public ResponseVO getUserChargeRecord(int id) {
         try {
             return ResponseVO.buildSuccess(chargeRecordList2buyRecordVOList(statisticsMapper.SelectChargeRecord(id)));
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("失败");
         }
-	}
+    }
 
-	private List<UserChargeRecordVO> chargeRecordList2buyRecordVOList(List<UserChargeRecord> userChargeRecord) {
+    private List<UserChargeRecordVO> chargeRecordList2buyRecordVOList(List<UserChargeRecord> userChargeRecord) {
         List<UserChargeRecordVO> UserChargeRecordVOList = new ArrayList<>();
-        for(UserChargeRecord userchargeRecord : userChargeRecord){
-        	UserChargeRecordVOList.add(new UserChargeRecordVO(userchargeRecord));
+        for (UserChargeRecord userchargeRecord : userChargeRecord) {
+            UserChargeRecordVOList.add(new UserChargeRecordVO(userchargeRecord));
         }
         return UserChargeRecordVOList;
-	}
+    }
+
+
 }

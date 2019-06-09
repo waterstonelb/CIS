@@ -1,7 +1,65 @@
 $(document).ready(function(){
-
+    getAmountHistory();
     showSidebar();
     getVIPvard();
+    getVIPCoupon();
+    function getVIPCoupon() {
+        getRequest(
+            'activity/get',
+            function (res) {
+                activities=res.content;
+                activities.forEach(function (activity) {
+                    if(activity.coupon.level==1){
+                        $("#coupon-list").append("<option value="+ activity.coupon.id +">"+activity.coupon.name+"</option>")
+                    }
+                })
+            }
+        )
+    }
+    function sendCoupon(obj) {
+        var userId=$(obj).parent().parent().children().eq(0).text();
+        var couponId=$("#coupon-list").val();
+        postRequest(
+            'vipactivity/coupon',
+            {
+                userId:userId,
+                coupunId:couponId
+            },
+            function (res) {
+                if(res.success)
+                    alert("赠送成功");
+                else
+                    alert("赠送失败");
+            },
+            function (error) {
+                alert(JSON.stringify(error));
+            }
+        )
+    }
+    function getAmountHistory() {
+        getRequest(
+            'statistics/amount?startDate?'+$("#start-date").val()+"&&endDate?"+$("#end-date").val(),
+            function (res) {
+                renderAmount(res.content);
+            },
+            function (error) {
+                alert(error)
+            }
+        )
+    }
+    function renderAmount(list) {
+        var innerHTML="";
+        if(list.length>0){
+            list.forEach(function (every) {
+                innerHTML+="<tr>"+
+                    "<td>"+every.userId+"</td>"+
+                    "<td>"+every.cardId+"</td>"+
+                    "<td>"+every.realPrice+"</td>"+
+                    "<td>"+"<button class='btn btn-primary' onclick='sendCoupon(this)'>赠送</button>"+"</td>"+
+                    "</tr>"
+            })
+        }
+    }
     function showSidebar(){
         var level = sessionStorage.getItem("level");
         var name = sessionStorage.getItem("username");

@@ -1,12 +1,6 @@
 package com.example.cinema.data.statistics;
 
-import com.example.cinema.po.AudiencePrice;
-import com.example.cinema.po.MovieScheduleTime;
-import com.example.cinema.po.MovieTotalBoxOffice;
-import com.example.cinema.po.PopularMovies;
-import com.example.cinema.po.UserBuyRecord;
-import com.example.cinema.po.UserChargeRecord;
-import com.example.cinema.po.PlacingRate;
+import com.example.cinema.po.*;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -72,4 +66,6 @@ public interface StatisticsMapper {
      * @return
      */
     List<UserChargeRecord> SelectChargeRecord(@Param("id") int id);
+
+    List<AdminUserBuyRecord> AdminSelectBuyRecord(@Param("data") Date data,@Param("nextdata")Date nextdata);
 }

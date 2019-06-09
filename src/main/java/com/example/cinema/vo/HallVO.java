@@ -19,6 +19,13 @@ public class HallVO {
         this.column = hall.getColumn();
     }
 
+    public HallVO(int hallId,int column,int row,String name){
+        this.id = hallId;
+        this.column = column;
+        this.row = row;
+        this.name = name;
+    }
+
     public Integer getId() {
         return id;
     }

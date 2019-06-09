@@ -1,5 +1,6 @@
 package com.example.cinema.blImpl.promotion;
 
+import com.example.cinema.bl.promotion.CouponService;
 import com.example.cinema.bl.promotion.VIPService;
 import com.example.cinema.bl.promotion.VIPServiceForBl;
 import com.example.cinema.data.promotion.VIPCardMapper;
@@ -7,6 +8,7 @@ import com.example.cinema.vo.VIPCardForm;
 import com.example.cinema.po.VIPCard;
 import com.example.cinema.vo.ResponseVO;
 import com.example.cinema.vo.VIPInfoVO;
+import com.example.cinema.vo.vipCoupon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,8 @@ import org.springframework.stereotype.Service;
 public class VIPServiceImpl implements VIPService, VIPServiceForBl {
     @Autowired
     VIPCardMapper vipCardMapper;
+    @Autowired
+    CouponService couponService;
 
     @Override
     public int getCardId(int userId) {
@@ -110,9 +114,19 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
     public double getBalance(int userId){
         try{
             return vipCardMapper.selectCardByUserId(userId).getBalance();
+        } catch(Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    @Override
+    public ResponseVO sendCoupon(vipCoupon vipCoupon){
+        try{
+            couponService.issueCoupon(vipCoupon.getCouponId(),vipCoupon.getUserId());
+            return ResponseVO.buildSuccess();
         }catch (Exception e){
             e.printStackTrace();
-            return  0;
+            return ResponseVO.buildFailure("赠送失败");
         }
     }
 }
