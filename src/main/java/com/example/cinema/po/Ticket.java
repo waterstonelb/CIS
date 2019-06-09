@@ -35,12 +35,20 @@ public class Ticket {
     /**
      * 订单状态：
      * 0：未完成 1：已完成 2:已失效
+     * 0：锁座但是未完成 1：已完成 2：已失效 3：已出票但是未上映
      */
     private int state;
 
     private Timestamp time;
 
     private double realPay;
+
+    public double getRealPay(){
+        return realPay;
+    }
+    public void setRealPay(double realPay){
+        this.realPay=realPay;
+    }
 
     public Timestamp getTime() {
         return time;
@@ -80,6 +88,9 @@ public class Ticket {
             case 2:
                 stateString = "已失效";
                 break;
+            case 3:
+                stateString = "已出票";
+                break;
             default:
                 stateString = "未完成";
         }
@@ -104,6 +115,9 @@ public class Ticket {
                 break;
             case 2:
                 stateString = "已失效";
+                break;
+            case 3:
+                stateString = "已出票";
                 break;
             default:
                 stateString = "未完成";

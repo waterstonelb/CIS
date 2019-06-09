@@ -16,5 +16,7 @@ public interface VIPServiceForBl {
      */
     int buyTicket(int userId,double totals);
 
+    int returnTicket(int userId,double totals);
+
     double getBalance(int useId);
 }

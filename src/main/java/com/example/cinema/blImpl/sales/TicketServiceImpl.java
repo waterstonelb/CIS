@@ -1,5 +1,6 @@
 package com.example.cinema.blImpl.sales;
 
+import com.example.cinema.bl.management.RefundServiceForBl;
 import com.example.cinema.bl.management.ScheduleService;
 import com.example.cinema.bl.promotion.*;
 import com.example.cinema.bl.sales.TicketService;
@@ -44,6 +45,9 @@ public class TicketServiceImpl implements TicketService {
     VIPActivityServiceForBl vipActivityServiceForBl;
     @Autowired
     ActivityServiceForBl activityServiceForBl;
+    @Autowired
+    RefundServiceForBl refunServiceForBl;
+
     @Transactional
     public ResponseVO addTicket(TicketForm ticketForm) {
         try {
@@ -126,14 +130,14 @@ public class TicketServiceImpl implements TicketService {
         try {
             List<TicketWithScheduleVO> ticketWithScheduleVOS = new ArrayList<>();
             for (Ticket ticket : ticketMapper.selectTicketByUser(userId)) {
-                if (ticket.getState() == 1 || ticket.getState() == 2) {
+                if (ticket.getState() == 1 || ticket.getState() == 2 || ticket.getState() == 3) {
                     TicketWithScheduleVO ticketWithScheduleVO=new TicketWithScheduleVO();
                     ticketWithScheduleVO.setId(ticket.getId());
                     ticketWithScheduleVO.setUserId(ticket.getUserId());
                     ticketWithScheduleVO.setSchedule(scheduleService.getScheduleItemById(ticket.getScheduleId()));
                     ticketWithScheduleVO.setColumnIndex(ticket.getColumnIndex());
                     ticketWithScheduleVO.setRowIndex(ticket.getRowIndex());
-                    ticketWithScheduleVO.setState(ticket.getState()==1?"已完成":"已失效");
+                    ticketWithScheduleVO.setState(ticket.getState()==1?"已完成":(ticket.getState()==2?"已失效":"已出票"));
                     ticketWithScheduleVO.setTime(ticket.getTime());
 
                     ticketWithScheduleVOS.add(ticketWithScheduleVO);
@@ -167,13 +171,27 @@ public class TicketServiceImpl implements TicketService {
         }
     }
 
+    /**
+     * 根据ticketID退票
+     */
     @Override
-    public ResponseVO cancelTicket(List<Integer> id) {
+    public ResponseVO cancelTicket(List<Integer> id) {//TODO: ，目前仅支持vip退票，普通用户退票会产生bug
         try {
+            int userId = ticketMapper.selectTicketById(id.get(0)).getUserId();
+            double totals = vipServiceForBl.getBalance(userId);
+            RefundPolicyVO rVO = refunServiceForBl.getRefundPolicyVO();
+            long thisTime = new Date().getTime();
             for (int Id : id) {
+                Ticket tmpTicket = ticketMapper.selectTicketById(Id);
+                Date scheduleStart = scheduleService.getScheduleItemById(tmpTicket.getScheduleId()).getStartTime();
+                if((scheduleStart.getTime()- thisTime)>=(long)24*3600*1000)
+                    totals+=tmpTicket.getRealPay()*rVO.getRefund_day();
+                else if((scheduleStart.getTime()- thisTime)>=(long)3600*1000)
+                    totals+=tmpTicket.getRealPay()*rVO.getRefund_hour();
                 ticketMapper.updateTicketState(Id,2);
             }
-            return ResponseVO.buildSuccess();
+            vipServiceForBl.returnTicket(userId, totals);
+            return ResponseVO.buildSuccess(totals);
         }catch (Exception e){
             return ResponseVO.buildFailure("退票失败");
         }
