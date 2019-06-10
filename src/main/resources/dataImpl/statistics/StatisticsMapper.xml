@@ -4,7 +4,7 @@
     <select id="selectMovieScheduleTimes" resultType="com.example.cinema.po.MovieScheduleTime">
         select movie_id as movieId, count(*) as time,name from
               (select * from schedule where start_time between #{date} and #{nextDate}) s,
-              movie where s.movie_id = movie.id group by movieId
+              movie where s.movie_id = movie.id group by movieId and name is not NULL
     </select>
 
     <select id="selectMovieTotalBoxOffice" resultType="com.example.cinema.po.MovieTotalBoxOffice">
@@ -12,16 +12,17 @@
         left join
           (select movie_id as movieId,sum(fare) as boxOffice from schedule
           right join
-          (select schedule_id from ticket where state = 1) t
+          (select schedule_id from ticket where state = 3) t
           on schedule.id = t.schedule_id group by movie_id) s
         on s.movieId = movie.id
+        where name is not NULL
         order by boxOffice desc
     </select>
 
     <select id="selectAudiencePrice" resultType="com.example.cinema.po.AudiencePrice">
         select user_id as userId, sum(fare) as totalPrice from schedule right join
               (select * from ticket where schedule_id in
-              (select id from schedule where start_time between #{date} and #{nextDate}) and state = 1) t
+              (select id from schedule where start_time between #{date} and #{nextDate}) and state = 3) t
         on schedule.id = schedule_id group by user_id
     </select>
 
@@ -30,9 +31,10 @@
         left join
           (select movie_id as movieId,sum(fare) as boxOffice from schedule
           right join
-          (select schedule_id from ticket where state = 1 and time between #{nextDate} and #{date}) t
+          (select schedule_id from ticket where state = 3 and time between #{nextDate} and #{date}) t
           on schedule.id = t.schedule_id group by movie_id) s
         on s.movieId = movie.id
+        where name is not NULL
         order by boxOffice desc
         limit #{movieNum}
     </select>
@@ -56,7 +58,7 @@
 
     <select id="SelectBuyRecord" resultType="com.example.cinema.po.UserBuyRecord">
         select real_pay as realPrice,time,name from
-        ((select * from ticket where ticket.user_id = #{id})u
+        ((select * from ticket where ticket.user_id = #{id} and state = 3)u
                 left join
                 (select name,schedule_ids from movie
                 left join 

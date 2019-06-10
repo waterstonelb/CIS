@@ -41,64 +41,68 @@
             </ul>
         </div>
     </div>
-    <div class="content-container">
-        <div class="movie-contianer">
-            <p class="title primary-text">热映电影</p>
-            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                <!-- Indicators -->
-                <ol class="carousel-indicators" id="movie-choose">
+    <div class="rows">
+        <div class = "col-md-1"></div>
+        <div class="content-container col-md-10 row">
+            <div class="movie-contianer col-md-8">
+                <p class="title primary-text">热映电影</p>
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators" id="movie-choose">
 
-                </ol>
+                    </ol>
 
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner movie-fshow" role="listbox" id="movie-show">
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner movie-fshow" role="listbox" id="movie-show">
 
 
+                    </div>
+
+                    <!-- Controls -->
+                    <a class="left carousel-control " href="#carousel-example-generic" role="button" data-slide="prev" style="border-radius: 20px">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control " href="#carousel-example-generic" role="button" data-slide="next" style="border-radius: 20px">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
-
-                <!-- Controls -->
-                <a class="left carousel-control " href="#carousel-example-generic" role="button" data-slide="prev" style="border-radius: 20px">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control " href="#carousel-example-generic" role="button" data-slide="next" style="border-radius: 20px">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
+            </div>
+            <div class="statistic-container col-md-4">
+                <p class="title primary-text">票房统计</p>
+                <ul class="top-sell-list card hgt" id = "test">
+                    <div class="statistic-item">
+                        <span>电影1</span>
+                        <span class="error-text">99</span>
+                    </div>
+                    <div class="statistic-item">
+                        <span>电影1</span>
+                        <span class="error-text">99</span>
+                    </div>
+                    <div class="statistic-item">
+                        <span>电影1</span>
+                        <span class="error-text">99</span>
+                    </div>
+                </ul>
+                <p class="title primary-text">最受欢迎</p>
+                <ul class="top-expectation-list card" id = "test">
+                    <div class="statistic-item">
+                        <span>电影1</span>
+                        <span class="error-text">99</span>
+                    </div>
+                    <div class="statistic-item">
+                        <span>电影1</span>
+                        <span class="error-text">99</span>
+                    </div>
+                    <div class="statistic-item">
+                        <span>电影1</span>
+                        <span class="error-text">99</span>
+                    </div>
+                </ul>
             </div>
         </div>
-        <div class="statistic-container">
-            <p class="title primary-text">票房统计</p>
-            <ul class="top-sell-list card">
-                <div class="statistic-item">
-                    <span>电影1</span>
-                    <span class="error-text">99</span>
-                </div>
-                <div class="statistic-item">
-                    <span>电影1</span>
-                    <span class="error-text">99</span>
-                </div>
-                <div class="statistic-item">
-                    <span>电影1</span>
-                    <span class="error-text">99</span>
-                </div>
-            </ul>
-            <p class="title primary-text">最受欢迎</p>
-            <ul class="top-expectation-list card">
-                <div class="statistic-item">
-                    <span>电影1</span>
-                    <span class="error-text">99</span>
-                </div>
-                <div class="statistic-item">
-                    <span>电影1</span>
-                    <span class="error-text">99</span>
-                </div>
-                <div class="statistic-item">
-                    <span>电影1</span>
-                    <span class="error-text">99</span>
-                </div>
-            </ul>
-        </div>
+        <div class="col-md-1"></div>
     </div>
 </body>
 </html>
