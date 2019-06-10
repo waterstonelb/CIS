@@ -1,4 +1,4 @@
-package com.example.cinema.blImpl.promotion;
+package com.example.cinema.bl.promotion;
 
 import com.example.cinema.po.Coupon;
 

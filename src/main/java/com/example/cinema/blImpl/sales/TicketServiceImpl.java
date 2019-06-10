@@ -1,30 +1,23 @@
 package com.example.cinema.blImpl.sales;
 
 import com.example.cinema.bl.management.RefundServiceForBl;
-import com.example.cinema.bl.management.ScheduleService;
 import com.example.cinema.bl.promotion.*;
 import com.example.cinema.bl.sales.TicketService;
-import com.example.cinema.blImpl.management.hall.HallServiceForBl;
-import com.example.cinema.blImpl.management.schedule.ScheduleServiceForBl;
-import com.example.cinema.blImpl.promotion.ActivityServiceForBl;
-import com.example.cinema.blImpl.promotion.CouponServiceForBl;
-import com.example.cinema.data.promotion.CouponMapper;
+import com.example.cinema.bl.management.HallServiceForBl;
+import com.example.cinema.bl.management.ScheduleServiceForBl;
+import com.example.cinema.bl.promotion.ActivityServiceForBl;
+import com.example.cinema.bl.promotion.CouponServiceForBl;
 import com.example.cinema.data.sales.TicketMapper;
 import com.example.cinema.po.*;
 import com.example.cinema.vo.*;
 
-import org.apache.ibatis.javassist.expr.NewArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.context.request.RequestContextHolder;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by liying on 2019/4/16.

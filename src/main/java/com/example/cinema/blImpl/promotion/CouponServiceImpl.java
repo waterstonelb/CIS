@@ -1,6 +1,7 @@
 package com.example.cinema.blImpl.promotion;
 
 import com.example.cinema.bl.promotion.CouponService;
+import com.example.cinema.bl.promotion.CouponServiceForBl;
 import com.example.cinema.data.promotion.CouponMapper;
 import com.example.cinema.po.Coupon;
 import com.example.cinema.vo.CouponForm;
@@ -14,7 +15,7 @@ import java.util.List;
  * Created by liying on 2019/4/17.
  */
 @Service
-public class CouponServiceImpl implements CouponService,CouponServiceForBl {
+public class CouponServiceImpl implements CouponService, CouponServiceForBl {
 
     @Autowired
     CouponMapper couponMapper;
