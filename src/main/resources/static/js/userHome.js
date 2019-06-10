@@ -4,6 +4,7 @@ $(document).ready(function () {
     getTopBox();
     getVIPinfo();
     getMostFavourite();
+    $("#user-name").append(sessionStorage.getItem('username'));
 
     function getVIPinfo() {
         getRequest(
@@ -83,7 +84,7 @@ $(document).ready(function () {
         var count=0;
         movieList.forEach(function (movie) {
             movieDomStr+="<div class='item "+(count==0?"active":"")+"' >" +
-                "                        <img src='"+movie.posterUrl+"' alt='成功' class='img-show'>" +
+                "                        <img src='"+movie.posterUrl+"' alt='成功' class='movie-img' id='"+movie.id+"'>" +
                 "                        <div class='carousel-caption'>" +movie.name+"</div>" +
                 "                    </div>";
             movieChoose+="<li data-target='#carousel-example-generic' data-slide-to='"+count+"'></li>"

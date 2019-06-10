@@ -10,6 +10,11 @@
     margin: auto;
 }
 
+.movie-fshow{
+    box-shadow: #ccc 0 0 20px 10px;
+    border-radius: 20px;
+}
+
 .movie-item .movie-img:hover {
     border: 2px solid #1caf9a;
 }
@@ -23,7 +28,12 @@
     text-align: center;
 }
 
-.movie-item .movie-img {
+.movie-img{
+    height: 100%;
+    width: 100%;
+}
+
+.movie-item{
     height: 165px;
     width: 120px;
     cursor: pointer;
