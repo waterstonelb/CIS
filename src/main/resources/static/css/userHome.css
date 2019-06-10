@@ -23,7 +23,12 @@
     text-align: center;
 }
 
-.movie-item .movie-img {
+.movie-img{
+    height: 200px;
+    width: 100px;
+}
+
+.movie-item{
     height: 165px;
     width: 120px;
     cursor: pointer;

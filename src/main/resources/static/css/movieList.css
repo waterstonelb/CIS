@@ -7,6 +7,7 @@
 .movie-item .movie-img {
     height: 159px;
     width: 110px;
+    border-radius: 20px 0 0 20px;
 }
 
 .movie-info {
