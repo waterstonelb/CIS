@@ -90,6 +90,8 @@
     <select id="judgeScheduleByHallId" resultMap="ScheduleItem">
         select * from schedule where hall_id=#{hallId} and start_time &gt; Now();
     </select>
+    <select id="">
+    </select>
 
     <resultMap id="ScheduleItem" type="com.example.cinema.po.ScheduleItem">
         <id column="id" property="id"></id>

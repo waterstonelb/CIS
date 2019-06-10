@@ -1,6 +1,7 @@
 package com.example.cinema.blImpl.management.refund;
 
 import com.example.cinema.bl.management.RefundService;
+import com.example.cinema.bl.management.RefundServiceForBl;
 import com.example.cinema.data.management.RefundMapper;
 import com.example.cinema.po.RefundPolicy;
 import com.example.cinema.vo.RefundPolicyVO;
@@ -9,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RefundServiceImpl implements RefundService {
+public class RefundServiceImpl implements RefundService,RefundServiceForBl{
 
     @Autowired
     RefundMapper rmapper;
@@ -38,6 +39,19 @@ public class RefundServiceImpl implements RefundService {
             e.printStackTrace();
             return ResponseVO.buildFailure("更新退票策略失败！");
         }
+    }
+
+    /**
+     * 用于返回一个退票策略的VO
+     */
+    @Override
+    public RefundPolicyVO getRefundPolicyVO() {
+        RefundPolicyVO rVO = new RefundPolicyVO();
+        RefundPolicy rPO = rmapper.getRefundPolicy();
+        rVO.setRefund_day(rPO.getRefund_day());
+        rVO.setRefund_hour(rPO.getRefund_hour());
+        rVO.setIssue_time(rPO.getTimestamp());
+        return rVO;
     }
     
 }

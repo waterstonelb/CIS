@@ -129,4 +129,18 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
             return ResponseVO.buildFailure("赠送失败");
         }
     }
+
+    /**
+     * 退票，成功返回0
+     */
+    @Override
+    public int returnTicket(int userId, double totals) {
+        try {
+            vipCardMapper.updateCardBalance(vipCardMapper.selectCardByUserId(userId).getId(), totals);
+            return 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
 }
