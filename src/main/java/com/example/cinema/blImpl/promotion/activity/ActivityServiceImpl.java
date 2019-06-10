@@ -1,4 +1,4 @@
-package com.example.cinema.blImpl.promotion.Activity;
+package com.example.cinema.blImpl.promotion.activity;
 
 import com.example.cinema.bl.promotion.ActivityService;
 import com.example.cinema.bl.promotion.CouponService;

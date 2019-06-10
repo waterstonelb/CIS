@@ -1,4 +1,4 @@
-package com.example.cinema.blImpl.management.Movie;
+package com.example.cinema.blImpl.management.movie;
 
 import com.example.cinema.po.Movie;
 //import com.example.cinema.vo.MovieVO8;

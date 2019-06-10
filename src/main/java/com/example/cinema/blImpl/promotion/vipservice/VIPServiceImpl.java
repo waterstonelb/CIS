@@ -1,8 +1,7 @@
-package com.example.cinema.blImpl.promotion.VIPService;
+package com.example.cinema.blImpl.promotion.vipservice;
 
-import com.example.cinema.bl.promotion.CouponService;
 import com.example.cinema.bl.promotion.VIPService;
-import com.example.cinema.blImpl.promotion.Coupon.CouponServiceForBl;
+import com.example.cinema.blImpl.promotion.coupon.CouponServiceForBl;
 import com.example.cinema.data.promotion.VIPCardMapper;
 import com.example.cinema.vo.VIPCardForm;
 import com.example.cinema.po.VIPCard;

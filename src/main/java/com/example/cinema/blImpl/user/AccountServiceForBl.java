@@ -7,7 +7,7 @@ public interface AccountServiceForBl {
     /**
      * 根据Id获取User
      * @param id
-     * @return User
+     * @return user
      */
     User getAccountById(int id);
 }
