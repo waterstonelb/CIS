@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.cinema.bl.statistics.MovieLikeService;
-import com.example.cinema.blImpl.management.schedule.MovieServiceForBl;
+import com.example.cinema.blImpl.management.Movie.MovieServiceForBl;
+import com.example.cinema.blImpl.user.AccountServiceForBl;
 import com.example.cinema.data.statistics.MovieLikeMapper;
-import com.example.cinema.data.user.AccountMapper;
 import com.example.cinema.po.DateLike;
 import com.example.cinema.po.MovieLikePO;
 import com.example.cinema.vo.DateLikeVO;
@@ -30,7 +30,7 @@ public class MovieLikeServiceImpl implements MovieLikeService {
     @Autowired
     private MovieServiceForBl movieServiceForBl;
     @Autowired
-    private AccountMapper accountMapper;
+    private AccountServiceForBl accountServiceForBl;
 
     @Override
     public ResponseVO likeMovie(int userId, int movieId) {
@@ -40,7 +40,7 @@ public class MovieLikeServiceImpl implements MovieLikeService {
             return ResponseVO.buildFailure(ALREADY_LIKE_ERROR_MESSAGE);
         } else if (movieServiceForBl.getMovieById(movieId) == null) {
             return ResponseVO.buildFailure(MOVIE_NOT_EXIST_ERROR_MESSAGE);
-        } else if ( accountMapper.getAccountById(userId)== null) {
+        } else if ( accountServiceForBl.getAccountById(userId)== null) {
             return ResponseVO.buildFailure(MOVIE_NOT_EXIST_ERROR_MESSAGE);
         }
         try {

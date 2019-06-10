@@ -1,4 +1,4 @@
-package com.example.cinema.blImpl.management.user;
+package com.example.cinema.blImpl.management.User;
 
 import java.util.ArrayList;
 import java.util.List;

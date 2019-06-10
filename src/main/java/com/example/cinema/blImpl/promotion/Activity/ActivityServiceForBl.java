@@ -1,4 +1,4 @@
-package com.example.cinema.blImpl.promotion;
+package com.example.cinema.blImpl.promotion.Activity;
 
 import java.util.*;
 import com.example.cinema.bl.promotion.ActivityService;

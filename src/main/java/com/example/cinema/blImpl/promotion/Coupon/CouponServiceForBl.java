@@ -1,4 +1,4 @@
-package com.example.cinema.blImpl.promotion;
+package com.example.cinema.blImpl.promotion.Coupon;
 
 import com.example.cinema.po.Coupon;
 
@@ -21,4 +21,8 @@ public interface CouponServiceForBl {
     Coupon getCoupon(int couponId);
 
     List<Coupon> getTicketCoupons(int userId,double amount);
+
+    List<Coupon> getCouponByUserId(int UserId);
+
+    void insertCouponUser(int couponId, int userId);
 }

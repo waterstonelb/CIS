@@ -1,30 +1,25 @@
 package com.example.cinema.blImpl.sales;
 
-import com.example.cinema.bl.management.RefundServiceForBl;
-import com.example.cinema.bl.management.ScheduleService;
+import com.example.cinema.blImpl.management.Refund.RefundServiceForBl;
 import com.example.cinema.bl.promotion.*;
 import com.example.cinema.bl.sales.TicketService;
-import com.example.cinema.blImpl.management.hall.HallServiceForBl;
-import com.example.cinema.blImpl.management.schedule.ScheduleServiceForBl;
-import com.example.cinema.blImpl.promotion.ActivityServiceForBl;
-import com.example.cinema.blImpl.promotion.CouponServiceForBl;
-import com.example.cinema.data.promotion.CouponMapper;
+import com.example.cinema.blImpl.management.Hall.HallServiceForBl;
+import com.example.cinema.blImpl.management.Schedule.ScheduleServiceForBl;
+import com.example.cinema.blImpl.promotion.Activity.ActivityServiceForBl;
+import com.example.cinema.blImpl.promotion.Coupon.CouponServiceForBl;
+import com.example.cinema.blImpl.promotion.VIPActivity.VIPActivityServiceForBl;
+import com.example.cinema.blImpl.promotion.VIPService.VIPServiceForBl;
 import com.example.cinema.data.sales.TicketMapper;
 import com.example.cinema.po.*;
 import com.example.cinema.vo.*;
 
-import org.apache.ibatis.javassist.expr.NewArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.context.request.RequestContextHolder;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by liying on 2019/4/16.
@@ -38,8 +33,6 @@ public class TicketServiceImpl implements TicketService {
     ScheduleServiceForBl scheduleService;
     @Autowired
     HallServiceForBl hallService;
-    @Autowired
-    CouponService couponService;
     @Autowired
     CouponServiceForBl couponServiceForBl;
     @Autowired
@@ -79,7 +72,7 @@ public class TicketServiceImpl implements TicketService {
             }
             // 获取coupon数据
             @SuppressWarnings("unchecked")
-            List<Coupon> coupons = (List<Coupon>) couponService.getCouponsByUser(ticketForm.getUserId()).getContent();// 获取activity数据
+            List<Coupon> coupons =couponServiceForBl.getCouponByUserId(ticketForm.getUserId());// 获取activity数据
             List<Coupon> rescoupons = new ArrayList<>();
             for (Coupon coupon : coupons) {
                 if (coupon.getTargetAmount() < totals)
@@ -236,7 +229,7 @@ public class TicketServiceImpl implements TicketService {
         int movieId=scheduleService.getScheduleItemById(scheduleId).getMovieId();
         List<Activity> activities=activityServiceForBl.getActivitiesByMovie(movieId);
         for (Activity avtivity:activities) {
-            couponService.issueCoupon(avtivity.getCoupon().getId(),ticket.getUserId());
+            couponServiceForBl.insertCouponUser(avtivity.getCoupon().getId(),ticket.getUserId());
         }
         return activities.size();
     }

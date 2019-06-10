@@ -14,10 +14,20 @@ import org.springframework.stereotype.Service;
  * @date 2019/3/23
  */
 @Service
-public class AccountServiceImpl implements AccountService {
+public class AccountServiceImpl implements AccountService,AccountServiceForBl {
     private final static String ACCOUNT_EXIST = "账号已存在";
     @Autowired
     private AccountMapper accountMapper;
+
+    @Override
+    public User getAccountById(int id){
+        try {
+            return accountMapper.getAccountById(id);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     @Override
     public ResponseVO registerAccount(UserForm userForm) {

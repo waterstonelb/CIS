@@ -1,6 +1,6 @@
 package com.example.cinema.controller.user;
 
-import com.example.cinema.blImpl.user.AccountServiceImpl;
+import com.example.cinema.bl.user.AccountService;
 import com.example.cinema.config.InterceptorConfiguration;
 import com.example.cinema.vo.UserForm;
 import com.example.cinema.vo.ResponseVO;
@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 public class AccountController {
     private final static String ACCOUNT_INFO_ERROR="用户名或密码错误";
     @Autowired
-    private AccountServiceImpl accountService;
+    private AccountService accountService;
     @PostMapping("/login")
     public ResponseVO login(@RequestBody UserForm userForm, HttpSession session){
         UserVO user = accountService.login(userForm);
