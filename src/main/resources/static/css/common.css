@@ -115,12 +115,12 @@ ul {
 .nav-logo {
     color: #1caf9a;
     font: 700 30px "Comic Sans MS";
-    text-shadow: 0 0 20px #1caf9a,
+    /*text-shadow: 0 0 20px #1caf9a,
     10px -10px 30px #1caf9a,
     20px -20px 40px #1caf96,
     -20px -60px 50px #1cafa1,
     0px -80px 60px #4caf9a,
-    10px -40px 50px #1caf9a;
+    10px -40px 50px #1caf9a;*/
 }
 
 .notice {

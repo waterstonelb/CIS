@@ -1,63 +1,63 @@
-$(document).ready(function(){
+$(document).ready(function () {
     showSidebar();
-    
+
     var movieId = parseInt(window.location.href.split('?')[1].split('&')[0].split('=')[1]);
     var userId = sessionStorage.getItem('id');
     var isLike = false;
 
     getMovie();
-    if(sessionStorage.getItem('role') === 'admin')
+    if (sessionStorage.getItem('role') === 'admin')
         getMovieLikeChart();
 
     function getMovieLikeChart() {
-       getRequest(
-           '/movie/' + movieId + '/like/date',
-           function(res){
-               var data = res.content,
+        getRequest(
+            '/movie/' + movieId + '/like/date',
+            function (res) {
+                var data = res.content,
                     dateArray = [],
                     numberArray = [];
-               data.forEach(function (item) {
-                   dateArray.push(item.likeTime);
-                   numberArray.push(item.likeNum);
-               });
+                data.forEach(function (item) {
+                    dateArray.push(item.likeTime);
+                    numberArray.push(item.likeNum);
+                });
 
-               var myChart = echarts.init($("#like-date-chart")[0]);
+                var myChart = echarts.init($("#like-date-chart")[0]);
 
-               // 指定图表的配置项和数据
-               var option = {
-                   title: {
-                       text: '想看人数变化表'
-                   },
-                   xAxis: {
-                       type: 'category',
-                       data: dateArray
-                   },
-                   yAxis: {
-                       type: 'value'
-                   },
-                   series: [{
-                       data: numberArray,
-                       type: 'line'
-                   }]
-               };
+                // 指定图表的配置项和数据
+                var option = {
+                    title: {
+                        text: '想看人数变化表'
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: dateArray
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [{
+                        data: numberArray,
+                        type: 'line'
+                    }]
+                };
 
-               // 使用刚指定的配置项和数据显示图表。
-               myChart.setOption(option);
-           },
-           function (error) {
-               alert(error);
-           }
-       );
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+            },
+            function (error) {
+                alert(error);
+            }
+        );
     }
 
     function getMovie() {
         getRequest(
-            '/movie/'+movieId + '/' + userId,
-            function(res){
+            '/movie/' + movieId + '/' + userId,
+            function (res) {
                 var data = res.content;
                 isLike = data.islike;
                 repaintMovieDetail(data);
-                if(data.status === 1){
+                if (data.status === 1) {
                     $("#delete-btn").text("上 映")
                 }
             },
@@ -70,7 +70,7 @@ $(document).ready(function(){
     function repaintMovieDetail(movie) {
         !isLike ? $('.icon-heart').removeClass('error-text') : $('.icon-heart').addClass('error-text');
         $('#like-btn span').text(isLike ? ' 已想看' : ' 想 看');
-        $('#movie-img').attr('src',movie.posterUrl);
+        $('#movie-img').attr('src', movie.posterUrl);
         $('#movie-name').text(movie.name);
         $('#order-movie-name').text(movie.name);
         $('#movie-description').text(movie.description);
@@ -86,12 +86,12 @@ $(document).ready(function(){
 
     // user界面才有
     $('#like-btn').click(function () {
-        var url = isLike ?'/movie/'+ movieId +'/unlike?userId='+ userId :'/movie/'+ movieId +'/like?userId='+ userId;
+        var url = isLike ? '/movie/' + movieId + '/unlike?userId=' + userId : '/movie/' + movieId + '/like?userId=' + userId;
         postRequest(
-             url,
+            url,
             null,
             function (res) {
-                 isLike = !isLike;
+                isLike = !isLike;
                 getMovie();
             },
             function (error) {
@@ -101,8 +101,8 @@ $(document).ready(function(){
 
     // admin界面才有
     $("#modify-btn").click(function () {
-        var dates=$('#movie-startDate').text().split('/');
-        var date=dates[0] +'-'+ (dates[1].length>1?dates[1]:'0'+dates[1]) +'-'+ (dates[2].length>1?dates[2]:'0'+dates[2]);
+        var dates = $('#movie-startDate').text().split('/');
+        var date = dates[0] + '-' + (dates[1].length > 1 ? dates[1] : '0' + dates[1]) + '-' + (dates[2].length > 1 ? dates[2] : '0' + dates[2]);
         $('#movie-name-input').val($('#movie-name').text());
         $('#movie-img-input').val($('#movie-img').attr('src'));
         $('#movie-type-input').val($('#movie-type').text());
@@ -116,8 +116,8 @@ $(document).ready(function(){
         $('#movie-description-input').val($('#movie-description').text())
     });
     $("#delete-btn").click(function () {
-        var movieName='确定下架'+$('#movie-name').text()+'?';
-        confirm(movieName) &&  postRequest(
+        var movieName = '确定下架' + $('#movie-name').text() + '?';
+        confirm(movieName) && postRequest(
             '/movie/off/batch',
             {
                 movieIdList: [movieId]
@@ -131,7 +131,7 @@ $(document).ready(function(){
     });
     $("#movie-form-btn").click(function () {
         var formData = getMovieForm();
-        if(!validateMovieForm(formData)) {
+        if (!validateMovieForm(formData)) {
             return;
         }
         postRequest(
@@ -139,7 +139,10 @@ $(document).ready(function(){
             formData,
             function (res) {
                 $("#movieModal").modal('hide');
-                getMovie();
+                if (res.success)
+                    getMovie();
+                else
+                    alert("res.message")
             },
             function (error) {
                 alert(error.message);
@@ -165,17 +168,17 @@ $(document).ready(function(){
 
     function validateMovieForm(data) {
         var isValidate = true;
-        if(!data.name) {
+        if (!data.name) {
             isValidate = false;
             $('#movie-name-input').parent('.form-group').addClass('has-error');
             alert("请输入电影名称")
         }
-        if(data.posterUrl.length>=255 || !data.posterUrl) {
+        if (data.posterUrl.length >= 255 || !data.posterUrl) {
             isValidate = false;
             $('#movie-img-input').parent('.form-group').addClass('has-error');
             alert("海报链接过长或无输入")
         }
-        if(!data.startDate) {
+        if (!data.startDate) {
             isValidate = false;
             $('#movie-date-input').parent('.form-group').addClass('has-error');
             alert("请输入上映日期")
@@ -183,14 +186,14 @@ $(document).ready(function(){
         return isValidate;
     }
 
-    function showSidebar(){
+    function showSidebar() {
         var level = sessionStorage.getItem("level");
         var name = sessionStorage.getItem("username");
         $("p.title").html(name);
-        if(level==0){
+        if (level == 0) {
             $("#sidebar").append('<li role="presentation"><a href="/admin/vip/manage"><i class="icon-credit-card"></i> 会员策略</a></li>');
             $("#sidebar").append('<li role="presentation"><a href="/admin/usermanage/manage"><i class="icon-user"></i> 员工管理</a></li>');
-        }else if(level==1){
+        } else if (level == 1) {
             $("#sidebar").append('<li role="presentation"><a href="/admin/vip/manage"><i class="icon-credit-card"></i> 会员策略</a></li>');
         }
     }

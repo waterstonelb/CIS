@@ -10,6 +10,11 @@
     margin: auto;
 }
 
+.movie-fshow{
+    box-shadow: #ccc 0 0 20px 10px;
+    border-radius: 20px;
+}
+
 .movie-item .movie-img:hover {
     border: 2px solid #1caf9a;
 }
@@ -24,8 +29,8 @@
 }
 
 .movie-img{
-    height: 200px;
-    width: 100px;
+    height: 100%;
+    width: 100%;
 }
 
 .movie-item{
