@@ -94,4 +94,15 @@ $(document).ready(function () {
 
 function issueTicket(data){
     alert("出票了！"+data.getAttribute("id"));
+    postRequest(
+        "/ticket/issue",
+        data.getAttribute("id"),
+        function (res) {
+            alert("出票成功");
+            location.reload();
+        },
+        function (error) {
+            alert("出票失败")
+        }
+    )
 }

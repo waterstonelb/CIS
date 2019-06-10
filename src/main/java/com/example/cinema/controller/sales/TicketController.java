@@ -48,6 +48,10 @@ public class TicketController {
     public ResponseVO cancelTicket(@RequestBody List<Integer> ticketId){
         return ticketService.cancelTicket(ticketId);
     }
+    @PostMapping("/issue")
+    public ResponseVO issueTicket(@RequestBody int ticketId){
+        return ticketService.issueTicket(ticketId);
+    }
 
 
 

@@ -1,7 +1,6 @@
 package com.example.cinema.bl.sales;
 
 import com.example.cinema.vo.*;
-import com.example.cinema.vo.TicketBuyForm;
 
 import java.util.List;
 
@@ -57,4 +56,6 @@ public interface TicketService {
      * @return
      */
     ResponseVO cancelTicket(List<Integer> id);
+
+	ResponseVO issueTicket(int ticketId);
 }

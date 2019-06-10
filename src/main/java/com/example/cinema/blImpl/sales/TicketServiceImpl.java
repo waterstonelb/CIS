@@ -266,4 +266,15 @@ public class TicketServiceImpl implements TicketService {
             return 0;
         }
     }
+
+    @Override
+    public ResponseVO issueTicket(int ticketId){
+        try {
+            ticketMapper.updateTicketState(ticketId,3 );
+            return ResponseVO.buildSuccess();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseVO.buildFailure("出票失败");
+        }
+    }
 }
