@@ -1,4 +1,4 @@
-package com.example.cinema.bl.promotion;
+package com.example.cinema.blImpl.promotion.VIPService;
 
 public interface VIPServiceForBl {
     /**

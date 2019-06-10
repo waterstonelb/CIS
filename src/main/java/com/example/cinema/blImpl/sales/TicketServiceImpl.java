@@ -1,12 +1,14 @@
 package com.example.cinema.blImpl.sales;
 
-import com.example.cinema.bl.management.RefundServiceForBl;
+import com.example.cinema.blImpl.management.Refund.RefundServiceForBl;
 import com.example.cinema.bl.promotion.*;
 import com.example.cinema.bl.sales.TicketService;
-import com.example.cinema.bl.management.HallServiceForBl;
-import com.example.cinema.bl.management.ScheduleServiceForBl;
-import com.example.cinema.bl.promotion.ActivityServiceForBl;
-import com.example.cinema.bl.promotion.CouponServiceForBl;
+import com.example.cinema.blImpl.management.Hall.HallServiceForBl;
+import com.example.cinema.blImpl.management.Schedule.ScheduleServiceForBl;
+import com.example.cinema.blImpl.promotion.Activity.ActivityServiceForBl;
+import com.example.cinema.blImpl.promotion.Coupon.CouponServiceForBl;
+import com.example.cinema.blImpl.promotion.VIPActivity.VIPActivityServiceForBl;
+import com.example.cinema.blImpl.promotion.VIPService.VIPServiceForBl;
 import com.example.cinema.data.sales.TicketMapper;
 import com.example.cinema.po.*;
 import com.example.cinema.vo.*;
@@ -31,8 +33,6 @@ public class TicketServiceImpl implements TicketService {
     ScheduleServiceForBl scheduleService;
     @Autowired
     HallServiceForBl hallService;
-    @Autowired
-    CouponService couponService;
     @Autowired
     CouponServiceForBl couponServiceForBl;
     @Autowired
@@ -72,7 +72,7 @@ public class TicketServiceImpl implements TicketService {
             }
             // 获取coupon数据
             @SuppressWarnings("unchecked")
-            List<Coupon> coupons = (List<Coupon>) couponService.getCouponsByUser(ticketForm.getUserId()).getContent();// 获取activity数据
+            List<Coupon> coupons =couponServiceForBl.getCouponByUserId(ticketForm.getUserId());// 获取activity数据
             List<Coupon> rescoupons = new ArrayList<>();
             for (Coupon coupon : coupons) {
                 if (coupon.getTargetAmount() < totals)
@@ -229,7 +229,7 @@ public class TicketServiceImpl implements TicketService {
         int movieId=scheduleService.getScheduleItemById(scheduleId).getMovieId();
         List<Activity> activities=activityServiceForBl.getActivitiesByMovie(movieId);
         for (Activity avtivity:activities) {
-            couponService.issueCoupon(avtivity.getCoupon().getId(),ticket.getUserId());
+            couponServiceForBl.insertCouponUser(avtivity.getCoupon().getId(),ticket.getUserId());
         }
         return activities.size();
     }

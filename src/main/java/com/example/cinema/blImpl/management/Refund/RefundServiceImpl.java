@@ -1,7 +1,6 @@
-package com.example.cinema.blImpl.management;
+package com.example.cinema.blImpl.management.Refund;
 
 import com.example.cinema.bl.management.RefundService;
-import com.example.cinema.bl.management.RefundServiceForBl;
 import com.example.cinema.data.management.RefundMapper;
 import com.example.cinema.po.RefundPolicy;
 import com.example.cinema.vo.RefundPolicyVO;

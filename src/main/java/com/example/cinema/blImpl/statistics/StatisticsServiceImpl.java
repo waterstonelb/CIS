@@ -1,6 +1,6 @@
 package com.example.cinema.blImpl.statistics;
 
-import com.example.cinema.bl.promotion.VIPServiceForBl;
+import com.example.cinema.blImpl.promotion.VIPService.VIPServiceForBl;
 import com.example.cinema.bl.statistics.StatisticsService;
 import com.example.cinema.data.statistics.StatisticsMapper;
 import com.example.cinema.po.*;

@@ -1,10 +1,9 @@
-package com.example.cinema.blImpl.management;
+package com.example.cinema.blImpl.management.Schedule;
 import java.util.Date;
 
-import com.example.cinema.bl.management.MovieServiceForBl;
+import com.example.cinema.blImpl.management.Movie.MovieServiceForBl;
 import com.example.cinema.bl.management.ScheduleService;
-import com.example.cinema.bl.management.HallServiceForBl;
-import com.example.cinema.bl.management.ScheduleServiceForBl;
+import com.example.cinema.blImpl.management.Hall.HallServiceForBl;
 import com.example.cinema.data.management.ScheduleMapper;
 import com.example.cinema.po.Movie;
 import com.example.cinema.po.ScheduleItem;

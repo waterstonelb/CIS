@@ -1,4 +1,4 @@
-package com.example.cinema.bl.management;
+package com.example.cinema.blImpl.management.Schedule;
 
 import com.example.cinema.po.ScheduleItem;
 

@@ -1,7 +1,6 @@
-package com.example.cinema.blImpl.promotion;
+package com.example.cinema.blImpl.promotion.VIPActivity;
 
 import com.example.cinema.bl.promotion.VIPActivityService;
-import com.example.cinema.bl.promotion.VIPActivityServiceForBl;
 import com.example.cinema.po.VIPAtivity;
 import com.example.cinema.vo.ResponseVO;
 import com.example.cinema.vo.VIPActivityForm;

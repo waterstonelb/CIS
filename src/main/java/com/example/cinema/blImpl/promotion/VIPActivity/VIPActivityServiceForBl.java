@@ -1,4 +1,4 @@
-package com.example.cinema.bl.promotion;
+package com.example.cinema.blImpl.promotion.VIPActivity;
 
 import com.example.cinema.po.VIPAtivity;
 
