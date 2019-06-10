@@ -10,7 +10,7 @@ $(document).ready(function () {
                 renderTicketList(res.content);
                 ticketList.forEach(function (ticket) {
                     if(ticket.state=="已完成"||ticket.state=="已出票")
-                        $('#movie-cancel-input').append("<option value="+ ticket.id +">"+ticket.schedule.movieName+(ticket.columnIndex+1)+"排"+(ticket.rowIndex+1)+"座"+"</option>");
+                        $('#movie-cancel-input').append("<option value="+ ticket.id +">"+ticket.schedule.movieName+(ticket.rowIndex+1)+"排"+(ticket.columnIndex+1)+"座"+"</option>");
                 })
             },
             function (error) {
@@ -24,10 +24,13 @@ $(document).ready(function () {
         for(let scheduleItemwithSeats of list) {
             strhtml+= "<tr>"+"<td>" + scheduleItemwithSeats.schedule.movieName + "</td>" +
                 "<td>" + scheduleItemwithSeats.schedule.hallName + "</td>" +
-                "<td>" + (scheduleItemwithSeats.columnIndex+1)+"排"+(scheduleItemwithSeats.rowIndex+1)+"座" + "</td>" +
+                "<td>" + (scheduleItemwithSeats.rowIndex+1)+"排"+(scheduleItemwithSeats.columnIndex+1)+"座" + "</td>" +
                 "<td>" + scheduleItemwithSeats.schedule.startTime.substr(0,19).replace("T", " ") + "</td>" +
-                "<td>" + scheduleItemwithSeats.schedule.endTime.substr(0,19).replace("T", " ") + "</td>" +
-                "<td>" + scheduleItemwithSeats.state + "</td>"+"</tr>";
+                "<td>" + scheduleItemwithSeats.schedule.endTime.substr(0,19).replace("T", " ") + "</td>";
+            if(scheduleItemwithSeats.state=="已完成")
+                strhtml+="<td><button id='"+scheduleItemwithSeats.id+"'  onclick='issueTicket(this)'>出票</button></td>"+"</tr>";
+            else
+                strhtml+="<td>" + scheduleItemwithSeats.state + "</td>"+"</tr>";
         }
         $('#schedule-info').append(strhtml)
     }
@@ -36,8 +39,8 @@ $(document).ready(function () {
         var ticketId = $('#movie-cancel-input').val();
         var inList = false;
         cancelTickets.forEach(element => {
-            console.log("ele:"+element);
-            console.log("ticket"+ticketId);
+            // console.log("ele:"+element);
+            // console.log("ticket"+ticketId);
             if(element==ticketId){
                 inList = true;
             }
@@ -55,7 +58,7 @@ $(document).ready(function () {
             if (scheduleItemwithSeats.id == ticketId) {
                 strhtml +="<tr id='"+scheduleItemwithSeats.id+"'>"+"<td>" + scheduleItemwithSeats.schedule.movieName + "</td>" +
                     "<td>" + scheduleItemwithSeats.schedule.hallName + "</td>" +
-                    "<td>" + (scheduleItemwithSeats.columnIndex+ 1) + "排" + (scheduleItemwithSeats.rowIndex + 1) + "座" + "</td>" +
+                    "<td>" + (scheduleItemwithSeats.rowIndex+ 1) + "排" + (scheduleItemwithSeats.columnIndex + 1) + "座" + "</td>" +
                     "<td>" + scheduleItemwithSeats.schedule.startTime.substr(0, 19).replace("T", " ") + "</td>" +
                     "<td>" + scheduleItemwithSeats.schedule.endTime.substr(0, 19).replace("T", " ") + "</td>" +
                     "<td>" + scheduleItemwithSeats.state + "</td>"+ "</tr>";
@@ -71,8 +74,9 @@ $(document).ready(function () {
                 "/ticket/cancel",
                 cancelTickets,
                 function (res) {
+                    if(res.content!="普通用户")
+                        sessionStorage.setItem("balance",res.content);
                     alert("退票成功");
-                    sessionStorage.setItem("balance",res.content);
                     location.reload();
                 },
                 function (error) {
@@ -87,3 +91,7 @@ $(document).ready(function () {
     });
 
 });
+
+function issueTicket(data){
+    alert("出票了！"+data.getAttribute("id"));
+}

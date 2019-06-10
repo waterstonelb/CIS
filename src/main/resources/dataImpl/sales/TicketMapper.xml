@@ -8,11 +8,13 @@
     </insert>
     <insert id="insertTickets" parameterType="java.util.List"
             useGeneratedKeys="true" keyProperty="id">
-        insert into ticket(user_id,schedule_id,column_index,row_index,state,real_pay)
-        values
+            insert into ticket(user_id,schedule_id,column_index,row_index,state,real_pay)
+            values
         <foreach collection="list" item="item" index="index"
                  separator=",">
+            <!-- if not exits(select * from ticket where column_index=#{item.columnIndex} and row_index=#{item.rowIndex} and state=#{item.state}) then -->
             (#{item.userId}, #{item.scheduleId},#{item.columnIndex},#{item.rowIndex},#{item.state},#{item.realPay})
+            
         </foreach>
 
     </insert>
@@ -55,8 +57,13 @@
         <result column="time" property="time"></result>
     </resultMap>
 
-    <update id="cleanExpiredTicket">
+    <update id="cleanLockedTicket">
         update ticket SET  state =2 WHERE UNIX_TIMESTAMP(now())-UNIX_TIMESTAMP(time)>900 and state=0;
     </update>
-
+    <update id="cleanExpiredTicket">
+        update ticket t,
+        schedule s
+        SET  t.state = 2 
+        WHERE UNIX_TIMESTAMP(now())-UNIX_TIMESTAMP(s.end_time)>0 and (t.state=1 or t.state=3) and t.schedule_id=s.id;
+    </update>
 </mapper>

@@ -8,7 +8,10 @@ import com.example.cinema.vo.TicketVIPBuyForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Enumeration;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by liying on 2019/4/16.
@@ -38,8 +41,8 @@ public class TicketController {
     }
 
     @GetMapping("/get/occupiedSeats")
-    public ResponseVO getOccupiedSeats(@RequestParam int scheduleId){
-        return ticketService.getBySchedule(scheduleId);
+    public ResponseVO getOccupiedSeats(@RequestParam int scheduleId,@RequestParam String id){
+        return ticketService.getBySchedule(scheduleId,Integer.parseInt(id));
     }
     @PostMapping("/cancel")
     public ResponseVO cancelTicket(@RequestBody List<Integer> ticketId){

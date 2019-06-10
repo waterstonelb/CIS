@@ -17,11 +17,14 @@ import org.apache.ibatis.javassist.expr.NewArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by liying on 2019/4/16.
@@ -54,25 +57,32 @@ public class TicketServiceImpl implements TicketService {
             List<Ticket> ticketList = new ArrayList<>();
             for (int i = 0; i < ticketForm.getSeats().size(); i++) {
                 Ticket ticket = new Ticket(ticketForm.getUserId(), ticketForm.getScheduleId(),
-                        ticketForm.getSeats().get(i).getColumnIndex(), ticketForm.getSeats().get(i).getRowIndex(), 0,0);
+                        ticketForm.getSeats().get(i).getColumnIndex(), ticketForm.getSeats().get(i).getRowIndex(), 0,
+                        0);
                 ticketList.add(ticket);
             }
-            ticketMapper.insertTickets(ticketList);
+            for (Ticket t : ticketList) {
+                Ticket tmpT = ticketMapper.selectTicketByScheduleIdAndSeat(t.getScheduleId(), t.getColumnIndex(), t.getRowIndex());
+                if(tmpT==null||tmpT.getState()!=0){
+                    ticketMapper.insertTicket(t);
+                }
+            }
 
-            //获取totals数据
+            // 获取totals数据
             ScheduleItem scheduleItem = scheduleService.getScheduleItemById(ticketForm.getScheduleId());
             double totals = scheduleItem.getFare() * ticketForm.getSeats().size();
             List<TicketVO> ticketVOList = new ArrayList<TicketVO>();
             for (int i = 0; i < ticketForm.getSeats().size(); i++) {
-                Ticket nticket = ticketMapper.selectTicketByScheduleIdAndSeat(ticketForm.getScheduleId(), ticketForm.getSeats().get(i).getColumnIndex(), ticketForm.getSeats().get(i).getRowIndex());
+                Ticket nticket = ticketMapper.selectTicketByScheduleIdAndSeat(ticketForm.getScheduleId(),
+                        ticketForm.getSeats().get(i).getColumnIndex(), ticketForm.getSeats().get(i).getRowIndex());
                 ticketVOList.add(nticket.getVO());
             }
-            //获取coupon数据
+            // 获取coupon数据
             @SuppressWarnings("unchecked")
-            List<Coupon> coupons = (List<Coupon>) couponService.getCouponsByUser(ticketForm.getUserId()).getContent();//获取activity数据
-            List<Coupon> rescoupons=new ArrayList<>();
-            for(Coupon coupon:coupons){
-                if(coupon.getTargetAmount()<totals)
+            List<Coupon> coupons = (List<Coupon>) couponService.getCouponsByUser(ticketForm.getUserId()).getContent();// 获取activity数据
+            List<Coupon> rescoupons = new ArrayList<>();
+            for (Coupon coupon : coupons) {
+                if (coupon.getTargetAmount() < totals)
                     rescoupons.add(coupon);
             }
             TicketWithCouponVO twc = new TicketWithCouponVO();
@@ -89,15 +99,16 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     @Transactional
-    public ResponseVO completeTicket(TicketBuyForm ticketBuyForm) {//校验优惠券和根据优惠活动赠送优惠券
+    public ResponseVO completeTicket(TicketBuyForm ticketBuyForm) {// 校验优惠券和根据优惠活动赠送优惠券
         try {
-            double total=useCoupon(ticketBuyForm.getTicketId().get(0),ticketBuyForm.getCouponId(),ticketBuyForm.getTicketId().size());//扣款金额，暂不处理
-            total=total/ticketBuyForm.getTicketId().size();
+            double total = useCoupon(ticketBuyForm.getTicketId().get(0), ticketBuyForm.getCouponId(),
+                    ticketBuyForm.getTicketId().size());// 扣款金额，暂不处理
+            total = total / ticketBuyForm.getTicketId().size();
             for (Integer ticketId : ticketBuyForm.getTicketId()) {
                 ticketMapper.updateTicketState(ticketId, 1);
-                ticketMapper.setRealPay(total,ticketId);
+                ticketMapper.setRealPay(total, ticketId);
             }
-            int numOfCoupon=userGetCoupons(ticketBuyForm.getTicketId().get(0));
+            int numOfCoupon = userGetCoupons(ticketBuyForm.getTicketId().get(0));
             return ResponseVO.buildSuccess(numOfCoupon);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -106,14 +117,22 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public ResponseVO getBySchedule(int scheduleId) {
+    public ResponseVO getBySchedule(int scheduleId,int userId) {
         try {
             List<Ticket> tickets = ticketMapper.selectTicketsBySchedule(scheduleId);
             ScheduleItem schedule = scheduleService.getScheduleItemById(scheduleId);
             Hall hall = hallService.getHallById(schedule.getHallId());
             int[][] seats = new int[hall.getRow()][hall.getColumn()];
             tickets.stream().forEach(ticket ->
-                seats[ticket.getRowIndex()][ticket.getColumnIndex()] = 1
+                {
+                    if(ticket.getState()==1)seats[ticket.getRowIndex()][ticket.getColumnIndex()] = 1;//已完成
+                    else if(ticket.getState()==0){
+                        if(ticket.getUserId()==userId)
+                            seats[ticket.getRowIndex()][ticket.getColumnIndex()] = 2;//锁座
+                        else
+                            seats[ticket.getRowIndex()][ticket.getColumnIndex()] = 1;//已完成
+                    }
+                }
             );
             ScheduleWithSeatVO scheduleWithSeatVO = new ScheduleWithSeatVO();
             scheduleWithSeatVO.setScheduleItem(schedule);
@@ -175,23 +194,32 @@ public class TicketServiceImpl implements TicketService {
      * 根据ticketID退票
      */
     @Override
-    public ResponseVO cancelTicket(List<Integer> id) {//TODO: ，目前仅支持vip退票，普通用户退票会产生bug
+    public ResponseVO cancelTicket(List<Integer> id) {//TODO
         try {
+            
             int userId = ticketMapper.selectTicketById(id.get(0)).getUserId();
-            double totals = vipServiceForBl.getBalance(userId);
-            RefundPolicyVO rVO = refunServiceForBl.getRefundPolicyVO();
-            long thisTime = new Date().getTime();
-            for (int Id : id) {
-                Ticket tmpTicket = ticketMapper.selectTicketById(Id);
-                Date scheduleStart = scheduleService.getScheduleItemById(tmpTicket.getScheduleId()).getStartTime();
-                if((scheduleStart.getTime()- thisTime)>=(long)24*3600*1000)
-                    totals+=tmpTicket.getRealPay()*rVO.getRefund_day();
-                else if((scheduleStart.getTime()- thisTime)>=(long)3600*1000)
-                    totals+=tmpTicket.getRealPay()*rVO.getRefund_hour();
-                ticketMapper.updateTicketState(Id,2);
+            if(vipServiceForBl.getCardId(userId)!=-1){
+                double totals = vipServiceForBl.getBalance(userId);
+                RefundPolicyVO rVO = refunServiceForBl.getRefundPolicyVO();
+                long thisTime = new Date().getTime();
+                for (int Id : id) {
+                    Ticket tmpTicket = ticketMapper.selectTicketById(Id);
+                    Date scheduleStart = scheduleService.getScheduleItemById(tmpTicket.getScheduleId()).getStartTime();
+                    if((scheduleStart.getTime()- thisTime)>=(long)24*3600*1000)
+                        totals+=tmpTicket.getRealPay()*rVO.getRefund_day();
+                    else if((scheduleStart.getTime()- thisTime)>=(long)3600*1000)
+                        totals+=tmpTicket.getRealPay()*rVO.getRefund_hour();
+                    ticketMapper.updateTicketState(Id,2);
+                }
+                vipServiceForBl.returnTicket(userId, totals);
+                return ResponseVO.buildSuccess(totals);
             }
-            vipServiceForBl.returnTicket(userId, totals);
-            return ResponseVO.buildSuccess(totals);
+            else{
+                for (int Id : id) {
+                    ticketMapper.updateTicketState(Id,2);
+                }
+                return ResponseVO.buildSuccess("普通用户");
+            }
         }catch (Exception e){
             return ResponseVO.buildFailure("退票失败");
         }

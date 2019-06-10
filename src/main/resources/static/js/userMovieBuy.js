@@ -14,7 +14,7 @@ $(document).ready(function () {
 
     function getInfo() {
         getRequest(
-            '/ticket/get/occupiedSeats?scheduleId=' + scheduleId,
+            '/ticket/get/occupiedSeats?scheduleId=' + scheduleId+'&&id='+sessionStorage.getItem("id"),
             function (res) {
                 if (res.success) {
                     renderSchedule(res.content.scheduleItem, res.content.seats);
@@ -45,9 +45,17 @@ function renderSchedule(schedule, seats) {
             if (seats[i][j] == 0) {
                 // 未选
                 temp += "<button class='cinema-hall-seat-choose' id='" + id + "' onclick='seatClick(\"" + id + "\"," + i + "," + j + ")'></button>";
-            } else {
-                // 已选中
-                temp += "<button class='cinema-hall-seat-lock'></button>";
+            } else if(seats[i][j] == 1){
+                // 已完成
+                temp += "<button class='cinema-hall-seat-finish' disabled='true'></button>";
+            }else if(seats[i][j] == 2){
+                //锁座
+                temp += "<button class='cinema-hall-seat' id='" + id + "' onclick='seatClick(\"" + id + "\"," + i + "," + j + ")'></button>";
+                selectedSeats[selectedSeats.length] = [i, j];
+                selectedSeats.sort(function (x, y) {
+                    var res = x[0] - y[0];
+                    return res === 0 ? x[1] - y[1] : res;
+                });
             }
         }
         seat += "<div>" + temp + "</div>";
@@ -64,20 +72,21 @@ function renderSchedule(schedule, seats) {
     hallDomStr += hallDom;
 
     $('#hall-card').html(hallDomStr);
+    beforConfirm();
 }
 
 function seatClick(id, i, j) {
     let seat = $('#' + id);
-    if (seat.hasClass("cinema-hall-seat-choose")) {
+    if (seat.hasClass("cinema-hall-seat-choose")) {//未选择：灰色
         seat.removeClass("cinema-hall-seat-choose");
-        seat.addClass("cinema-hall-seat");
+        seat.addClass("cinema-hall-seat");//已选择:绿色
 
-        selectedSeats[selectedSeats.length] = [i, j]
+        selectedSeats[selectedSeats.length] = [i, j];
     } else {
-        seat.removeClass("cinema-hall-seat");
-        seat.addClass("cinema-hall-seat-choose");
+        seat.removeClass("cinema-hall-seat");//去掉绿色
+        seat.addClass("cinema-hall-seat-choose");//改为灰色
 
-        selectedSeats = selectedSeats.filter(function (value) {
+        selectedSeats = selectedSeats.filter(function (value) {//selectedSeats改为0
             return value[0] != i || value[1] != j;
         })
     }
@@ -86,7 +95,10 @@ function seatClick(id, i, j) {
         var res = x[0] - y[0];
         return res === 0 ? x[1] - y[1] : res;
     });
-
+    beforConfirm();
+    
+}
+function beforConfirm(){
     let seatDetailStr = "";
     if (selectedSeats.length == 0) {
         seatDetailStr += "还未选择座位";

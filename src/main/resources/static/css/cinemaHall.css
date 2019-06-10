@@ -44,3 +44,25 @@
     border: none;
     outline: none;
 }
+
+.cinema-hall-seat-lock:hover {
+    background: url("../images/seatChoose.png");
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    margin: 3px;
+
+    border: 1px solid #00F;
+    outline: none;
+}
+
+.cinema-hall-seat-finish {
+    background: url("../images/seatFinish.png");
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    margin: 3px;
+
+    border: none;
+    outline: none;
+}

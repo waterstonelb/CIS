@@ -32,7 +32,7 @@ public interface TicketService {
      * @param scheduleId
      * @return
      */
-    ResponseVO getBySchedule(int scheduleId);
+    ResponseVO getBySchedule(int scheduleId,int userId);
 
     /**
      * TODO:获得用户买过的票

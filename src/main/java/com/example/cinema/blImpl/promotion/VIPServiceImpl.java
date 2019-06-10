@@ -23,12 +23,17 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
     @Autowired
     CouponService couponService;
 
+    /**
+     * 根据userid获取cardId
+     * @return -1:没有搜索到card ; 其他：cardId
+     * 
+     */
     @Override
     public int getCardId(int userId) {
         try {
             return vipCardMapper.selectCardByUserId(userId).getCardId();
         } catch (Exception e) {
-            e.printStackTrace();
+            // e.printStackTrace();
             return -1;
         }
     }
