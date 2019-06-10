@@ -33,7 +33,7 @@ function repaintScheduleDate(curDateLoc) {
         var date = dates[i].date.substring(5, 7) + "月" + dates[i].date.substring(8, 10) + "日";
         if (i == 0) date += "（今天）";
         else if (i == 1) date += "（明天）";
-        dateContent += '<li role="presentation" id="schedule-date' + i + '"><a href="#"  onclick="repaintScheduleDate(\'' + i + '\')">' + date + '</a></li>';
+        dateContent += '<li role="presentation" id="schedule-date' + i + '"><a href="#" style=\"border-radius: 20px 0 0 0;\" onclick="repaintScheduleDate(\'' + i + '\')">' + date + '</a></li>';
     }
     $('#schedule-date').html(dateContent);
 

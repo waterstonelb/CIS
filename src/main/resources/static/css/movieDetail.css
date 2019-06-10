@@ -1,5 +1,7 @@
-.content-header {
+.content-header{
     display: flex;
+    background-color: slategray;
+    border-radius: 20px;
 }
 
 .movie-basic-info {
@@ -9,6 +11,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    color: #d9edf7;
 }
 
 .movie-operations {
@@ -16,8 +19,9 @@
 }
 
 #movie-img {
-    height: 320px;
-    width: 210px;
+    height: 340px;
+    width: 225px;
+    border-radius: 20px 0 0 20px;
 }
 
 #movie-description {

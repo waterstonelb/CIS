@@ -33,7 +33,7 @@
         <button class="nav-user-container btn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
             <img class="avatar-sm" src="/images/defaultAvatar.jpg"/>
-            <span class="gray-text" style="vertical-align: middle" id="user-name">&nbsp;<span class="caret"></span></span>
+            <span style="vertical-align: middle" id="user-name">&nbsp;<span class="caret"></span></span>
         </button>
         <ul class="dropdown-menu">
             <li><a href="/user/buy">电影票</a></li>
@@ -44,28 +44,32 @@
     </div>
 </div>
 <div class="content-container">
-    <div class="content-header">
-        <img id="movie-img">
-        <div class="movie-basic-info">
-            <div><span class="title" id="movie-name"></span></div>
-            <div style="margin-top: 20px;"><span>简 介 ：</span><span id="movie-description" class="gray-text"></span>
-            </div>
-            <div><span>上 映 ：</span><span id="movie-startDate"></span></div>
-            <div><span>类 型 ：</span><span id="movie-type"></span></div>
-            <div><span>地 区 ：</span><span id="movie-country"></span></div>
-            <div><span>语 言 ：</span><span id="movie-language"></span></div>
-            <div><span>导 演 ：</span><span id="movie-director"></span></div>
-            <div><span>主 演 ：</span><span id="movie-starring"></span></div>
-            <div><span>编 剧 ：</span><span id="movie-writer"></span></div>
-            <div class="movie-operations">
-                <button type="button" class="btn btn-primary" id="like-btn"><i class='icon-heart'></i><span> 想 看</span>
-                </button>
+    <div class="card">
+        <div class="content-header">
+            <img id="movie-img">
+            <div class="movie-basic-info">
+                <div style="
+                margin-top: 25px;
+            "><span class="title" id="movie-name"></span></div>
+                <div style="margin-top: 15px;"><span>简 介 ：</span><span id="movie-description"></span>
+                </div>
+                <div><span>上 映 ：</span><span id="movie-startDate"></span></div>
+                <div><span>类 型 ：</span><span id="movie-type"></span></div>
+                <div><span>地 区 ：</span><span id="movie-country"></span></div>
+                <div><span>语 言 ：</span><span id="movie-language"></span></div>
+                <div><span>导 演 ：</span><span id="movie-director"></span></div>
+                <div><span>主 演 ：</span><span id="movie-starring"></span></div>
+                <div><span>编 剧 ：</span><span id="movie-writer"></span></div>
+                <div class="movie-operations">
+                    <button type="button" class="btn btn-primary" id="like-btn"><i class='icon-heart'></i><span> 想 看</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
     <div class="seesion-container">
         <h1 id="none-hint" style="display: none;">暂无排片</h1>
-        <div id="schedule" style="display: none;">
+        <div id="schedule" class="card">
             <ul class="nav nav-tabs" id="schedule-date">
             </ul>
 

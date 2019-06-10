@@ -36,7 +36,7 @@ $(document).ready(function() {
 
             activitiesDomStr+=
                 "<div class='activity-container'>" +
-                "    <div class='activity-card card'>" +
+                "    <div class='activity-card'>" +
                 "       <div class='activity-line'>" +
                 "           <span class='title'>"+activity.name+"</span>" +
                 "           <span class='gray-text'>"+activity.description+"</span>" +

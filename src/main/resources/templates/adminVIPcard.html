@@ -33,6 +33,7 @@
     <div class="content-container">
         <div class="content-header">
             <span class="title gray-text">会员卡管理</span>
+            <div>
             <button type="button" class="btn btn-primary" data-backdrop="static" data-toggle="modal"
                     data-target="#vipcardModal"><i class="icon-plus-sign"></i> 发布会员卡
             </button>
@@ -43,12 +44,13 @@
                     data-target="#vipdeleteModal"><i class=" icon-remove-sign
 "></i> 删除会员卡
             </button>
+            </div>
         </div>
         <div class="content-vipcard">
 
         </div>
         <div class="card">
-            <div style="display: flex;justify-content: space-between padding:15px">
+            <div style="display: flex;justify-content: space-evenly; padding:15px">
                 <div>
                     <span>开始日期 </span>
                     <input type="date" class="form-control" id="start-date" style="display: inline-block;width: 180px;">
@@ -68,7 +70,7 @@
                         <th>消费者ID</th>
                         <th>会员卡种类</th>
                         <th>历史消费总额</th>
-                        <th>操作</th>>
+                        <th>操作</th>
                     </tr>
                     </thead>
                     <tbody id="amount-history">

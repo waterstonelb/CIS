@@ -28,11 +28,6 @@
     text-align: center;
 }
 
-.movie-img{
-    height: auto;
-    width: auto;
-}
-
 .movie-item{
     height: 165px;
     width: 120px;
@@ -43,6 +38,9 @@
     margin: 8px 0;
     display: flex;
     justify-content: space-between;
+    border-bottom-color: #ccc;
+    border-bottom-style: dashed;
+    border-bottom-width: 1px;
 }
 
 .movie-contianer {

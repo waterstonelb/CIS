@@ -41,7 +41,7 @@ $(document).ready(function(){
     }
     function getVIPCoupon() {
         getRequest(
-            'http://localhost:8080/activity/get',
+            '../../activity/get',
             function (res) {
                 activities=res.content;
                 activities.forEach(function (activity) {
@@ -55,7 +55,7 @@ $(document).ready(function(){
 
     $("#date-submit").click(function () {
         getRequest(
-            'http://localhost:8080/statistics/amount?startDate='+$("#start-date").val()+"&&endDate="+$("#end-date").val(),
+            '../../statistics/amount?startDate='+$("#start-date").val()+"&&endDate="+$("#end-date").val(),
             function (res) {
                 renderAmount(res.content);
             },
@@ -106,7 +106,7 @@ $(document).ready(function(){
             if(vipCard.status==1) {
                 innerValidHTML +=
                     "<div class='activity-container'>" +
-                    "    <div class='activity-card card'>" +
+                    "    <div class='activity-card'>" +
                     "       <div class='activity-line'>" +
                     "           <span class=\"label label-success\" id='card-id'>ID:" + vipCard.id + "</span>" +
                     "           <span class='title'>" + vipCard.cardName + "</span>" +

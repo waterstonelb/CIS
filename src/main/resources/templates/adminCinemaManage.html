@@ -33,18 +33,27 @@
     <div class="content-container">
         <div class="content-item">
             <span class="title gray-text">常规设置</span>
-            <div class="content-card card">
-                <span class="">用户可见排片日期：</span><span id="can-see-num"></span>
+            <div class="content-card card" style="
+            display: flex;
+            justify-content: space-between;
+        ">
+                <div style="
+                padding-top: 10px;
+            "><span class="">用户可见排片日期：</span><span id="can-see-num"></span></div>
                 <button type="button" class="btn btn-primary" id="canview-modify-btn">修改</button>
                 <input type="number" class="form-control" id="canview-set-input" style="display: none;width: 200px;">
                 <button type="button" style="display: none" class="btn btn-primary" id="canview-confirm-btn">确认</button>
             </div>
         </div>
         <div class="content-item">
-            <span class="title gray-text">影厅管理</span>
-            <button type="button" class="btn btn-primary" id="hall-modify-btn" data-toggle="modal" data-target="#editModal">修改影厅</button>
-            <button type="button" class="btn btn-primary" id="hall-add-btn" data-toggle="modal" data-target="#addModal">增加影厅</button>
-            <button type="button" class="btn btn-primary" id="hall-delete-btn" data-toggle="modal" data-target="#delModal">删除影厅</button>
+                <div style="
+                display: flex;
+                justify-content: space-between;
+                padding-right: 20px;
+            "><span class="title gray-text">影厅管理</span>
+                       <div> <button type="button" class="btn btn-primary" id="hall-modify-btn" data-toggle="modal" data-target="#editModal">修改影厅</button>
+                        <button type="button" class="btn btn-primary" id="hall-add-btn" data-toggle="modal" data-target="#addModal">增加影厅</button>
+                        <button type="button" class="btn btn-primary" id="hall-delete-btn" data-toggle="modal" data-target="#delModal">删除影厅</button></div></div>
             <div class="content-card card" id="hall-card">
             </div>
         </div>
