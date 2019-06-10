@@ -2,10 +2,10 @@
     list-style: none;
     display: flex;
     margin-top: 20px;
-    border-bottom: 1px solid #ccc;
+    /* border-bottom: 1px solid #ccc; */
 }
 .movie-item .movie-img {
-    height: 159px;
+    height: 160px;
     width: 110px;
     border-radius: 20px 0 0 20px;
 }

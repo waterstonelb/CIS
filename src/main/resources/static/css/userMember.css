@@ -40,6 +40,9 @@
     align-items: center;
     padding-top: 20px;
     border: 1px solid #1caf9a;
+    border-radius: 20px 20px 20px 20px;
+    box-shadow: 0px 0px 20px 4px #ccc;
+    margin-bottom: 10px;
 }
 
 .card .info .price {
@@ -77,10 +80,12 @@
     font-size: 16px;
     color: #fff;
     line-height: 26px;
-    text-align: center
-}
+    text-align: center;
+    border: 0px;
+    border-radius: 0 0 20px 20px;
 
 /* coupon为优惠券样式 */
+
 .coupon-wrapper {
     padding: 5px;
 }

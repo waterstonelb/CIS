@@ -8,6 +8,7 @@ var ticket;
 var userId;
 
 $(document).ready(function () {
+    $("#user-name").prepend(sessionStorage.getItem('username'));
     scheduleId = parseInt(window.location.href.split('?')[1].split('&')[1].split('=')[1]);
     userId = sessionStorage.getItem("id")
     getInfo();

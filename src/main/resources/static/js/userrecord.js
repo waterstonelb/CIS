@@ -1,6 +1,7 @@
 var ticketList;
 var cancelTickets=[];
 $(document).ready(function () {
+    $("#user-name").prepend(sessionStorage.getItem('username'));
     getUserBuy();
     function getUserBuy() {
         var id = sessionStorage.getItem('id');

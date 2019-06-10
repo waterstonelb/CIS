@@ -3,6 +3,7 @@ $(document).ready(function () {
     getCoupon();
     getVIPCards();
     showVIPinfo();
+    $("#user-name").prepend(sessionStorage.getItem('username'));
 });
 
 var isBuyState = true;

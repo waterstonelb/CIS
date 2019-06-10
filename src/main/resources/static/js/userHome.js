@@ -4,7 +4,7 @@ $(document).ready(function () {
     getTopBox();
     getVIPinfo();
     getMostFavourite();
-    $("#user-name").append(sessionStorage.getItem('username'));
+    $("#user-name").prepend(sessionStorage.getItem('username'));
 
     function getVIPinfo() {
         getRequest(

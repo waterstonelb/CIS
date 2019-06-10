@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    $("#user-name").prepend(sessionStorage.getItem('username'));
 
     getMovieList('');
 

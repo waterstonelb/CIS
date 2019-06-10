@@ -32,7 +32,7 @@
         <button class="nav-user-container btn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
             <img class="avatar-sm" src="/images/defaultAvatar.jpg"/>
-            <span class="gray-text" style="vertical-align: middle">用户A&nbsp;<span class="caret"></span></span>
+            <span class="gray-text" style="vertical-align: middle" id="user-name">&nbsp;<span class="caret"></span></span>
         </button>
         <ul class="dropdown-menu">
             <li><a href="#">电影票</a></li>
@@ -65,7 +65,10 @@
         </div>
     </div>
     <div class="card">
-        <div class="header">
+        <div class="header"style="
+        margin-top: 0px;
+        margin-bottom: 20px;
+    ">
             <div class="title">退票</div>
         </div>
         <div>
@@ -73,7 +76,9 @@
                 <option>--请选择您需要退的票--</option>
             </select>
         </div>
-        <div>
+        <div style="
+        margin-top: 20px;
+    ">
             <div>已选电影:</div>
             <div id="selected-movies">
 
