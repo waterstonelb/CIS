@@ -1,5 +1,6 @@
 .table-wrapper {
     padding: 20px;
+    color: aliceblue;
 }
 
 .table-wrapper .table b {
@@ -29,4 +30,5 @@
 .card .header .title {
     font-size: 24px;
     font-weight: 500;
+    color: burlywood;
 }
