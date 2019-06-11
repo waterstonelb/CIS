@@ -6,8 +6,6 @@
         insert into vip_card(user_id,balance,vipactivity_id)
         values(#{userId}, #{balance},#{cardId})
     </insert>
-
-
     <insert id="insertUserCharge" parameterType="com.example.cinema.po.UserChargeRecord"
             useGeneratedKeys="true" keyProperty="id">
         insert into user_charge(user_id,charge,charge_time)

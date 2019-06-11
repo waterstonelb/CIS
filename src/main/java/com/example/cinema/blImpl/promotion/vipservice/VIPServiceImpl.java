@@ -100,6 +100,7 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
             if (vipCard == null) {
                 return ResponseVO.buildFailure("用户卡不存在");
             }
+            vipCard.setBalance((double)Math.round(vipCard.getBalance()*100)/100);
             return ResponseVO.buildSuccess(vipCard);
         } catch (Exception e) {
             e.printStackTrace();
