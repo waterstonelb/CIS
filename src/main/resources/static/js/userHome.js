@@ -85,7 +85,7 @@ $(document).ready(function () {
         movieList.forEach(function (movie) {
             movieDomStr+="<div class='item "+(count==0?"active":"")+"' >" +
                 "                        <img src='"+movie.posterUrl+"' alt='成功' class='movie-img' id='"+movie.id+"'>" +
-                "                        <div class='carousel-caption'>" +movie.name+"</div>" +
+                "                        <div class='carousel-caption' style='font-size: 20px'>" +movie.name+"</div>" +
                 "                    </div>";
             movieChoose+="<li data-target='#carousel-example-generic' data-slide-to='"+count+"'></li>"
             count=count+1;

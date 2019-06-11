@@ -17,11 +17,17 @@ input {
 ul {
     list-style: none;
 }
+#user-name{
+    color: darkblue;
+}
 .card {
-    background: #fff;
+    background: #5aafbd61;
     border-radius: 20px;
-    box-shadow: #ccc 0 0 20px 10px;
-
+    backdrop-filter: blur(20px);
+    color: #a1afa6;
+}
+.card:hover{
+    box-shadow: #3c4550 0 0 20px 10px 
 }
 .title {
     font-size: 24px;
@@ -46,7 +52,7 @@ ul {
     颜色相关
  */
 .gray-text {
-    color: #777;
+    color: #e2eff1;
 }
 .dark-text {
     color: #666;
@@ -56,9 +62,12 @@ ul {
 }
 .primary-text {
     color: #1caf9a;
+    font-size: unset;
+
 }
 .primary-bg {
-    background: #1caf9a;
+    background: #2992899e;
+    backdrop-filter: blur(20px);
 }
 .error-bg {
     background: #ed5565;
@@ -76,9 +85,10 @@ ul {
     height: 100%;
 }
 .content-container {
+    background-image: url("../images/sxsxsx.jpg");
     flex: 1;
     height: 100%;
-    background: #e4e7ea;
+    /*background: #e4e7ea;*/
     padding: 20px;
     overflow-y: scroll;
 }

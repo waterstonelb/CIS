@@ -1,13 +1,13 @@
 package com.example.cinema.blImpl.sales;
 
-import com.example.cinema.blImpl.management.Refund.RefundServiceForBl;
+import com.example.cinema.blImpl.management.refund.RefundServiceForBl;
 import com.example.cinema.bl.sales.TicketService;
-import com.example.cinema.blImpl.management.Hall.HallServiceForBl;
-import com.example.cinema.blImpl.management.Schedule.ScheduleServiceForBl;
-import com.example.cinema.blImpl.promotion.Activity.ActivityServiceForBl;
-import com.example.cinema.blImpl.promotion.Coupon.CouponServiceForBl;
-import com.example.cinema.blImpl.promotion.VIPActivity.VIPActivityServiceForBl;
-import com.example.cinema.blImpl.promotion.VIPService.VIPServiceForBl;
+import com.example.cinema.blImpl.management.hall.HallServiceForBl;
+import com.example.cinema.blImpl.management.schedule.ScheduleServiceForBl;
+import com.example.cinema.blImpl.promotion.activity.ActivityServiceForBl;
+import com.example.cinema.blImpl.promotion.coupon.CouponServiceForBl;
+import com.example.cinema.blImpl.promotion.vipactivity.VIPActivityServiceForBl;
+import com.example.cinema.blImpl.promotion.vipservice.VIPServiceForBl;
 import com.example.cinema.data.sales.TicketMapper;
 import com.example.cinema.po.*;
 import com.example.cinema.vo.*;

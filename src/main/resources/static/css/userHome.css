@@ -11,8 +11,12 @@
 }
 
 .movie-fshow{
-    box-shadow: #ccc 0 0 20px 10px;
+    /*box-shadow: #ccc 0 0 20px 10px;*/
     border-radius: 20px;
+}
+
+.movie-fshow:hover{
+    box-shadow: #22413cab 0 0 20px 10px 
 }
 
 .movie-item .movie-img:hover {
@@ -73,8 +77,7 @@
     padding: 10px 20px;
 }
 #carousel-example-generic{
-    height:auto
-}
+    height:700px}
 .row {
     display: -webkit-box;
     display: -webkit-flex;

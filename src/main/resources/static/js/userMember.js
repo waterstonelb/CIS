@@ -86,8 +86,7 @@ function confirmCommit() {
                     function (res) {
                         $('#buyModal').modal('hide');
                         alert("购买会员卡成功");
-                        getVIP();
-                        location.reload();
+                        location.replace('member');
                     },
                     function (error) {
                         alert(error);

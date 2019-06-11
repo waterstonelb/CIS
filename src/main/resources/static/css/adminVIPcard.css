@@ -10,11 +10,15 @@
     flex-direction: column;
     flex-basis: 50%;
     justify-content: space-around;
-    background-color: #ffffff;
+    background-color: #39c9de94;
     border-radius: 20px 0 0 20px;
-
+    backdrop-filter: blur(15px);
 }
 
+.activity-card:hover{
+    box-shadow: #3c4550 0 0 20px 10px 
+
+}
 .activity-line {
     display: flex;
     align-items: baseline;
