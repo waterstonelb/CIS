@@ -218,6 +218,8 @@ public class StatisticsServiceImpl implements StatisticsService {
         return UserBuyRecordVOList;
     }
 
+    
+
     @Override
     public ResponseVO getUserChargeRecord(int id) {
         try {

@@ -63,7 +63,7 @@
     <update id="cleanExpiredTicket">
         update ticket t,
         schedule s
-        SET  t.state = 2 
-        WHERE UNIX_TIMESTAMP(now())-UNIX_TIMESTAMP(s.end_time)>0 and (t.state=1 or t.state=3) and t.schedule_id=s.id;
+        SET  t.state = 3 
+        WHERE UNIX_TIMESTAMP(now())-UNIX_TIMESTAMP(s.end_time)>0 and t.state=1 and t.schedule_id=s.id;
     </update>
 </mapper>

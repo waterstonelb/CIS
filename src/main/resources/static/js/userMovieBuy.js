@@ -20,6 +20,10 @@ $(document).ready(function () {
                 if (res.success) {
                     renderSchedule(res.content.scheduleItem, res.content.seats);
                 }
+                else{
+                    alert(res.message);
+                    location.reload();
+                }
             },
             function (error) {
                 alert(JSON.stringify(error));
@@ -138,9 +142,15 @@ function orderConfirmClick() {
             seats: toS()
         },
         function (res) {
-            orderInfo = res.content;
-            renderOrder(orderInfo);
-            coupons=orderInfo.coupons
+            if(res.success){
+                orderInfo = res.content;
+                renderOrder(orderInfo);
+                coupons=orderInfo.coupons
+            }
+            else{
+                alert(res.message);
+                location.reload();
+            }
         },
         function (error) {
             alert(error)

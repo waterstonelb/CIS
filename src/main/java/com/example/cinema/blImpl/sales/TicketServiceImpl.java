@@ -1,7 +1,6 @@
 package com.example.cinema.blImpl.sales;
 
 import com.example.cinema.blImpl.management.Refund.RefundServiceForBl;
-import com.example.cinema.bl.promotion.*;
 import com.example.cinema.bl.sales.TicketService;
 import com.example.cinema.blImpl.management.Hall.HallServiceForBl;
 import com.example.cinema.blImpl.management.Schedule.ScheduleServiceForBl;
@@ -50,8 +49,11 @@ public class TicketServiceImpl implements TicketService {
             List<Ticket> ticketList = new ArrayList<>();
             for (int i = 0; i < ticketForm.getSeats().size(); i++) {
                 Ticket ticket = new Ticket(ticketForm.getUserId(), ticketForm.getScheduleId(),
-                        ticketForm.getSeats().get(i).getColumnIndex(), ticketForm.getSeats().get(i).getRowIndex(), 0,
-                        0);
+                        ticketForm.getSeats().get(i).getColumnIndex(), ticketForm.getSeats().get(i).getRowIndex(), 0,0);
+                Ticket conflictTicket = ticketMapper.selectTicketByScheduleIdAndSeat(ticket.getScheduleId(), ticket.getColumnIndex(), ticket.getRowIndex());
+                if(conflictTicket!=null && conflictTicket.getState()!=2 && conflictTicket.getUserId()!=ticket.getUserId()){
+                    return ResponseVO.buildFailure("锁座失败！");
+                }
                 ticketList.add(ticket);
             }
             for (Ticket t : ticketList) {
@@ -118,7 +120,7 @@ public class TicketServiceImpl implements TicketService {
             int[][] seats = new int[hall.getRow()][hall.getColumn()];
             tickets.stream().forEach(ticket ->
                 {
-                    if(ticket.getState()==1)seats[ticket.getRowIndex()][ticket.getColumnIndex()] = 1;//已完成
+                    if(ticket.getState()==1 || ticket.getState()==3)seats[ticket.getRowIndex()][ticket.getColumnIndex()] = 1;//已完成
                     else if(ticket.getState()==0){
                         if(ticket.getUserId()==userId)
                             seats[ticket.getRowIndex()][ticket.getColumnIndex()] = 2;//锁座
@@ -142,14 +144,14 @@ public class TicketServiceImpl implements TicketService {
         try {
             List<TicketWithScheduleVO> ticketWithScheduleVOS = new ArrayList<>();
             for (Ticket ticket : ticketMapper.selectTicketByUser(userId)) {
-                if (ticket.getState() == 1 || ticket.getState() == 2 || ticket.getState() == 3) {
+                if (ticket.getState() == 1 || ticket.getState() == 3) {
                     TicketWithScheduleVO ticketWithScheduleVO=new TicketWithScheduleVO();
                     ticketWithScheduleVO.setId(ticket.getId());
                     ticketWithScheduleVO.setUserId(ticket.getUserId());
                     ticketWithScheduleVO.setSchedule(scheduleService.getScheduleItemById(ticket.getScheduleId()));
                     ticketWithScheduleVO.setColumnIndex(ticket.getColumnIndex());
                     ticketWithScheduleVO.setRowIndex(ticket.getRowIndex());
-                    ticketWithScheduleVO.setState(ticket.getState()==1?"已完成":(ticket.getState()==2?"已失效":"已出票"));
+                    ticketWithScheduleVO.setState(ticket.getState()==1?"已完成":"已出票");
                     ticketWithScheduleVO.setTime(ticket.getTime());
 
                     ticketWithScheduleVOS.add(ticketWithScheduleVO);
@@ -187,7 +189,7 @@ public class TicketServiceImpl implements TicketService {
      * 根据ticketID退票
      */
     @Override
-    public ResponseVO cancelTicket(List<Integer> id) {//TODO
+    public ResponseVO cancelTicket(List<Integer> id) {
         try {
             
             int userId = ticketMapper.selectTicketById(id.get(0)).getUserId();
@@ -264,7 +266,17 @@ public class TicketServiceImpl implements TicketService {
     public ResponseVO issueTicket(int ticketId){
         try {
             ticketMapper.updateTicketState(ticketId,3 );
-            return ResponseVO.buildSuccess();
+            Ticket ticket= ticketMapper.selectTicketById(ticketId);
+            TicketWithScheduleVO tScheduleVO = new TicketWithScheduleVO();
+            tScheduleVO.setId(ticket.getId());
+            tScheduleVO.setUserId(ticket.getUserId());
+            tScheduleVO.setSchedule(scheduleService.getScheduleItemById(ticket.getScheduleId()));
+            tScheduleVO.setColumnIndex(ticket.getColumnIndex());
+            tScheduleVO.setRowIndex(ticket.getRowIndex());
+            tScheduleVO.setState("已出票");
+            tScheduleVO.setTime(ticket.getTime());
+
+            return ResponseVO.buildSuccess(tScheduleVO);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("出票失败");

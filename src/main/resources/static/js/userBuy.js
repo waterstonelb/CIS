@@ -29,7 +29,7 @@ $(document).ready(function () {
                 "<td>" + scheduleItemwithSeats.schedule.startTime.substr(0,19).replace("T", " ") + "</td>" +
                 "<td>" + scheduleItemwithSeats.schedule.endTime.substr(0,19).replace("T", " ") + "</td>";
             if(scheduleItemwithSeats.state=="已完成")
-                strhtml+="<td><button id='"+scheduleItemwithSeats.id+"'  onclick='issueTicket(this)'>出票</button></td>"+"</tr>";
+                strhtml+="<td><button id='"+scheduleItemwithSeats.id+"' data-toggle='modal' data-target='#myModal' onclick='issueTicket(this)'>出票</button></td>"+"</tr>";
             else
                 strhtml+="<td>" + scheduleItemwithSeats.state + "</td>"+"</tr>";
         }
@@ -94,13 +94,17 @@ $(document).ready(function () {
 });
 
 function issueTicket(data){
-    alert("出票了！"+data.getAttribute("id"));
+    // alert("出票了！"+data.getAttribute("id"));
     postRequest(
         "/ticket/issue",
         data.getAttribute("id"),
         function (res) {
-            alert("出票成功");
-            location.reload();
+            $("#ticket-movie-name").text(res.content.schedule.movieName);
+            $("#ticket-user-name").text(sessionStorage.getItem("username"));
+            $("#ticket-seat1").text((res.content.rowIndex+1)+"-"+(res.content.columnIndex+1));
+            $("#ticket-seat2").text((res.content.rowIndex+1)+"-"+(res.content.columnIndex+1));
+            $("#ticket-timestart").text(res.content.schedule.startTime.substr(11,5));
+            $("#ticket-timeend").text(res.content.schedule.endTime.substr(11,5));
         },
         function (error) {
             alert("出票失败")

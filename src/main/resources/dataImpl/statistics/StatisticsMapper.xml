@@ -58,7 +58,7 @@
 
     <select id="SelectBuyRecord" resultType="com.example.cinema.po.UserBuyRecord">
         select real_pay as realPrice,time,name from
-        ((select * from ticket where ticket.user_id = #{id} and state = 3)u
+        ((select * from ticket where ticket.user_id = #{id} and (state = 3 or state = 1))u
                 left join
                 (select name,schedule_ids from movie
                 left join 
@@ -67,8 +67,6 @@
              on u.schedule_id = t.schedule_ids)
 
     </select>
-
-
 
 
     <select id="SelectChargeRecord" resultType="com.example.cinema.po.UserChargeRecord">

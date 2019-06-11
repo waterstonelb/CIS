@@ -57,5 +57,6 @@ public interface TicketService {
      */
     ResponseVO cancelTicket(List<Integer> id);
 
-	ResponseVO issueTicket(int ticketId);
+    ResponseVO issueTicket(int ticketId);
+
 }

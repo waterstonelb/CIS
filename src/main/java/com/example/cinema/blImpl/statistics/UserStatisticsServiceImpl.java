@@ -5,9 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.example.cinema.bl.statistics.StatisticsService;
 import com.example.cinema.bl.statistics.UserStatisticsService;
-import com.example.cinema.data.statistics.StatisticsMapper;
 import com.example.cinema.data.statistics.UserStatisticsMapper;
 import com.example.cinema.po.UserBuyRecord;
 import com.example.cinema.po.UserChargeRecord;

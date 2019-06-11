@@ -107,5 +107,62 @@
     </div>
 </div>
 
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					NJU-se影城欢迎您！
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div class="ticket-cardWrap">
+                    <div class="ticket-card ticket-cardLeft">
+                      <h1>NJU-se <span>Cinema</span></h1>
+                      <div class="ticket-title">
+                        <h2 id="ticket-movie-name"></h2>
+                        <span>movie</span>
+                      </div>
+                      <div class="ticket-name">
+                        <h2 id="ticket-user-name"></h2>
+                        <span>name</span>
+                      </div>
+                      <div class="ticket-seat">
+                        <h2 id="ticket-seat1"></h2>
+                        <span>seat</span>
+                      </div>
+                      <div class="ticket-time">
+                        <h2 id="ticket-timestart"></h2>
+                        <span>start</span>
+                      </div>
+                      <div class="ticket-time">
+                        <h2 id="ticket-timeend"></h2>
+                        <span>end</span>
+                      </div>
+                      
+                    </div>
+                    <div class="ticket-card ticket-cardRight">
+                      <div class="eye"></div>
+                      <div class="number">
+                        <h3 id="ticket-seat2"></h3>
+                        <span>seat</span>
+                      </div>
+                      <div class="barcode"></div>
+                    </div>
+                  
+                  </div>
+			</div>
+			<div class="modal-footer" style="clear: both;">
+				<button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.reload()">确定
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+
 </body>
 </html>
