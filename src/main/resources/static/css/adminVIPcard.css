@@ -12,7 +12,7 @@
     justify-content: space-around;
     background-color: #39c9de94;
     border-radius: 20px 0 0 20px;
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(20px);
 }
 
 .activity-card:hover{

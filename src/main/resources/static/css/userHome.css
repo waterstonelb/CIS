@@ -10,6 +10,11 @@
     margin: auto;
 }
 
+.top-titile{
+    font-size: x-large;
+    color: thistle;
+}
+
 .movie-fshow{
     /*box-shadow: #ccc 0 0 20px 10px;*/
     border-radius: 20px;

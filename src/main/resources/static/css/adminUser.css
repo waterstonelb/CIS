@@ -11,7 +11,7 @@
     margin-top: 35px;
     margin-left: 10%;
     margin-right: 10%;
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(20px);
 }
 
 .um-blk:hover{

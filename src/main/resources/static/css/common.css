@@ -135,4 +135,6 @@ ul {
     color: rgba(255, 4, 84, 0.82);
     font-size: 12px;
 }
-
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #ecf0f100;
+}

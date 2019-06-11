@@ -29,7 +29,7 @@ $(document).ready(function () {
                 "<td>" + scheduleItemwithSeats.schedule.startTime.substr(0,19).replace("T", " ") + "</td>" +
                 "<td>" + scheduleItemwithSeats.schedule.endTime.substr(0,19).replace("T", " ") + "</td>";
             if(scheduleItemwithSeats.state=="已完成")
-                strhtml+="<td><button id='"+scheduleItemwithSeats.id+"' data-toggle='modal' data-target='#myModal' onclick='issueTicket(this)'>出票</button></td>"+"</tr>";
+                strhtml+="<td><button class='btn btn-primary' id='"+scheduleItemwithSeats.id+"' data-toggle='modal' data-target='#myModal' onclick='issueTicket(this)'>出票</button></td>"+"</tr>";
             else
                 strhtml+="<td>" + scheduleItemwithSeats.state + "</td>"+"</tr>";
         }
