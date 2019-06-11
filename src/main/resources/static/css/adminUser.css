@@ -5,20 +5,23 @@
 .um-blk{
     padding-top: 23px;
     margin-bottom: 10px;
-    /* background-color: #c6e4f2; */
-    background-color: initial;
+    background-color: #c6daf269;
     border-radius: 20px;
     padding-bottom: 7px;
     margin-top: 35px;
-    box-shadow: 0px 0px 20px 10px #cecece;
     margin-left: 10%;
     margin-right: 10%;
+    backdrop-filter: blur(15px);
+}
+
+.um-blk:hover{
+    box-shadow: #3c4550 0 0 20px 10px 
 
 }
 .um-blk-header{
-    background-color: white;
+    /* background-color: white; */
     /* background-color: #59c4ffe3; */
-    background-color: #48bfae;
+    background-color: #3e4c5d;
     padding-top: 3px;
     padding-bottom: 3px;
 }
@@ -31,12 +34,12 @@
     min-width: 45%;
     height:34px;
     /* background: #65c7fecc; */
-    background-color: cadetblue;
+    background-color: #44648a;
     border-radius:4px;
     text-align:center;
     color:#fff;
     line-height:34px;
-    box-shadow: 4px 2px 5px 0px #c6caccbf;
+    /* box-shadow: 4px 2px 5px 0px #c6caccbf; */
     border-radius: 20px;
     margin-left: 30px;
     padding-left: 20px;
@@ -47,7 +50,7 @@
     height:34px;
     /* background: #65c7fe75; */
     /* background-color: #7ae3d4; */
-    background-color: cadetblue;
+    background-color: #275b5d;
     border-radius:4px;
     font-size: 17px;
     text-align:center;
@@ -57,8 +60,11 @@
     margin-right:10px;
     /* border-color: oldlace; */
     border:0px;
-    box-shadow: 3px 1px 4px 0px #a4acb0;
     border-radius: 20px;
+}
+.user-button:hover{
+    box-shadow: 0px 0px 15px 0px #a4acb0;
+
 }
 .button-div{
     display: inline-block;

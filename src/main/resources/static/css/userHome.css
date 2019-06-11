@@ -15,6 +15,10 @@
     border-radius: 20px;
 }
 
+.movie-fshow:hover{
+    box-shadow: #22413cab 0 0 20px 10px 
+}
+
 .movie-item .movie-img:hover {
     border: 2px solid #1caf9a;
 }

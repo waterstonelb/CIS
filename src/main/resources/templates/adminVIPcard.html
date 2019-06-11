@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>活动管理</title>
-    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/adminVIPcard.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/adminVIPcard.css" />
 
 
     <script src="/js/jquery.js"></script>
@@ -14,211 +15,236 @@
     <script src="/js/request.js"></script>
     <script src="/js/adminVIPcard.js"></script>
 </head>
+
 <body>
-<div class="main-container">
-    <div class="nav-left-container">
-        <div class="nav-user-container" style="margin-bottom: 50px;">
-            <img class="avatar-lg" src="/images/defaultAvatar.jpg"/>
-            <p class="title"></p>
-        </div>
-        <ul class="nav nav-pills nav-stacked" id="sidebar">
-            <li role="presentation"><a href="/admin/movie/manage"><i class="icon-film"></i> 电影管理</a></li>
-            <li role="presentation"><a href="/admin/session/manage"><i class="icon-calendar"></i> 排片管理</a></li>
-            <li role="presentation"><a href="/admin/promotion/manage"><i class="icon-gift"></i> 活动管理</a></li>
-            <li role="presentation"><a href="/admin/refund/manage"><i class="icon-refresh"></i> 退票管理</a></li>
-            <li role="presentation"><a href="/admin/cinema/manage"><i class="icon-cogs"></i> 影院管理</a></li>
-            <li role="presentation"><a href="/admin/cinema/statistic"><i class="icon-bar-chart"></i> 影院统计</a></li>
-        </ul>
-    </div>
-    <div class="content-container">
-        <div class="content-header">
-            <span class="title gray-text">会员卡管理</span>
-            <div>
-            <button type="button" class="btn btn-primary" data-backdrop="static" data-toggle="modal"
-                    data-target="#vipcardModal"><i class="icon-plus-sign"></i> 发布会员卡
-            </button>
-            <button type="button" class="btn btn-primary" data-backdrop="static" data-toggle="modal"
-                    data-target="#vipcardmodModal"><i class='icon-wrench'></i> 修改会员卡
-            </button>
-            <button type="button" class="btn btn-primary" data-backdrop="static" data-toggle="modal"
-                    data-target="#vipdeleteModal"><i class=" icon-remove-sign
-"></i> 删除会员卡
-            </button>
+    <div class="main-container">
+        <div class="nav-left-container">
+            <div class="nav-user-container" style="margin-bottom: 50px;">
+                <img class="avatar-lg" src="/images/defaultAvatar.jpg" />
+                <p class="title"></p>
             </div>
+            <ul class="nav nav-pills nav-stacked" id="sidebar">
+                <li role="presentation"><a href="/admin/movie/manage"><i class="icon-film"></i> 电影管理</a></li>
+                <li role="presentation"><a href="/admin/session/manage"><i class="icon-calendar"></i> 排片管理</a></li>
+                <li role="presentation"><a href="/admin/promotion/manage"><i class="icon-gift"></i> 活动管理</a></li>
+                <li role="presentation"><a href="/admin/refund/manage"><i class="icon-refresh"></i> 退票管理</a></li>
+                <li role="presentation"><a href="/admin/cinema/manage"><i class="icon-cogs"></i> 影院管理</a></li>
+                <li role="presentation"><a href="/admin/cinema/statistic"><i class="icon-bar-chart"></i> 影院统计</a></li>
+            </ul>
         </div>
-        <div class="content-vipcard">
-
-        </div>
-        <div class="card">
-            <div style="display: flex;justify-content: space-evenly; padding:15px">
+        <div class="content-container">
+            <div class="content-header">
+                <span class="title gray-text">会员卡管理</span>
                 <div>
-                    <span>开始日期 </span>
-                    <input type="date" class="form-control" id="start-date" style="display: inline-block;width: 180px;">
-                    <span>截止日期 </span>
-                    <input type="date" class="form-control" id="end-date" style="display: inline-block;width: 180px;">
-                    <span>选择赠送优惠券</span>
-                    <select class="form-control" id="coupon-list" style="display: inline-block;width: 180px;"></select>
+                    <button type="button" class="btn btn-primary" data-backdrop="static" data-toggle="modal"
+                        data-target="#vipcardModal"><i class="icon-plus-sign"></i> 发布会员卡
+                    </button>
+                    <button type="button" class="btn btn-primary" data-backdrop="static" data-toggle="modal"
+                        data-target="#vipcardmodModal"><i class='icon-wrench'></i> 修改会员卡
+                    </button>
+                    <button type="button" class="btn btn-primary" data-backdrop="static" data-toggle="modal"
+                        data-target="#vipdeleteModal"><i class=" icon-remove-sign
+"></i> 删除会员卡
+                    </button>
                 </div>
-                <button id="date-submit" type="button" class="btn btn-primary">查询</button>
             </div>
-            <div class="panel panel-default" style="border-radius: 20px">
-                <!-- Default panel contents -->
-                <div class="panel-heading">用户消费排名</div>
-                <table class="table" style="border-radius: 20px">
-                    <thead>
-                    <tr>
-                        <th>消费者ID</th>
-                        <th>会员卡种类</th>
-                        <th>历史消费总额</th>
-                        <th>操作</th>
-                    </tr>
-                    </thead>
-                    <tbody id="amount-history">
+            <div class="content-vipcard">
 
-                    </tbody>
-                </table>
             </div>
-        </div>
-    </div>
+            <div class="card">
+                <div style="display: flex;justify-content: space-evenly; padding:15px">
+                    <div>
+                        <span>开始日期 </span>
+                        <input type="date" class="form-control" id="start-date"
+                            style="display: inline-block;width: 180px;">
+                        <span>截止日期 </span>
+                        <input type="date" class="form-control" id="end-date"
+                            style="display: inline-block;width: 180px;">
+                        <span>选择赠送优惠券</span>
+                        <select class="form-control" id="coupon-list"
+                            style="display: inline-block;width: 180px;"></select>
+                    </div>
+                    <button id="date-submit" type="button" class="btn btn-primary">查询</button>
+                </div>
+                <div class="panel"
+                    style="border-radius: 20px;background-color: #00ffff45;backdrop-filter: blur(15px);color: snow;">
+                    <!-- Default panel contents -->
+                    <div style="    padding: 10px;
+                font-size: medium;
+                color: seashell;
+                margin-left: 10px;
+                margin-top: 10px;
+                border-bottom: outset">用户消费排名</div>
+                    <table class="table" style="border-radius: 20px">
+                        <thead>
+                            <tr>
+                                <th>消费者ID</th>
+                                <th>会员卡种类</th>
+                                <th>历史消费总额</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="amount-history">
 
-</div>
-<div class="modal fade" id="vipcardModal" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="vipcardModalLabel">发布会员卡</h4>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="modal-body">
-                <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="vip-name-input"><span class="error-text">*</span>会员卡名称</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="vip-name-input" placeholder="请输入会员卡名称">
+        </div>
+
+    </div>
+    <div class="modal fade" id="vipcardModal" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="vipcardModalLabel">发布会员卡</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="vip-name-input"><span
+                                    class="error-text">*</span>会员卡名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="vip-name-input" placeholder="请输入会员卡名称">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="vip-price-input"><span class="error-text">*</span>会员卡价格</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="vip-price-input" placeholder="请输入会员卡价格">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="vip-price-input"><span
+                                    class="error-text">*</span>会员卡价格</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="vip-price-input" placeholder="请输入会员卡价格">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="vip-target-input"><span class="error-text">*</span>充值满减需满金额</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="vip-target-input" placeholder="请输入需满金额">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="vip-target-input"><span
+                                    class="error-text">*</span>充值满减需满金额</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="vip-target-input" placeholder="请输入需满金额">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="vip-discountamount-input"><span
-                                class="error-text">*</span>满减金额</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="vip-discountamount-input"
-                                   placeholder="请输入满减金额">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="vip-discountamount-input"><span
+                                    class="error-text">*</span>满减金额</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="vip-discountamount-input"
+                                    placeholder="请输入满减金额">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="vip-discount-input"><span class="error-text">*</span>购票折扣金额</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="vip-discount-input" placeholder="请输入购票折扣金额">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="vip-discount-input"><span
+                                    class="error-text">*</span>购票折扣金额</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="vip-discount-input"
+                                    placeholder="请输入购票折扣金额">
+                            </div>
                         </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" id="vip-form-btn">确认</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="vip-form-btn">确认</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="modal fade" id="vipcardmodModal" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="vipcardmodModalLabel">修改会员卡</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="vip-id-mod-input"><span class="error-text">*</span>会员卡ID</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="vip-id-mod-input" placeholder="请输入会员卡ID">
+    <div class="modal fade" id="vipcardmodModal" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="vipcardmodModalLabel">修改会员卡</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="vip-id-mod-input"><span
+                                    class="error-text">*</span>会员卡ID</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="vip-id-mod-input" placeholder="请输入会员卡ID">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="vip-name-mod-input"><span class="error-text">*</span>会员卡名称</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="vip-name-mod-input" placeholder="请输入会员卡名称">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="vip-name-mod-input"><span
+                                    class="error-text">*</span>会员卡名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="vip-name-mod-input" placeholder="请输入会员卡名称">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="vip-price-mod-input"><span
-                                class="error-text">*</span>会员卡价格</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="vip-price-mod-input" placeholder="请输入会员卡价格">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="vip-price-mod-input"><span
+                                    class="error-text">*</span>会员卡价格</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="vip-price-mod-input"
+                                    placeholder="请输入会员卡价格">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="vip-target-mod-input"><span
-                                class="error-text">*</span>充值满减需满金额</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="vip-target-mod-input" placeholder="请输入需满金额">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="vip-target-mod-input"><span
+                                    class="error-text">*</span>充值满减需满金额</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="vip-target-mod-input"
+                                    placeholder="请输入需满金额">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="vip-discountamount-mod-input"><span
-                                class="error-text">*</span>满减金额</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="vip-discountamount-mod-input"
-                                   placeholder="请输入满减金额">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="vip-discountamount-mod-input"><span
+                                    class="error-text">*</span>满减金额</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="vip-discountamount-mod-input"
+                                    placeholder="请输入满减金额">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="vip-discount-mod-input"><span
-                                class="error-text">*</span>购票折扣金额</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="vip-discount-mod-input"
-                                   placeholder="请输入购票折扣金额">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="vip-discount-mod-input"><span
+                                    class="error-text">*</span>购票折扣金额</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="vip-discount-mod-input"
+                                    placeholder="请输入购票折扣金额">
+                            </div>
                         </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" id="vip-mod-btn">确认</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="vipdeleteModal" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="vipdeleteModalLabel">删除会员卡</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="vip-delete-input"><span class="error-text">*</span>会员卡ID</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="vip-delete-input" placeholder="请输入要删除会员卡ID">
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" id="vip-delete-btn">确认</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="vip-mod-btn">确认</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <div class="modal fade" id="vipdeleteModal" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="vipdeleteModalLabel">删除会员卡</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="vip-delete-input"><span
+                                    class="error-text">*</span>会员卡ID</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="vip-delete-input"
+                                    placeholder="请输入要删除会员卡ID">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="vip-delete-btn">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
+
 </html>
