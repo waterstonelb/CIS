@@ -4,7 +4,8 @@
     <select id="selectMovieScheduleTimes" resultType="com.example.cinema.po.MovieScheduleTime">
         select movie_id as movieId, count(*) as time,name from
               (select * from schedule where start_time between #{date} and #{nextDate}) s,
-              movie where s.movie_id = movie.id group by movieId and name is not NULL
+              movie where s.movie_id = movie.id  and name is not NULL
+              group by movieId
     </select>
 
     <select id="selectMovieTotalBoxOffice" resultType="com.example.cinema.po.MovieTotalBoxOffice">
