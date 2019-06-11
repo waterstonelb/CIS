@@ -78,8 +78,10 @@ $(document).ready(function () {
                 cancelTickets,
                 function (res) {
                     var ret = res.content;
+                    console.log(ret);
+                    console.log(sessionStorage.getItem("balance"));
                     if(ret!="普通用户")
-                        sessionStorage.setItem("balance",ret+sessionStorage.getItem("balance"));
+                        sessionStorage.setItem("balance",ret+parseFloat(sessionStorage.getItem("balance")));
                     alert("退票成功!找您 "+ret.toFixed(2)+" 元。");
                     location.reload();
                 },

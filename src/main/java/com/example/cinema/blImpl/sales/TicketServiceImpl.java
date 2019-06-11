@@ -208,12 +208,14 @@ public class TicketServiceImpl implements TicketService {
                     ticketMapper.updateTicketState(Id,2);
                 }
                 vipServiceForBl.returnTicket(userId, totals);
+                System.out.println("会员");
                 return ResponseVO.buildSuccess(totals-lastTotals);
             }
             else{
                 for (int Id : id) {
                     ticketMapper.updateTicketState(Id,2);
                 }
+                System.out.println("普通用户");
                 return ResponseVO.buildSuccess("普通用户");
             }
         }catch (Exception e){
