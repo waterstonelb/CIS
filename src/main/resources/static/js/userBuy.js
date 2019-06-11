@@ -10,8 +10,10 @@ $(document).ready(function () {
                 ticketList=res.content;
                 renderTicketList(res.content);
                 ticketList.forEach(function (ticket) {
-                    if(ticket.state=="已完成"||ticket.state=="已出票")
-                        $('#movie-cancel-input').append("<option value="+ ticket.id +">"+ticket.schedule.movieName+(ticket.rowIndex+1)+"排"+(ticket.columnIndex+1)+"座"+"</option>");
+                    if(ticket.state=="已完成")
+                        $('#movie-cancel-input').append("<option value="+ ticket.id +">"+
+                        ticket.schedule.movieName+(ticket.rowIndex+1)+"排"+(ticket.columnIndex+1)+"座 "+
+                        ticket.schedule.startTime.substr(0,16).replace("T", " ")+"</option>");
                 })
             },
             function (error) {
@@ -75,9 +77,10 @@ $(document).ready(function () {
                 "/ticket/cancel",
                 cancelTickets,
                 function (res) {
-                    if(res.content!="普通用户")
-                        sessionStorage.setItem("balance",res.content);
-                    alert("退票成功");
+                    var ret = res.content;
+                    if(ret!="普通用户")
+                        sessionStorage.setItem("balance",ret+sessionStorage.getItem("balance"));
+                    alert("退票成功!找您 "+ret.toFixed(2)+" 元。");
                     location.reload();
                 },
                 function (error) {

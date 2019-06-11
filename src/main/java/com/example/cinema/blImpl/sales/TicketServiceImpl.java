@@ -195,6 +195,7 @@ public class TicketServiceImpl implements TicketService {
             int userId = ticketMapper.selectTicketById(id.get(0)).getUserId();
             if(vipServiceForBl.getCardId(userId)!=-1){
                 double totals = vipServiceForBl.getBalance(userId);
+                double lastTotals = totals;
                 RefundPolicyVO rVO = refunServiceForBl.getRefundPolicyVO();
                 long thisTime = new Date().getTime();
                 for (int Id : id) {
@@ -207,7 +208,7 @@ public class TicketServiceImpl implements TicketService {
                     ticketMapper.updateTicketState(Id,2);
                 }
                 vipServiceForBl.returnTicket(userId, totals);
-                return ResponseVO.buildSuccess(totals);
+                return ResponseVO.buildSuccess(totals-lastTotals);
             }
             else{
                 for (int Id : id) {
