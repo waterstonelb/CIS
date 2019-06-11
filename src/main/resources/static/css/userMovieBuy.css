@@ -6,6 +6,7 @@
 .seat-content .movie-detail {
     padding: 20px;
     min-width: 30%;
+    color: snow;
 }
 
 .seat-content .movie-detail .line {
@@ -94,4 +95,11 @@ hr.dashed-line {
 .success-notice .hint {
     margin-top: 25px;
     font-size: 20px;
+}
+.breadcrumb {
+    padding: 8px 15px;
+    margin-bottom: 20px;
+    list-style: none;
+    background-color: #7c8dbb45;
+    border-radius: 4px;
 }

@@ -7,6 +7,12 @@
         values(#{userId}, #{balance},#{cardId})
     </insert>
 
+
+    <insert id="insertUserCharge" parameterType="com.example.cinema.po.UserChargeRecord"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into user_charge(user_id,charge,charge_time)
+        values(#{userId},#{chargeNum},now())
+    </insert>
     <select id="selectCardById" resultMap="VIPCard">
         select * from vip_card where id=#{id}
     </select>

@@ -69,9 +69,8 @@
 
     </select>
 
-
     <select id="SelectChargeRecord" resultType="com.example.cinema.po.UserChargeRecord">
-        select charge_time as time,charge as chargeNum from user_charge where user_id=#{id}
+        select charge_time as time,charge as chargeNum,user_id as userId from user_charge where user_id=#{id}
     </select>
 
     <select id="AdminSelectChargeRecord" resultType="com.example.cinema.po.AdminChargeRecord">

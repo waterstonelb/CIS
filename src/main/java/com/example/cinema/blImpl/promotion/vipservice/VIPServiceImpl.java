@@ -3,6 +3,7 @@ package com.example.cinema.blImpl.promotion.vipservice;
 import com.example.cinema.bl.promotion.VIPService;
 import com.example.cinema.blImpl.promotion.coupon.CouponServiceForBl;
 import com.example.cinema.data.promotion.VIPCardMapper;
+import com.example.cinema.po.UserChargeRecord;
 import com.example.cinema.vo.VIPCardForm;
 import com.example.cinema.po.VIPCard;
 import com.example.cinema.vo.ResponseVO;
@@ -79,7 +80,11 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
         }
         double balance = vipCard.calculate(vipCardForm.getAmount(), vipCardForm.getTargetAmount(), vipCardForm.getDiscountAmount());
         vipCard.setBalance(vipCard.getBalance() + balance);
+        UserChargeRecord userChargeRecord=new UserChargeRecord();
+        userChargeRecord.setchargeNum(vipCardForm.getAmount());
+        userChargeRecord.setUserId(vipCard.getUserId());
         try {
+            vipCardMapper.insertUserCharge(userChargeRecord);
             vipCardMapper.updateCardBalance(vipCardForm.getVipId(), vipCard.getBalance());
             return ResponseVO.buildSuccess(vipCard);
         } catch (Exception e) {

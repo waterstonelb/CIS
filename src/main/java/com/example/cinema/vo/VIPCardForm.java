@@ -19,7 +19,7 @@ public class VIPCardForm {
     /**
      * 付款金额
      */
-    private int amount;
+    private double amount;
 
     public double getDiscountAmount() {
         return discountAmount;
@@ -54,7 +54,7 @@ public class VIPCardForm {
         this.vipId = vipId;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 
