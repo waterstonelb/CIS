@@ -252,6 +252,7 @@ public class TicketServiceImpl implements TicketService {
                 if (coupon.getId()==couponId) {
                     haveCoupon = true;
                     couponServiceForBl.deleteUserCoupon(ticket.getUserId(), couponId);
+                    break;
                 }
             }
             double total = haveCoupon?oneMoive * numOfTicket - couponServiceForBl.getCoupon(couponId).getDiscountAmount():oneMoive * numOfTicket;
