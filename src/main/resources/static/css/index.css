@@ -8,6 +8,7 @@ body{
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	background-size: cover;
 }
 #login-container {
 	/*background: rgba(0, 0, 0, 0.6);*/
