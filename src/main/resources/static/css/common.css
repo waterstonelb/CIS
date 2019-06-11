@@ -18,10 +18,11 @@ ul {
     list-style: none;
 }
 .card {
-    background: #fff;
+    background: #5aafbd61;
     border-radius: 20px;
-    box-shadow: #ccc 0 0 20px 10px;
-
+    /* box-shadow: #ccc 0 0 20px 10px; */
+    backdrop-filter: blur(15px);
+    color: #a1afa6;
 }
 .title {
     font-size: 24px;
@@ -76,9 +77,10 @@ ul {
     height: 100%;
 }
 .content-container {
+    background-image: url("https://flipermag.com/wp-content/uploads/2015/04/sxsxsx.jpg");
     flex: 1;
     height: 100%;
-    background: #e4e7ea;
+    /*background: #e4e7ea;*/
     padding: 20px;
     overflow-y: scroll;
 }
