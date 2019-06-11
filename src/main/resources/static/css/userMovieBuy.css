@@ -6,6 +6,7 @@
 .seat-content .movie-detail {
     padding: 20px;
     min-width: 30%;
+    color: snow;
 }
 
 .seat-content .movie-detail .line {
