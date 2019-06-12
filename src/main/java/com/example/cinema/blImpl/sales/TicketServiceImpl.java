@@ -191,32 +191,27 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public ResponseVO cancelTicket(List<Integer> id) {
         try {
-            
             int userId = ticketMapper.selectTicketById(id.get(0)).getUserId();
+            double totals = 0;
+            RefundPolicyVO rVO = refunServiceForBl.getRefundPolicyVO();
+            long thisTime = new Date().getTime();
+            for (int Id : id) {
+                Ticket tmpTicket = ticketMapper.selectTicketById(Id);
+                Date scheduleStart = scheduleService.getScheduleItemById(tmpTicket.getScheduleId()).getStartTime();
+                if((scheduleStart.getTime()- thisTime)>=(long)24*3600*1000)
+                    totals+=tmpTicket.getRealPay()*rVO.getRefund_day();
+                else if((scheduleStart.getTime()- thisTime)>=(long)3600*1000)
+                    totals+=tmpTicket.getRealPay()*rVO.getRefund_hour();
+                ticketMapper.updateTicketState(Id,2);
+            }
             if(vipServiceForBl.getCardId(userId)!=-1){
-                double totals = vipServiceForBl.getBalance(userId);
-                double lastTotals = totals;
-                RefundPolicyVO rVO = refunServiceForBl.getRefundPolicyVO();
-                long thisTime = new Date().getTime();
-                for (int Id : id) {
-                    Ticket tmpTicket = ticketMapper.selectTicketById(Id);
-                    Date scheduleStart = scheduleService.getScheduleItemById(tmpTicket.getScheduleId()).getStartTime();
-                    if((scheduleStart.getTime()- thisTime)>=(long)24*3600*1000)
-                        totals+=tmpTicket.getRealPay()*rVO.getRefund_day();
-                    else if((scheduleStart.getTime()- thisTime)>=(long)3600*1000)
-                        totals+=tmpTicket.getRealPay()*rVO.getRefund_hour();
-                    ticketMapper.updateTicketState(Id,2);
-                }
-                vipServiceForBl.returnTicket(userId, totals);
+                vipServiceForBl.returnTicket(userId, totals+vipServiceForBl.getBalance(userId));
                 System.out.println("会员");
-                return ResponseVO.buildSuccess(totals-lastTotals);
+                return ResponseVO.buildSuccess(totals);
             }
             else{
-                for (int Id : id) {
-                    ticketMapper.updateTicketState(Id,2);
-                }
                 System.out.println("普通用户");
-                return ResponseVO.buildSuccess("普通用户");
+                return ResponseVO.buildSuccess(totals);
             }
         }catch (Exception e){
             return ResponseVO.buildFailure("退票失败");
