@@ -1,4 +1,4 @@
-package com.example.cinema.blImpl.management.refund;
+package com.example.cinema.blImpl.promotion.refund;
 
 import com.example.cinema.vo.RefundPolicyVO;
 
