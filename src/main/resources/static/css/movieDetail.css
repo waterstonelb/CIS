@@ -2,6 +2,10 @@
     display: flex;
     background-color: #7080906b;
     border-radius: 20px;
+    backdrop-filter: blur(20px);
+}
+.content-header:hover{
+    box-shadow: #3c4550 0 0 20px 10px;
 }
 
 .movie-basic-info {
@@ -12,6 +16,7 @@
     flex-direction: column;
     justify-content: space-around;
     color: #d9edf7;
+    /* backdrop-filter: blur(20px); */
 }
 
 .movie-operations {
@@ -39,4 +44,5 @@
     padding: 20px;
     display: flex;
     justify-content: center;
+    background-color: #d1eae887;
 }
