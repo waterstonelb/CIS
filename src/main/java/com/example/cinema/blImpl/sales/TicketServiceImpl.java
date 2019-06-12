@@ -1,6 +1,6 @@
 package com.example.cinema.blImpl.sales;
 
-import com.example.cinema.blImpl.management.refund.RefundServiceForBl;
+import com.example.cinema.blImpl.promotion.refund.RefundServiceForBl;
 import com.example.cinema.bl.sales.TicketService;
 import com.example.cinema.blImpl.management.hall.HallServiceForBl;
 import com.example.cinema.blImpl.management.schedule.ScheduleServiceForBl;
