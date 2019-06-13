@@ -1,6 +1,6 @@
 var selectedSeats = [];
 var scheduleId;
-var order = {ticketId: [], couponId: 0, userId: 0};
+var order = { ticketId: [], couponId: 0, userId: 0 };
 var coupons = [];
 var isVIP = false;
 var useVIP = true;
@@ -15,12 +15,12 @@ $(document).ready(function () {
 
     function getInfo() {
         getRequest(
-            '/ticket/get/occupiedSeats?scheduleId=' + scheduleId+'&&id='+sessionStorage.getItem("id"),
+            '/ticket/get/occupiedSeats?scheduleId=' + scheduleId + '&&id=' + sessionStorage.getItem("id"),
             function (res) {
                 if (res.success) {
                     renderSchedule(res.content.scheduleItem, res.content.seats);
                 }
-                else{
+                else {
                     alert(res.message);
                     location.reload();
                 }
@@ -50,10 +50,10 @@ function renderSchedule(schedule, seats) {
             if (seats[i][j] == 0) {
                 // 未选
                 temp += "<button class='cinema-hall-seat-choose' id='" + id + "' onclick='seatClick(\"" + id + "\"," + i + "," + j + ")'></button>";
-            } else if(seats[i][j] == 1){
+            } else if (seats[i][j] == 1) {
                 // 已完成
                 temp += "<button class='cinema-hall-seat-finish' disabled='true'></button>";
-            }else if(seats[i][j] == 2){
+            } else if (seats[i][j] == 2) {
                 //锁座
                 temp += "<button class='cinema-hall-seat' id='" + id + "' onclick='seatClick(\"" + id + "\"," + i + "," + j + ")'></button>";
                 selectedSeats[selectedSeats.length] = [i, j];
@@ -101,9 +101,9 @@ function seatClick(id, i, j) {
         return res === 0 ? x[1] - y[1] : res;
     });
     beforConfirm();
-    
+
 }
-function beforConfirm(){
+function beforConfirm() {
     let seatDetailStr = "";
     if (selectedSeats.length == 0) {
         seatDetailStr += "还未选择座位";
@@ -142,12 +142,12 @@ function orderConfirmClick() {
             seats: toS()
         },
         function (res) {
-            if(res.success){
+            if (res.success) {
                 orderInfo = res.content;
                 renderOrder(orderInfo);
-                coupons=orderInfo.coupons
+                coupons = orderInfo.coupons
             }
-            else{
+            else {
                 alert(res.message);
                 location.reload();
             }
@@ -156,78 +156,7 @@ function orderConfirmClick() {
             alert(error)
         }
     );
-    // TODO:这里是假数据，需要连接后端获取真数据，数据格式可以自行修改，但如果改了格式，别忘了修改renderOrder方法
-
-
-    /*var orderInfo = {
-        "ticketVOList": [{
-            "id": 63,
-            "userId": 15,
-            "scheduleId": 67,
-            "columnIndex": 4,
-            "rowIndex": 1,
-            "state": "未完成"
-        }, {
-            "id": 64,
-            "userId": 15,
-            "scheduleId": 67,
-            "columnIndex": 6,
-            "rowIndex": 1,
-            "state": "未完成"}],
-
-        "total": 999.0,
-        "coupons": [{
-            "id": 5,
-            "description": "测试优惠券",
-            "name": "品质联盟",
-            "targetAmount": 30.0,
-            "discountAmount": 4.0,
-            "startTime": "2019-04-21T05:14:46.000+0800",
-            "endTime": "2019-04-25T05:14:51.000+0800"
-        }, {
-            "id": 5,
-            "description": "测试优惠券",
-            "name": "品质联盟",
-            "targetAmount": 30.0,
-            "discountAmount": 4.0,
-            "startTime": "2019-04-21T05:14:46.000+0800",
-            "endTime": "2019-04-25T05:14:51.000+0800"
-        }],
-        "activities": [{
-            "id": 4,
-            "name": "测试活动",
-            "description": "测试活动",
-            "startTime": "2019-04-21T00:00:00.000+0800",
-            "endTime": "2019-04-27T00:00:00.000+0800",
-            "movieList": [{
-                "id": 10,
-                "name": "夏目友人帐",
-                "posterUrl": "http://n.sinaimg.cn/translate/640/w600h840/20190312/ampL-hufnxfm4278816.jpg",
-                "director": "大森贵弘 /伊藤秀樹",
-                "screenWriter": "",
-                "starring": "神谷浩史 /井上和彦 /高良健吾 /小林沙苗 /泽城美雪",
-                "type": "动画",
-                "country": null,
-                "language": null,
-                "startDate": "2019-04-14T22:54:31.000+0800",
-                "length": 120,
-                "description": "在人与妖怪之间过着忙碌日子的夏目，偶然与以前的同学结城重逢，由此回忆起了被妖怪缠身的苦涩记忆。此时，夏目认识了在归还名字的妖怪记忆中出现的女性·津村容莉枝。和玲子相识的她，现在和独子椋雄一同过着平稳的生活。夏目通过与他们的交流，心境也变得平和。但这对母子居住的城镇，却似乎潜伏着神秘的妖怪。在调查此事归来后，寄生于猫咪老师身体的“妖之种”，在藤原家的庭院中，一夜之间就长成树结出果实。而吃掉了与自己形状相似果实的猫咪老师，竟然分裂成了3个",
-                "status": 0,
-                "islike": null,
-                "likeCount": null
-            }],
-            "coupon": {
-                "id": 8,
-                "description": "测试优惠券",
-                "name": "123",
-                "targetAmount": 100.0,
-                "discountAmount": 99.0,
-                "startTime": "2019-04-21T00:00:00.000+0800",
-                "endTime": "2019-04-27T00:00:00.000+0800"
-            }
-        }]
-    };*/
-
+   
 
     getRequest(
         '/vip/' + sessionStorage.getItem('id') + '/get',
@@ -277,14 +206,14 @@ function renderOrder(orderInfo) {
     var total = orderInfo.total.toFixed(2);
     $('#order-total').text(total);
     $('#order-footer-total').text("总金额： ¥" + total);
-    if(sessionStorage.getItem('isVIP')=='1')
-        $('#order-discount-total').text("会员折后价: ￥"+ total*sessionStorage.getItem('discount'));
+    if (sessionStorage.getItem('isVIP') == '1')
+        $('#order-discount-total').text("会员折后价: ￥" + total * sessionStorage.getItem('discount'));
 
     var couponTicketStr = "";
     if (orderInfo.coupons.length == 0) {
         $('#order-discount').text("优惠金额：无");
-        $('#order-actual-total').text(" ¥" + total*sessionStorage.getItem('discount'));
-        $('#pay-amount').html("<div><b>金额：</b>" + total*sessionStorage.getItem('discount') + "元</div>");
+        $('#order-actual-total').text(" ¥" + total * sessionStorage.getItem('discount'));
+        $('#pay-amount').html("<div><b>金额：</b>" + total * sessionStorage.getItem('discount') + "元</div>");
     } else {
         coupons = orderInfo.coupons;
         for (let coupon of coupons) {
@@ -298,7 +227,9 @@ function renderOrder(orderInfo) {
 function changeCoupon(couponIndex) {
     order.couponId = coupons[couponIndex].id;
     $('#order-discount').text("优惠金额： ¥" + coupons[couponIndex].discountAmount.toFixed(2));
-    var actualTotal = sessionStorage['discount']*(parseFloat($('#order-total').text()) - parseFloat(coupons[couponIndex].discountAmount)).toFixed(2);
+    var actualTotal = sessionStorage['discount'] * (parseFloat($('#order-total').text()) - parseFloat(coupons[couponIndex].discountAmount)).toFixed(2);
+    if (sessionStorage.getItem('isVIP') == '1')
+        $('#order-discount-total').text("会员折后价: ￥" + actualTotal);
     $('#order-actual-total').text(" ¥" + actualTotal);
     $('#pay-amount').html("<div><b>金额：</b>" + actualTotal + "元</div>");
 }
@@ -309,7 +240,7 @@ function payConfirmClick() {
     } else {
         if (validateForm()) {
             if ($('#userBuy-cardNum').val() === "123123123" && $('#userBuy-cardPwd').val() === "123123") {
-                order.userId=sessionStorage.getItem('id');
+                order.userId = sessionStorage.getItem('id');
                 postPayRequest();
             } else {
                 alert("银行卡号或密码错误");
@@ -323,7 +254,7 @@ function postPayRequest() {
     $('#order-state').css("display", "none");
     $('#success-state').css("display", "");
     $('#buyModal').modal('hide');
-    if(useVIP){
+    if (useVIP) {
         postRequest(
             "/ticket/vip/buy",
             {
@@ -332,12 +263,12 @@ function postPayRequest() {
                 userId: sessionStorage.getItem("id")
             },
             function (res) {
-                sessionStorage['balance']=res.content;
+                sessionStorage['balance'] = res.content;
             },
             function () {
             }
         )
-    }else {
+    } else {
         postRequest(
             "/ticket/buy",
             order,

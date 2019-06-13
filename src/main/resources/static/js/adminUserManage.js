@@ -40,7 +40,7 @@ $(document).ready(function(){
     function showSidebar(){
         var level = sessionStorage.getItem("level");
         var name = sessionStorage.getItem("username");
-        $("p.title").html(name);
+        $("p.title").text(htmlspecialchars1(name));
         if(level==0){
             $("#sidebar").append('<li role="presentation"><a href="/admin/vip/manage"><i class="icon-credit-card"></i> 会员策略</a></li>');
             $("#sidebar").append('<li role="presentation" class="active"><a href="#"><i class="icon-user"></i> 员工管理</a></li>');
@@ -52,7 +52,7 @@ $(document).ready(function(){
 
 function modifyUser(data){
     var username = getThisName(data);
-    $("#userModifyModalLabel").html("当前员工:"+username);
+    $("#userModifyModalLabel").text("当前员工:"+ htmlspecialchars1(username));
 }
 function deleteUser(data){
     var username = getThisName(data);
@@ -88,17 +88,24 @@ function getModifyUserForm(){
         "pass_again":$("#modify-again-input").val()
     };
 }
-function validateUserForm(formData){
-    //TODO
-    var isValidate=true;
-    console.log(formData.username+" "+formData.password);
-    if(!formData.username || !formData.password){
-        isValidate = false;
-    }
-    if(formData.password!=formData.pass_again){
-        isValidate = false;
-    }
-    return isValidate;
+function validateUserForm(data){
+    var isValidate = true;
+        if (!data.username || data.username.length < 4 || data.username.length > 10) {
+            isValidate = false;
+            alert("用户名长度为4-10位！");
+        }
+        else if (!data.password || data.password.length < 6 || data.password.length > 12) {
+            isValidate = false;
+            alert("密码长度为6-12位！");
+        }else if (!data.pass_again) {
+            isValidate = false;
+            alert("第二次输入密码不能为空！");
+        } else if (data.pass_again != data.password) {
+            isValidate = false;
+            alert("两次输入密码不一致！");
+        }
+
+        return isValidate;
 }
 function getManagerList(){
     getRequest(
@@ -129,7 +136,7 @@ function renderManagerList(list){
         mlDomStr+=
         '<li class="um-card">'+
             '<div class="um-card-info">'+
-                '<span class="um-username">用户名：'+element.username+'</span> <span class="um-password">密码：'+element.password+'</span>'+
+                '<span class="um-username">用户名：'+ htmlspecialchars1(element.username)+'</span> <span class="um-password">密码：'+ htmlspecialchars1(element.password)+'</span>'+
             '</div>'+
             '<div class="button-div">'+
             '<button type="button" class="user-button" onclick="modifyUser(this)" data-backdrop="static" data-toggle="modal" data-target="#userModify"">修改</button>'+
@@ -146,7 +153,7 @@ function renderStaffList(list){
         slDomStr+=
         '<li class="um-card">'+
             '<div class="um-card-info">'+
-            '<span class="um-username">用户名：'+element.username+'</span> <span class="um-password">密码：'+element.password+'</span>'+
+            '<span class="um-username">用户名：'+ htmlspecialchars1(element.username)+'</span> <span class="um-password">密码：'+ htmlspecialchars1(element.password)+'</span>'+
             '</div>'+
             '<div class="button-div">'+
             '<button type="button" class="user-button" onclick="modifyUser(this)" data-backdrop="static" data-toggle="modal" data-target="#userModify">修改</button>'+
@@ -159,3 +166,36 @@ function renderStaffList(list){
 function getThisName(data){
     return (data.parentNode.parentNode.children[0].children[0].innerHTML.split("：")[1]);
 }
+function htmlspecialchars1(str){            
+    str = str.replace(/&/g, '&amp;');  
+    str = str.replace(/</g, '&lt;');  
+    str = str.replace(/>/g, '&gt;');  
+    str = str.replace(/"/g, '&quot;');  
+    str = str.replace(/'/g, '&#039;');  
+    return str;  
+}  
+  
+//这个版本多转换了一些内容  
+function htmlspecialchars2(str) {        
+        var s = "";  
+        if (str.length == 0) return "";  
+        for   (var i=0; i<str.length; i++)  
+        {  
+            switch (str.substr(i,1))  
+            {  
+                case "<": s += "&lt;"; break;  
+                case ">": s += "&gt;"; break;  
+                case "&": s += "&amp;"; break;  
+                case " ":  
+                    if(str.substr(i + 1, 1) == " "){  
+                        s += " &nbsp;";  
+                        i++;  
+                    } else s += " ";  
+                    break;  
+                case "\"": s += "&quot;"; break;  
+                case "\n": s += "<br>"; break;  
+                default: s += str.substr(i,1); break;  
+            }  
+        }  
+        return s;  
+    } 

@@ -1,5 +1,6 @@
 package com.example.cinema.data.promotion;
 
+import com.example.cinema.po.UserChargeRecord;
 import com.example.cinema.po.VIPCard;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -18,6 +19,6 @@ public interface VIPCardMapper {
 
     VIPCard selectCardByUserId(int userId);
 
-
+    void insertUserCharge(UserChargeRecord userChargeRecord);
 
 }

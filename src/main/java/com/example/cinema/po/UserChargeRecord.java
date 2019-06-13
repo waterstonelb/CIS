@@ -5,8 +5,17 @@ package com.example.cinema.po;
  * @date 2019/6/7 ???
  */
 public class UserChargeRecord {
+    private int userId;
     private Double chargeNum;
     private String time;
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     public Double getchargeNum() {
         return chargeNum;

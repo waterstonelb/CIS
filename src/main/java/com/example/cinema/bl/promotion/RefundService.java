@@ -1,4 +1,4 @@
-package com.example.cinema.bl.management;
+package com.example.cinema.bl.promotion;
 
 import com.example.cinema.vo.ResponseVO;
 

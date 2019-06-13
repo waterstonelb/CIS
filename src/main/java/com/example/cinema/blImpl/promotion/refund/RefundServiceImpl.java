@@ -1,7 +1,7 @@
-package com.example.cinema.blImpl.management.refund;
+package com.example.cinema.blImpl.promotion.refund;
 
-import com.example.cinema.bl.management.RefundService;
-import com.example.cinema.data.management.RefundMapper;
+import com.example.cinema.bl.promotion.RefundService;
+import com.example.cinema.data.promotion.RefundMapper;
 import com.example.cinema.po.RefundPolicy;
 import com.example.cinema.vo.RefundPolicyVO;
 import com.example.cinema.vo.ResponseVO;

@@ -1,6 +1,6 @@
 package com.example.cinema.controller.management;
 
-import com.example.cinema.bl.management.RefundService;
+import com.example.cinema.bl.promotion.RefundService;
 import com.example.cinema.vo.RefundPolicyVO;
 import com.example.cinema.vo.ResponseVO;
 

@@ -40,7 +40,7 @@ function showVIPinfo() {
         $("#nonmember-card").css("display", "none");
         $("#member-id").text(sessionStorage.getItem('vipId'));
         $("#member-joinDate").text(sessionStorage.getItem('joinDate').substring(0,10));
-        $("#member-balance").text(sessionStorage.getItem('balance'));
+        $("#member-balance").text(parseFloat(sessionStorage.getItem('balance')).toFixed(2));
         $("#member-name").text(sessionStorage.getItem('cardName'));
         $("#member-description").text("充值满"+sessionStorage.getItem('targetAmount')+"送"+sessionStorage.getItem('discountAmount'));
         $("#member-discount").text("购票享"+sessionStorage.getItem('discount')*10+"折优惠");

@@ -1,4 +1,4 @@
-package com.example.cinema.data.management;
+package com.example.cinema.data.promotion;
 
 import com.example.cinema.po.RefundPolicy;
 

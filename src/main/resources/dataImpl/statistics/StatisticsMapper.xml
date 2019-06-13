@@ -69,7 +69,6 @@
 
     </select>
 
-
     <select id="SelectChargeRecord" resultType="com.example.cinema.po.UserChargeRecord">
         select charge_time as time,charge as chargeNum,user_id as userId from user_charge where user_id=#{id}
     </select>
