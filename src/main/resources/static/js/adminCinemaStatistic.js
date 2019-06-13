@@ -152,6 +152,10 @@ $(document).ready(function() {
     // TODO:
     function getPlacingRate() {
         var date = $("#date").val();
+        if(date=="")
+        {
+            date=new Date().toLocaleDateString();
+        }
         getRequest(
             '/statistics/placing/rate?date='+date,
             function (res) {
