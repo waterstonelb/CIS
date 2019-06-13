@@ -6,7 +6,7 @@ $(document).ready(function () {
     var isLike = false;
 
     getMovie();
-    if (sessionStorage.getItem('role') === 'admin')
+    if ((sessionStorage.getItem('role') === 'admin')||(sessionStorage.getItem('role') === 'manager')||(sessionStorage.getItem('role') === 'staff'))
         getMovieLikeChart();
 
     function getMovieLikeChart() {

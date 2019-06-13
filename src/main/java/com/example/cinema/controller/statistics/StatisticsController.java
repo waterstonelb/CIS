@@ -44,6 +44,8 @@ public class StatisticsController {
 
     @RequestMapping(value = "statistics/placing/rate", method = RequestMethod.GET)
     public ResponseVO getMoviePlacingRateByDate(@RequestParam(required = false) String date){
+    	date=date.replace('/', '-');
+    	System.out.println(date);
         return statisticsService.getMoviePlacingRateByDate(date);
     }
 
