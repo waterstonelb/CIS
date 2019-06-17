@@ -10,8 +10,6 @@ public interface CouponService {
 
     ResponseVO getCouponsByUser(int userId);
 
-    ResponseVO addCoupon(CouponForm couponForm);
-
     ResponseVO issueCoupon(int couponId,int userId);
 
 }

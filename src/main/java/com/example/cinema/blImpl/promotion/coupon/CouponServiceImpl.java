@@ -40,7 +40,7 @@ public class CouponServiceImpl implements CouponService, CouponServiceForBl {
     }
 
     @Override
-    public ResponseVO addCoupon(CouponForm couponForm) {
+    public Coupon addCoupon(CouponForm couponForm) {
         try {
             Coupon coupon=new Coupon();
             coupon.setName(couponForm.getName());
@@ -51,13 +51,12 @@ public class CouponServiceImpl implements CouponService, CouponServiceForBl {
             coupon.setEndTime(couponForm.getEndTime());
             coupon.setLevel(couponForm.getLevel());
             couponMapper.insertCoupon(coupon);
-            return ResponseVO.buildSuccess(coupon);
+            return coupon;
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseVO.buildFailure("失败");
+            return null;
         }
     }
-
     @Override
     public ResponseVO issueCoupon(int couponId, int userId) {
         try {

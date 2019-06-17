@@ -2,6 +2,7 @@ package com.example.cinema.blImpl.promotion.activity;
 
 import com.example.cinema.bl.promotion.ActivityService;
 import com.example.cinema.bl.promotion.CouponService;
+import com.example.cinema.blImpl.promotion.coupon.CouponServiceForBl;
 import com.example.cinema.data.promotion.ActivityMapper;
 import com.example.cinema.po.Activity;
 import com.example.cinema.po.Coupon;
@@ -22,14 +23,15 @@ public class ActivityServiceImpl implements ActivityService,ActivityServiceForBl
     @Autowired
     ActivityMapper activityMapper;
     @Autowired
-    CouponService couponService;
+    CouponServiceForBl couponServiceForBl;
 
     @Override
     @Transactional
     public ResponseVO publishActivity(ActivityForm activityForm) {
         try {
-            ResponseVO vo = couponService.addCoupon(activityForm.getCouponForm());
-            Coupon coupon = (Coupon) vo.getContent();
+            //ResponseVO vo = couponService.addCoupon(activityForm.getCouponForm());
+            //Coupon coupon = (Coupon) vo.getContent();
+            Coupon coupon=couponServiceForBl.addCoupon(activityForm.getCouponForm());
             Activity activity = new Activity();
             activity.setName(activityForm.getName());
             activity.setDescription(activityForm.getName());
