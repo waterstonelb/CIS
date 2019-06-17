@@ -4,6 +4,8 @@ import com.example.cinema.bl.promotion.VIPService;
 import com.example.cinema.vo.VIPCardForm;
 import com.example.cinema.vo.vipCoupon;
 import com.example.cinema.vo.ResponseVO;
+
+import org.apache.coyote.http11.upgrade.UpgradeProcessorBase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +30,11 @@ public class VIPCardController {
     @GetMapping("/getVIPInfo")
     public ResponseVO getVIPInfo(){
         return vipService.getVIPInfo();
+    }
+
+    @PostMapping("/upgrade")
+    public ResponseVO upgrade(@RequestBody VIPCardForm vipCardForm){
+        return vipService.upgradeCard(vipCardForm);
     }
 
     @PostMapping("/charge")

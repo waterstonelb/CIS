@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>影院管理</title>
-    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/cinemaHall.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/cinemaHall.css" />
 
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap.js"></script>
@@ -14,83 +15,95 @@
     <script src="/js/adminCinemaManage.js"></script>
 
 </head>
+
 <body>
-<div class="main-container">
-    <div class="nav-left-container">
-        <div class="nav-user-container" style="margin-bottom: 50px;">
-            <img class="avatar-lg" src="/images/icon.jpg" />
-            <p class="title"></p>
+    <div class="main-container">
+        <div class="nav-left-container">
+            <div class="nav-user-container" style="margin-bottom: 50px;">
+                <img class="avatar-lg" src="/images/icon.jpg" />
+                <p class="title"></p>
+            </div>
+            <ul class="nav nav-pills nav-stacked" id="sidebar">
+                <li role="presentation"><a href="/admin/movie/manage"><i class="icon-film"></i> 电影管理</a></li>
+                <li role="presentation"><a href="/admin/session/manage"><i class="icon-calendar"></i> 排片管理</a></li>
+                <li role="presentation"><a href="/admin/promotion/manage"><i class="icon-gift"></i> 活动管理</a></li>
+                <li role="presentation"><a href="/admin/refund/manage"><i class="icon-refresh"></i> 退票管理</a></li>
+                <li role="presentation" class="active"><a href="#"><i class="icon-cogs"></i> 影院管理</a></li>
+                <li role="presentation"><a href="/admin/cinema/statistic"><i class="icon-bar-chart"></i> 影院统计</a></li>
+            </ul>
         </div>
-        <ul class="nav nav-pills nav-stacked" id="sidebar">
-            <li role="presentation"><a href="/admin/movie/manage"><i class="icon-film"></i> 电影管理</a></li>
-            <li role="presentation"><a href="/admin/session/manage"><i class="icon-calendar"></i> 排片管理</a></li>
-            <li role="presentation"><a href="/admin/promotion/manage"><i class="icon-gift"></i> 活动管理</a></li>
-            <li role="presentation"><a href="/admin/refund/manage"><i class="icon-refresh"></i> 退票管理</a></li>
-            <li role="presentation" class="active"><a href="#"><i class="icon-cogs"></i> 影院管理</a></li>
-            <li role="presentation"><a href="/admin/cinema/statistic"><i class="icon-bar-chart"></i> 影院统计</a></li>
-        </ul>
-    </div>
-    <div class="content-container">
-        <div class="content-item">
-            <span class="title gray-text">常规设置</span>
-            <div class="content-card card" style="
+        <div class="content-container">
+            <div class="content-item">
+                <span class="title gray-text">常规设置</span>
+                <div class="content-card card" style="
             display: flex;
             justify-content: space-between;
         ">
-                <div style="
+                    <div style="
                 padding-top: 10px;
             "><span class="">用户可见排片日期：</span><span id="can-see-num"></span></div>
-                <button type="button" class="btn btn-primary" id="canview-modify-btn">修改</button>
-                <input type="number" class="form-control" id="canview-set-input" style="display: none;width: 200px;">
-                <button type="button" style="display: none" class="btn btn-primary" id="canview-confirm-btn">确认</button>
+                    <button type="button" class="btn btn-primary" id="canview-modify-btn">修改</button>
+                    <input type="number" class="form-control" id="canview-set-input"
+                        style="display: none;width: 200px;">
+                    <button type="button" style="display: none" class="btn btn-primary"
+                        id="canview-confirm-btn">确认</button>
+                </div>
             </div>
-        </div>
-        <div class="content-item">
+            <div class="content-item">
                 <div style="
                 display: flex;
                 justify-content: space-between;
                 padding-right: 20px;
             "><span class="title gray-text">影厅管理</span>
-                       <div> <button type="button" class="btn btn-primary" id="hall-modify-btn" data-toggle="modal" data-target="#editModal">修改影厅</button>
-                        <button type="button" class="btn btn-primary" id="hall-add-btn" data-toggle="modal" data-target="#addModal">增加影厅</button>
-                        <button type="button" class="btn btn-primary" id="hall-delete-btn" data-toggle="modal" data-target="#delModal">删除影厅</button></div></div>
-            <div class="content-card card" id="hall-card">
+                    <div> <button type="button" class="btn btn-primary" id="hall-modify-btn" data-toggle="modal"
+                            data-target="#editModal">修改影厅</button>
+                        <button type="button" class="btn btn-primary" id="hall-add-btn" data-toggle="modal"
+                            data-target="#addModal">增加影厅</button>
+                        <button type="button" class="btn btn-primary" id="hall-delete-btn" data-toggle="modal"
+                            data-target="#delModal">删除影厅</button></div>
+                </div>
+                <div class="content-card card" id="hall-card">
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel">
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">修改影厅</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" role="form">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="select-hall-id"><span class="error-text">*</span>原影厅名称</label>
+                            <label class="col-sm-2 control-label" for="select-hall-id"><span
+                                    class="error-text">*</span>原影厅名称</label>
                             <div class="col-sm-10">
                                 <select id="select-hall-id" class="form-control selector">
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                                <label class="col-sm-2 control-label" for="edit-name"><span class="error-text">*</span>新影厅名称</label>
-                                <div class="col-sm-10">
-                                    <input type="text" id="edit-name" class="form-control" placeholder="请输入新影厅名称"/>
-                                </div>
-                            </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="edit-column"><span class="error-text">*</span>影厅列数</label>
+                            <label class="col-sm-2 control-label" for="edit-name"><span
+                                    class="error-text">*</span>新影厅名称</label>
                             <div class="col-sm-10">
-                                <input type="number" id="edit-column" class="form-control" placeholder="请输入影厅列数"/>
+                                <input type="text" id="edit-name" class="form-control" placeholder="请输入新影厅名称" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="edit-row"><span class="error-text">*</span>影厅行数</label>
+                            <label class="col-sm-2 control-label" for="edit-column"><span
+                                    class="error-text">*</span>影厅列数</label>
                             <div class="col-sm-10">
-                                <input type="number" id="edit-row" class="form-control" placeholder="请输入影厅行数"/>
+                                <input type="number" id="edit-column" class="form-control" placeholder="请输入影厅列数" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="edit-row"><span
+                                    class="error-text">*</span>影厅行数</label>
+                            <div class="col-sm-10">
+                                <input type="number" id="edit-row" class="form-control" placeholder="请输入影厅行数" />
                             </div>
                         </div>
                     </form>
@@ -106,31 +119,35 @@
         </div>
     </div>
 
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel">
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">添加影厅</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" role="form">
                         <div class="form-group">
-                                <label class="col-sm-2 control-label" for="add-name"><span class="error-text">*</span>新影厅名称</label>
-                                <div class="col-sm-10">
-                                    <input type="text" id="add-name" class="form-control" placeholder="请输入新影厅名称"/>
-                                </div>
-                            </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="add-column"><span class="error-text">*</span>影厅列数</label>
+                            <label class="col-sm-2 control-label" for="add-name"><span
+                                    class="error-text">*</span>新影厅名称</label>
                             <div class="col-sm-10">
-                                <input type="number" id="add-column" class="form-control" placeholder="请输入影厅列数"/>
+                                <input type="text" id="add-name" class="form-control" placeholder="请输入新影厅名称" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="add-row"><span class="error-text">*</span>影厅行数</label>
+                            <label class="col-sm-2 control-label" for="add-column"><span
+                                    class="error-text">*</span>影厅列数</label>
                             <div class="col-sm-10">
-                                <input type="number" id="add-row" class="form-control" placeholder="请输入影厅行数"/>
+                                <input type="number" id="add-column" class="form-control" placeholder="请输入影厅列数" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="add-row"><span
+                                    class="error-text">*</span>影厅行数</label>
+                            <div class="col-sm-10">
+                                <input type="number" id="add-row" class="form-control" placeholder="请输入影厅行数" />
                             </div>
                         </div>
                     </form>
@@ -145,17 +162,19 @@
             </div>
         </div>
     </div>
-<div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel">
+    <div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">删除影厅</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" role="form">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="del-hall-id"><span class="error-text">*</span>请选择影厅名称</label>
+                            <label class="col-sm-2 control-label" for="del-hall-id"><span
+                                    class="error-text">*</span>请选择影厅名称</label>
                             <div class="col-sm-10">
                                 <select id="del-hall-id" class="form-control selector">
                                 </select>
@@ -175,4 +194,5 @@
     </div>
 
 </body>
+
 </html>

@@ -153,4 +153,16 @@ public class VIPServiceImpl implements VIPService, VIPServiceForBl {
             return -1;
         }
     }
+
+    @Override
+    public ResponseVO upgradeCard(VIPCardForm vipCardForm){
+        try{
+            double balance=vipCardMapper.selectCardById(vipCardForm.getVipId()).getBalance()-vipCardForm.getAmount();
+            vipCardMapper.updateCard(vipCardForm.getVipId(),balance,vipCardForm.getCardId());
+            return ResponseVO.buildSuccess();
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseVO.buildFailure("升级失败");
+        }
+    }
 }

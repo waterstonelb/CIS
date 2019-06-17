@@ -30,6 +30,8 @@
     <update id="updateCardBalance" >
         update vip_card set balance = #{balance} where id=#{id}
     </update>
-
+    <update id="updateCard">
+        update vip_card set vipactivity_id = #{cardId},balance=#{balance} where id=#{id}
+    </update>
 
 </mapper>

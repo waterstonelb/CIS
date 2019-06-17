@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>购票</title>
     <!-- Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
     <!-- font-asesome图标库 -->
-    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css" />
 
     <!-- 引入css样式文件 -->
-    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/userMember.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="/css/userMember.css" />
 
     <!-- 引入js脚本文件 -->
     <!-- jquery -->
@@ -21,132 +22,174 @@
     <script src="/js/userMember.js"></script>
 
 </head>
+
 <body>
-<div class="nav-top-container">
-    <div class="nav-logo title">CIS电影购票系统</div>
-    <ul class="nav nav-pills">
-        <li role="presentation"><a href="/user/home">首页</a></li>
-        <li role="presentation"><a href="/user/movie">电影</a></li>
-    </ul>
-    <div class="btn-group">
-        <button class="nav-user-container btn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-            <img class="avatar-sm" src="/images/icon.jpg"/>
-            <span class="gray-text" style="vertical-align: middle" id="user-name">&nbsp;<span class="caret"></span></span>
-        </button>
-        <ul class="dropdown-menu">
-            <li><a href="/user/buy">电影票</a></li>
-            <li><a href="#">卡包</a></li>
-            <li><a href="/user/record">消费记录</a></li>
-            <li id="logout"><a href="#">登出</a></li>
+    <div class="nav-top-container">
+        <div class="nav-logo title">CIS电影购票系统</div>
+        <ul class="nav nav-pills">
+            <li role="presentation"><a href="/user/home">首页</a></li>
+            <li role="presentation"><a href="/user/movie">电影</a></li>
         </ul>
+        <div class="btn-group">
+            <button class="nav-user-container btn dropdown-toggle" type="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <img class="avatar-sm" src="/images/icon.jpg" />
+                <span class="gray-text" style="vertical-align: middle" id="user-name">&nbsp;<span
+                        class="caret"></span></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="/user/buy">电影票</a></li>
+                <li><a href="#">卡包</a></li>
+                <li><a href="/user/record">消费记录</a></li>
+                <li id="logout"><a href="#">登出</a></li>
+            </ul>
+        </div>
     </div>
-</div>
-<div class="content-container">
-    <!--非会员-->
-    <div class="card col-md-8 col-md-offset-2" id="nonmember-card" style="display: none;">
-        <div class="header">
-            <div class="title">会员卡</div>
-            <div class="state">非会员</div>
-        </div>
-        <div class="line">
-            <div>成为VIP会员</div>
-            <hr/>
-        </div>
-        <div id="user-vip-list">
-            <!--
+    <div class="content-container">
+        <!--非会员-->
+        <div class="card col-md-8 col-md-offset-2" id="nonmember-card" style="display: none;">
+            <div class="header">
+                <div class="title">会员卡</div>
+                <div class="state">非会员</div>
+            </div>
+            <div class="line">
+                <div>成为VIP会员</div>
+                <hr />
+            </div>
+            <div id="user-vip-list">
+                <!--
             <div class="price"><b id="member-buy-price"></b>元/张</div>
             <div id="member-buy-description" class="description"></div>
             <button onclick="buyClick()">立即购买</button>-->
+            </div>
+        </div>
+
+        <!--会员-->
+        <div class="card col-md-8 col-md-offset-2" id="member-card" style="visibility: hidden;">
+            <div class="header">
+                <div class="title">会员卡</div>
+                <div class="state">VIP</div>
+            </div>
+            <div class="line">
+                <div>会员信息</div>
+                <hr />
+            </div>
+            <div class="info">
+                <div class="content">
+                    <div class="line">
+                        <div><b>会员卡号：</b></div>
+                        <div id="member-id"></div>
+                    </div>
+                    <div class="line">
+                        <div><b>会员卡名称：</b></div>
+                        <div id="member-name"></div>
+                    </div>
+                    <div class="line">
+                        <div><b>入会日期：</b></div>
+                        <div id="member-joinDate"></div>
+                    </div>
+                    <div class="line">
+                        <div><b>充值优惠：</b></div>
+                        <div id="member-description"></div>
+                    </div>
+                    <div class="line">
+                        <div id="member-discount"></div>
+                    </div>
+
+                    <hr />
+
+                    <div class="line">
+                        <div><b>余额：</b></div>
+                        <div id="member-balance"></div>
+                    </div>
+                </div>
+                <button onclick="chargeClick()">立即充值</button>
+            </div>
+            <button id="upgrade-vip" data-toggle="modal" data-target="#upgradeModal">升级会员卡</button>
+        </div>
+
+        <!--优惠券-->
+        <div class="card col-md-8 col-md-offset-2">
+            <div class="header">
+                <div class="title">优惠券</div>
+            </div>
+            <div id="coupon-list"></div>
         </div>
     </div>
 
-    <!--会员-->
-    <div class="card col-md-8 col-md-offset-2" id="member-card" style="visibility: hidden;">
-        <div class="header">
-            <div class="title">会员卡</div>
-            <div class="state">VIP</div>
-        </div>
-        <div class="line">
-            <div>会员信息</div>
-            <hr/>
-        </div>
-        <div class="info">
-            <div class="content">
-                <div class="line">
-                    <div><b>会员卡号：</b></div>
-                    <div id="member-id"></div>
+    <div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">购买会员卡</h4>
                 </div>
-                <div class="line">
-                    <div><b>会员卡名称：</b></div>
-                    <div id="member-name"></div>
+                <div class="modal-body" id="userMember-form">
+                    <div class="form-group">
+                        <label>会员卡ID:<span id="vip-card-id"></span></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="userMember-cardNum"><span class="error-text">*</span>银行卡号</label>
+                        <input class="form-control" id="userMember-cardNum" placeholder="请输入银行卡号">
+                        <p id="userMember-cardNum-error" class="notice">银行卡号不能为空</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="userMember-cardPwd"><span class="error-text">*</span>密码</label>
+                        <input type="password" class="form-control" id="userMember-cardPwd" placeholder="请输入密码">
+                        <p id="userMember-cardPwd-error" class="notice">密码不能为空</p>
+                    </div>
+                    <div class="form-group" id="userMember-amount-group">
+                        <label for="userMember-amount"><span class="error-text">*</span>金额</label>
+                        <input type="number" class="form-control" id="userMember-amount" placeholder="请输入充值金额">
+                        <p id="userMember-amount-error" class="notice">充值金额需要大于0元</p>
+                    </div>
                 </div>
-                <div class="line">
-                    <div><b>入会日期：</b></div>
-                    <div id="member-joinDate"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="confirmCommit()">确定</button>
                 </div>
-                <div class="line">
-                    <div><b>充值优惠：</b></div>
-                    <div id="member-description"></div>
-                </div>
-                <div class="line">
-                    <div id="member-discount"></div>
-                </div>
-
-                <hr/>
-
-                <div class="line">
-                    <div><b>余额：</b></div>
-                    <div id="member-balance"></div>
-                </div>
-            </div>
-            <button onclick="chargeClick()">立即充值</button>
-        </div>
-    </div>
-
-    <!--优惠券-->
-    <div class="card col-md-8 col-md-offset-2">
-        <div class="header">
-            <div class="title">优惠券</div>
-        </div>
-        <div id="coupon-list"></div>
-    </div>
-</div>
-
-<div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">购买会员卡</h4>
-            </div>
-            <div class="modal-body" id="userMember-form">
-                <div class="form-group">
-                    <label>会员卡ID:<span id="vip-card-id"></span></label>
-                </div>
-                <div class="form-group">
-                    <label for="userMember-cardNum"><span class="error-text">*</span>银行卡号</label>
-                    <input class="form-control" id="userMember-cardNum" placeholder="请输入银行卡号">
-                    <p id="userMember-cardNum-error" class="notice">银行卡号不能为空</p>
-                </div>
-                <div class="form-group">
-                    <label for="userMember-cardPwd"><span class="error-text">*</span>密码</label>
-                    <input type="password" class="form-control" id="userMember-cardPwd" placeholder="请输入密码">
-                    <p id="userMember-cardPwd-error" class="notice">密码不能为空</p>
-                </div>
-                <div class="form-group" id="userMember-amount-group">
-                    <label for="userMember-amount"><span class="error-text">*</span>金额</label>
-                    <input type="number" class="form-control" id="userMember-amount" placeholder="请输入充值金额">
-                    <p id="userMember-amount-error" class="notice">充值金额需要大于0元</p>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" onclick="confirmCommit()">确定</button>
             </div>
         </div>
     </div>
-</div>
+    <div class="modal fade" id="upgradeModal" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">选择其他会员卡</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="upgrade-vip-id"><span
+                                    class="error-text">*</span>请选择会员卡种类</label>
+                            <div class="col-sm-10">
+                                <select id="upgrade-vip-id" class="form-control selector">
+                                    <option value="-1">请选择会员卡</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="upgarde-detail">会员卡详情</label>
+                            <div class="col-sm-10">
+                                <div id="upgrade-detail"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <!--
+                <button type="button" class="btn btn-danger" id="schedule-edit-remove-btn">删除</button>
+                -->
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="upgradeClick()">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>

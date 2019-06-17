@@ -21,4 +21,6 @@ public interface VIPCardMapper {
 
     void insertUserCharge(UserChargeRecord userChargeRecord);
 
+    void updateCard(@Param("id") int id,@Param("balance") double balance,@Param("cardId") int cardId);
+
 }

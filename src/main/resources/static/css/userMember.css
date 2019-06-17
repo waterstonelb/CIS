@@ -4,6 +4,20 @@
     margin-bottom: 40px;
 }
 
+.card button{
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px 0;
+    background: #d5de898a;
+    font-size: 16px;
+    color: #fff;
+    line-height: 26px;
+    text-align: center;
+    border: 0px;
+    border-radius: 30px;
+    backdrop-filter: blur(20px);
+}
+
 .card .header {
     display: flex;
     flex-direction: row;

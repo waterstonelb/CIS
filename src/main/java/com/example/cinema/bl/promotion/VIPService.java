@@ -24,5 +24,5 @@ public interface VIPService {
 
     ResponseVO sendCoupon(vipCoupon vipCoupon);
 
-
+    ResponseVO upgradeCard(VIPCardForm vipCardForm);
 }
