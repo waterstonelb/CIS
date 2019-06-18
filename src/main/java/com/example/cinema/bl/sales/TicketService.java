@@ -57,6 +57,11 @@ public interface TicketService {
      */
     ResponseVO cancelTicket(List<Integer> id);
 
+    /**
+     * 出票
+     * @param ticketId
+     * @return
+     */
     ResponseVO issueTicket(int ticketId);
 
 }

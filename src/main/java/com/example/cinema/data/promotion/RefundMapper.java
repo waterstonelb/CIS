@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface RefundMapper{
     /**
-     * 
+     * 增添退票策略
      * @param refund_day
      * @param refund_hour
      * @return
@@ -16,7 +16,7 @@ public interface RefundMapper{
     int addRefundPolicy(@Param("day") Float refund_day,@Param("hour") Float refund_hour);
 
     /**
-     * 
+     * 得到最新的退票策略
      * @return
      */
     RefundPolicy getRefundPolicy();
