@@ -15,7 +15,7 @@ import com.example.cinema.vo.UserChargeRecordVO;
 
 public class UserStatisticsServiceImpl implements UserStatisticsService{
     @Autowired
-    private UserStatisticsMapper statisticsMapper;
+    private UserStatist<icsMapper statisticsMapper;
 	public ResponseVO getUserBuyRecord() {
         try {
             return ResponseVO.buildSuccess(buyRecordList2buyRecordVOList(statisticsMapper.SelectBuyRecord()));

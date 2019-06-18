@@ -2,7 +2,7 @@ package com.example.cinema.blImpl.sales;
 
 import com.example.cinema.blImpl.promotion.refund.RefundServiceForBl;
 import com.example.cinema.bl.sales.TicketService;
-import com.example.cinema.blImpl.management.hall.HallServiceForBl;
+import com.example.cinema.blImpl.management.schedule.HallServiceForBl;
 import com.example.cinema.blImpl.management.schedule.ScheduleServiceForBl;
 import com.example.cinema.blImpl.promotion.activity.ActivityServiceForBl;
 import com.example.cinema.blImpl.promotion.coupon.CouponServiceForBl;
@@ -29,9 +29,9 @@ public class TicketServiceImpl implements TicketService {
     @Autowired
     TicketMapper ticketMapper;
     @Autowired
-    ScheduleServiceForBl scheduleService;
+    ScheduleServiceForBl scheduleServiceForBl;
     @Autowired
-    HallServiceForBl hallService;
+    HallServiceForBl hallServiceForBl;
     @Autowired
     CouponServiceForBl couponServiceForBl;
     @Autowired
@@ -68,7 +68,7 @@ public class TicketServiceImpl implements TicketService {
             }
 
             // 获取totals数据
-            ScheduleItem scheduleItem = scheduleService.getScheduleItemById(ticketForm.getScheduleId());
+            ScheduleItem scheduleItem = scheduleServiceForBl.getScheduleItemById(ticketForm.getScheduleId());
             double totals = scheduleItem.getFare() * ticketForm.getSeats().size();
             List<TicketVO> ticketVOList = new ArrayList<TicketVO>();
             for (int i = 0; i < ticketForm.getSeats().size(); i++) {
@@ -119,8 +119,8 @@ public class TicketServiceImpl implements TicketService {
     public ResponseVO getBySchedule(int scheduleId, int userId) {
         try {
             List<Ticket> tickets = ticketMapper.selectTicketsBySchedule(scheduleId);
-            ScheduleItem schedule = scheduleService.getScheduleItemById(scheduleId);
-            Hall hall = hallService.getHallById(schedule.getHallId());
+            ScheduleItem schedule = scheduleServiceForBl.getScheduleItemById(scheduleId);
+            Hall hall = hallServiceForBl.getHallById(schedule.getHallId());
             int[][] seats = new int[hall.getRow()][hall.getColumn()];
             tickets.stream().forEach(ticket -> {
                 if (ticket.getState() == 1 || ticket.getState() == 3)
@@ -151,7 +151,7 @@ public class TicketServiceImpl implements TicketService {
                     TicketWithScheduleVO ticketWithScheduleVO = new TicketWithScheduleVO();
                     ticketWithScheduleVO.setId(ticket.getId());
                     ticketWithScheduleVO.setUserId(ticket.getUserId());
-                    ticketWithScheduleVO.setSchedule(scheduleService.getScheduleItemById(ticket.getScheduleId()));
+                    ticketWithScheduleVO.setSchedule(scheduleServiceForBl.getScheduleItemById(ticket.getScheduleId()));
                     ticketWithScheduleVO.setColumnIndex(ticket.getColumnIndex());
                     ticketWithScheduleVO.setRowIndex(ticket.getRowIndex());
                     ticketWithScheduleVO.setState(ticket.getState() == 1 ? "已完成" : "已出票");
@@ -202,7 +202,7 @@ public class TicketServiceImpl implements TicketService {
             long thisTime = new Date().getTime();
             for (int Id : id) {
                 Ticket tmpTicket = ticketMapper.selectTicketById(Id);
-                Date scheduleStart = scheduleService.getScheduleItemById(tmpTicket.getScheduleId()).getStartTime();
+                Date scheduleStart = scheduleServiceForBl.getScheduleItemById(tmpTicket.getScheduleId()).getStartTime();
                 if((scheduleStart.getTime()- thisTime)>=(long)24*3600*1000)
                     totals+=tmpTicket.getRealPay()*rVO.getRefund_day();
                 else if((scheduleStart.getTime()- thisTime)>=(long)3600*1000)
@@ -232,7 +232,7 @@ public class TicketServiceImpl implements TicketService {
     private int userGetCoupons(int ticketId) {
         Ticket ticket = ticketMapper.selectTicketById(ticketId);
         int scheduleId = ticket.getScheduleId();
-        int movieId = scheduleService.getScheduleItemById(scheduleId).getMovieId();
+        int movieId = scheduleServiceForBl.getScheduleItemById(scheduleId).getMovieId();
         List<Activity> activities = activityServiceForBl.getActivitiesByMovie(movieId);
         for (Activity avtivity : activities) {
             if (avtivity.getCoupon().getLevel() == 0)
@@ -250,7 +250,7 @@ public class TicketServiceImpl implements TicketService {
     private double useCoupon(int ticketId, int couponId, int numOfTicket) {
         try {
             Ticket ticket = ticketMapper.selectTicketById(ticketId);
-            double oneMoive = scheduleService.getScheduleItemById(ticket.getScheduleId()).getFare();
+            double oneMoive = scheduleServiceForBl.getScheduleItemById(ticket.getScheduleId()).getFare();
             List<Coupon> coupons = couponServiceForBl.getTicketCoupons(ticket.getUserId(), oneMoive * numOfTicket);
             boolean haveCoupon = false;
             for (Coupon coupon : coupons) {
@@ -278,7 +278,7 @@ public class TicketServiceImpl implements TicketService {
             TicketWithScheduleVO tScheduleVO = new TicketWithScheduleVO();
             tScheduleVO.setId(ticket.getId());
             tScheduleVO.setUserId(ticket.getUserId());
-            tScheduleVO.setSchedule(scheduleService.getScheduleItemById(ticket.getScheduleId()));
+            tScheduleVO.setSchedule(scheduleServiceForBl.getScheduleItemById(ticket.getScheduleId()));
             tScheduleVO.setColumnIndex(ticket.getColumnIndex());
             tScheduleVO.setRowIndex(ticket.getRowIndex());
             tScheduleVO.setState("已出票");
