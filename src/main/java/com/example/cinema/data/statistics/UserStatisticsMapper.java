@@ -1,5 +1,6 @@
 package com.example.cinema.data.statistics;
 
+import com.example.cinema.po.AdminUserBuyRecord;
 import com.example.cinema.po.AudiencePrice;
 import com.example.cinema.po.MovieScheduleTime;
 import com.example.cinema.po.MovieTotalBoxOffice;
@@ -25,11 +26,17 @@ public interface UserStatisticsMapper {
      * @param date
      * @return
      */
-    List<UserBuyRecord> SelectBuyRecord();
+    List<UserBuyRecord> SelectBuyRecord(@Param("id") int id);
     /**
      * 查询充值记录
+     * @param id 
      * @param 
      * @return
      */
-    List<UserChargeRecord> SelectChargeRecord();
+    List<UserChargeRecord> SelectChargeRecord(@Param("id") int id);
+    /*
+     * 用户消费排名
+     * @param
+     * @return
+     */
 }

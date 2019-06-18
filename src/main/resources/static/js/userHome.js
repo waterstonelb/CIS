@@ -68,7 +68,7 @@ $(document).ready(function () {
 
     function getMostFavourite() {
         getRequest(
-            "/statistics/userlike",
+            "../movielikestatistics/userlike",
             function (res) {
                 favouriteList = res.content;
                 renderMostFavourite(favouriteList)

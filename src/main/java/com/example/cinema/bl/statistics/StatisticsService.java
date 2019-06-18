@@ -4,6 +4,8 @@ import com.example.cinema.vo.ResponseVO;
 
 import java.util.Date;
 
+import org.apache.ibatis.annotations.Mapper;
+
 /**
  * @author fjj
  * @date 2019/4/16 1:34 PM
@@ -47,20 +49,6 @@ public interface StatisticsService {
      * @return
      */
     ResponseVO getPopularMovies(int days, int movieNum);
-    /**
-     * 获取购票记录
-     * @param id 
-     * @param date
-     * @return
-     */
-    ResponseVO getUserBuyRecord(int id);
-
-    /**
-     * 获取充值记录
-     * @param id 
-     * @return
-     */
-    ResponseVO getUserChargeRecord(int id);
 
     /**
      * 获取用户消费排名
