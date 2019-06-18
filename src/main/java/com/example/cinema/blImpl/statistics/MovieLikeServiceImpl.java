@@ -16,8 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * @author fjj
- * @date 2019/4/28 3:07 PM
+ * @author yzh
+ * @date 2019/6/18 23:39 PM
+ * 实现MovieLikeService接口
  */
 @Service
 public class MovieLikeServiceImpl implements MovieLikeService {

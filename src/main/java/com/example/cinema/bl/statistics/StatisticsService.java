@@ -7,8 +7,9 @@ import java.util.Date;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * @author fjj
- * @date 2019/4/16 1:34 PM
+ * @author yzh
+ * @date 2019/6/18 23:49 PM
+ * 完成影院方统计相关功能
  */
 public interface StatisticsService {
     /**

@@ -1,8 +1,6 @@
 package com.example.cinema.blImpl.statistics;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +9,16 @@ import org.springframework.stereotype.Service;
 import com.example.cinema.bl.statistics.UserStatisticsService;
 import com.example.cinema.blImpl.promotion.vipservice.VIPServiceForBl;
 import com.example.cinema.data.statistics.UserStatisticsMapper;
-import com.example.cinema.po.AdminUserBuyRecord;
 import com.example.cinema.po.UserBuyRecord;
 import com.example.cinema.po.UserChargeRecord;
 import com.example.cinema.vo.ResponseVO;
 import com.example.cinema.vo.UserBuyRecordVO;
 import com.example.cinema.vo.UserChargeRecordVO;
-import com.example.cinema.vo.amountVO;
+/*
+ * @author yzh
+ * @date 2019/6/18 23:30 PM
+ * 实现UserStatisticsService接口
+ */
 @Service
 public class UserStatisticsServiceImpl implements UserStatisticsService{
     @Autowired
@@ -40,9 +41,6 @@ public class UserStatisticsServiceImpl implements UserStatisticsService{
         }
         return UserBuyRecordVOList;
     }
-
-    
-
     @Override
     public ResponseVO getUserChargeRecord(int id) {
         try {

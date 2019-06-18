@@ -9,8 +9,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author fjj
- * @date 2019/4/16 1:43 PM
+ * @author yzh
+ * @date 2019/6/18 23:47 PM
+ * 在数据库层面实现影院统计相关功能
  */
 @Mapper
 public interface StatisticsMapper {

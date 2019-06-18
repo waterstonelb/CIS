@@ -11,7 +11,9 @@ import java.util.List;
 
 
 /**
- * Created by liying on 2019/3/23.
+ * @author yzh
+ * @date 2019/6/18 23:48 PM
+ * 在数据库层面实现想看电影相关操作功能
  */
 @Mapper
 public interface MovieLikeMapper {

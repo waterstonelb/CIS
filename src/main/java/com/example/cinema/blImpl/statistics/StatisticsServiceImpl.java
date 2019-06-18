@@ -24,8 +24,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author fjj
- * @date 2019/4/16 1:34 PM
+ * @author yzh
+ * @date 2019/6/18 23:46 PM
+ * 实现StatisticService接口
  */
 @Service
 public class StatisticsServiceImpl implements StatisticsService {
@@ -46,9 +47,6 @@ public class StatisticsServiceImpl implements StatisticsService {
 
             Date nextDate = getNumDayAfterDate(requireDate, 1);
             return ResponseVO.buildSuccess(movieScheduleTimeList2MovieScheduleTimeVOList(statisticsMapper.selectMovieScheduleTimes(requireDate, nextDate)));
-            //selectmoviescheduletime 返回所有电影票房
-            //然后那个长不辣叽得转vo
-            //最后返回vo 得到id 时间 片名
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseVO.buildFailure("失败");
@@ -104,7 +102,6 @@ public class StatisticsServiceImpl implements StatisticsService {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 requireDate = simpleDateFormat.parse(date);
             }
-            System.out.println(requireDate);
             Date nextDate = getNumDayAfterDate(requireDate, 1);
             return ResponseVO.buildSuccess(PlacingRateList2MovieTotalBoxOfficeVOList(statisticsMapper.selectPlacingRate(requireDate, nextDate)));
         } catch (Exception e) {
@@ -206,15 +203,4 @@ public class StatisticsServiceImpl implements StatisticsService {
         }
         return PlacingRateVOList;
     }
-
-
-    private List<UserChargeRecordVO> chargeRecordList2buyRecordVOList(List<UserChargeRecord> userChargeRecord) {
-        List<UserChargeRecordVO> UserChargeRecordVOList = new ArrayList<>();
-        for (UserChargeRecord userchargeRecord : userChargeRecord) {
-            UserChargeRecordVOList.add(new UserChargeRecordVO(userchargeRecord));
-        }
-        return UserChargeRecordVOList;
-    }
-
-
 }

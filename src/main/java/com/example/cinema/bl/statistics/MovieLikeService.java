@@ -3,8 +3,9 @@ package com.example.cinema.bl.statistics;
 import com.example.cinema.vo.ResponseVO;
 
 /**
- * @author fjj
- * @date 2019/4/28 3:07 PM
+ * @author yzh
+ * @date 2019/6/18 23:41 PM
+ * 完成想看电影相关功能
  */
 public interface MovieLikeService {
     /**
