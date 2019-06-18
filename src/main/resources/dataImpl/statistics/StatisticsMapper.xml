@@ -57,22 +57,6 @@
     </select>
 
 
-    <select id="SelectBuyRecord" resultType="com.example.cinema.po.UserBuyRecord">
-        select real_pay as realPrice,time,name from
-        ((select * from ticket where ticket.user_id = #{id} and (state = 3 or state = 1))u
-                left join
-                (select name,schedule_ids from movie
-                left join 
-                (select id as schedule_ids,movie_id from schedule)s
-                on movie.id = s.movie_id)t
-             on u.schedule_id = t.schedule_ids)
-
-    </select>
-
-    <select id="SelectChargeRecord" resultType="com.example.cinema.po.UserChargeRecord">
-        select charge_time as time,charge as chargeNum,user_id as userId from user_charge where user_id=#{id}
-    </select>
-
     <select id="AdminSelectChargeRecord" resultType="com.example.cinema.po.AdminChargeRecord">
         select nid as userId,sum(charge) as chargeNum from
             (select user_id as nid,charge from user_charge where charge_time between #{date} and #{nextdate})t

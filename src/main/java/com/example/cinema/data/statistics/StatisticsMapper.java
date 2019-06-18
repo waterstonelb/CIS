@@ -59,8 +59,6 @@ public interface StatisticsMapper {
      * @return
      */
     List<UserBuyRecord> SelectBuyRecord(@Param("id") int id);
-
-
     /**
      * 查询充值记录
      * @param id 

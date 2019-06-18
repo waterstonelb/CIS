@@ -206,35 +206,6 @@ public class StatisticsServiceImpl implements StatisticsService {
     }
 
 
-    public ResponseVO getUserBuyRecord(int id) {
-        try {
-            return ResponseVO.buildSuccess(buyRecordList2buyRecordVOList(statisticsMapper.SelectBuyRecord(id)));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseVO.buildFailure("失败");
-        }
-    }
-
-    private List<UserBuyRecordVO> buyRecordList2buyRecordVOList(List<UserBuyRecord> userBuyRecord) {
-        List<UserBuyRecordVO> UserBuyRecordVOList = new ArrayList<>();
-        for (UserBuyRecord userbuyRecord : userBuyRecord) {
-            UserBuyRecordVOList.add(new UserBuyRecordVO(userbuyRecord));
-        }
-        return UserBuyRecordVOList;
-    }
-
-    
-
-    @Override
-    public ResponseVO getUserChargeRecord(int id) {
-        try {
-            return ResponseVO.buildSuccess(chargeRecordList2buyRecordVOList(statisticsMapper.SelectChargeRecord(id)));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseVO.buildFailure("失败");
-        }
-    }
-
     private List<UserChargeRecordVO> chargeRecordList2buyRecordVOList(List<UserChargeRecord> userChargeRecord) {
         List<UserChargeRecordVO> UserChargeRecordVOList = new ArrayList<>();
         for (UserChargeRecord userchargeRecord : userChargeRecord) {

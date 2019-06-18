@@ -54,20 +54,6 @@ public class StatisticsController {
         return statisticsService.getPopularMovies(days, movieNum);
     }
 
-    @RequestMapping(value = "userstatistics/BuyRecord", method = RequestMethod.GET)
-    public ResponseVO getUserBuyRecord(@RequestParam int id){
-        return statisticsService.getUserBuyRecord(id);
-    }
-    
-    @RequestMapping(value = "userstatistics/ChargeRecord", method = RequestMethod.GET)
-    public ResponseVO getUserChargeRecord(@RequestParam int id){
-        return statisticsService.getUserChargeRecord(id);
-    }
-    
-    @RequestMapping(value = "statistics/userlike", method = RequestMethod.GET)
-    public ResponseVO getLikeMovieList(){
-        return movielikeService.getlikemovielist();
-        }
 
     @RequestMapping(value = "statistics/amount",method = RequestMethod.GET)
     public ResponseVO getAmountHistory(@RequestParam String startDate, @RequestParam String endDate){

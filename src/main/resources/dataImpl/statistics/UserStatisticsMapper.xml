@@ -2,17 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.cinema.data.statistics.UserStatisticsMapper">
     <select id="SelectBuyRecord" resultType="com.example.cinema.po.UserBuyRecord">
-        select real_pay,time,name from ticket
-        left join
-            (select name,schedule_ids from movie
-            left join 
-            (select id as schedule_ids,movie_id from schedule)s
-            on movie.id = s.movie_id)t
-        on ticket.schedule_id = t.schedule_ids
+        select real_pay as realPrice,time,name from
+        ((select * from ticket where ticket.user_id = #{id} and (state = 3 or state = 1))u
+                left join
+                (select name,schedule_ids from movie
+                left join 
+                (select id as schedule_ids,movie_id from schedule)s
+                on movie.id = s.movie_id)t
+             on u.schedule_id = t.schedule_ids)
 
     </select>
 
     <select id="SelectChargeRecord" resultType="com.example.cinema.po.UserChargeRecord">
-        select charge_time as time,charge as chargeNum from user_charge
+        select charge_time as time,charge as chargeNum,user_id as userId from user_charge where user_id=#{id}
     </select>
 </mapper>
