@@ -55,6 +55,8 @@ public class StatisticsServiceImpl implements StatisticsService {
         }
     }
 
+    
+    
     @Override
     public ResponseVO getTotalBoxOffice() {
         try {
