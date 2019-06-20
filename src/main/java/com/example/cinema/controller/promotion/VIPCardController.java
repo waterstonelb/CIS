@@ -5,7 +5,6 @@ import com.example.cinema.vo.VIPCardForm;
 import com.example.cinema.vo.vipCoupon;
 import com.example.cinema.vo.ResponseVO;
 
-import org.apache.coyote.http11.upgrade.UpgradeProcessorBase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

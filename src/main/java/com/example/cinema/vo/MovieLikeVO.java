@@ -2,7 +2,6 @@ package com.example.cinema.vo;
 
 import com.example.cinema.po.MovieLikePO;
 
-import java.sql.Date;
 
 /**
  * @author fjj

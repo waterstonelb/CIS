@@ -1,7 +1,5 @@
 package com.example.cinema.vo;
 
-import com.example.cinema.po.ScheduleItem;
-
 import java.util.Date;
 import java.util.List;
 

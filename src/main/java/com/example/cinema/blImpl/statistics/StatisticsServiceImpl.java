@@ -10,8 +10,6 @@ import com.example.cinema.vo.MovieTotalBoxOfficeVO;
 import com.example.cinema.vo.PlacingRateVO;
 import com.example.cinema.vo.PopularMoviesVO;
 import com.example.cinema.vo.ResponseVO;
-import com.example.cinema.vo.UserBuyRecordVO;
-import com.example.cinema.vo.UserChargeRecordVO;
 import com.example.cinema.vo.amountVO;
 
 import org.springframework.beans.factory.annotation.Autowired;

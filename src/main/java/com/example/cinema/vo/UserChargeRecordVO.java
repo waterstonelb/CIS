@@ -1,6 +1,5 @@
 package com.example.cinema.vo;
 
-import com.example.cinema.po.UserBuyRecord;
 import com.example.cinema.po.UserChargeRecord;
 
 public class UserChargeRecordVO {

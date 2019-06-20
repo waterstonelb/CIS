@@ -2,7 +2,6 @@ package com.example.cinema.data.statistics;
 
 import com.example.cinema.po.DateLike;
 import com.example.cinema.po.MovieLikePO;
-import com.example.cinema.vo.MovieLikeVO;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

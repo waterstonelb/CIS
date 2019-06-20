@@ -2,7 +2,6 @@ package com.example.cinema.data.management;
 
 import com.example.cinema.po.Movie;
 import com.example.cinema.vo.MovieForm;
-import com.example.cinema.vo.MovieVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

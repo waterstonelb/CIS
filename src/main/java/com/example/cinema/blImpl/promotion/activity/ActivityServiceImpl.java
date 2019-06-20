@@ -1,7 +1,6 @@
 package com.example.cinema.blImpl.promotion.activity;
 
 import com.example.cinema.bl.promotion.ActivityService;
-import com.example.cinema.bl.promotion.CouponService;
 import com.example.cinema.blImpl.promotion.coupon.CouponServiceForBl;
 import com.example.cinema.data.promotion.ActivityMapper;
 import com.example.cinema.po.Activity;

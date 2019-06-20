@@ -4,7 +4,6 @@ import com.example.cinema.vo.ResponseVO;
 
 import java.util.Date;
 
-import org.apache.ibatis.annotations.Mapper;
 
 /**
  * @author yzh

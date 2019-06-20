@@ -1,7 +1,6 @@
 package com.example.cinema.data.sales;
 
 import com.example.cinema.po.Ticket;
-import com.example.cinema.po.UserBuyRecord;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

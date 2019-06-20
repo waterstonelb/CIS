@@ -1,6 +1,5 @@
 package com.example.cinema.bl.promotion;
 
-import com.example.cinema.vo.CouponForm;
 import com.example.cinema.vo.ResponseVO;
 
 /**

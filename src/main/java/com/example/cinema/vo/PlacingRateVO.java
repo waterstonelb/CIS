@@ -1,7 +1,6 @@
 package com.example.cinema.vo;
 
 import com.example.cinema.po.PlacingRate;
-import com.example.cinema.po.PopularMovies;
 
 public class PlacingRateVO {
     /**

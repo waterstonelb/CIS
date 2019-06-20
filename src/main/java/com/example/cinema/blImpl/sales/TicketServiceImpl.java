@@ -53,7 +53,7 @@ public class TicketServiceImpl implements TicketService {
                         0);
                 Ticket conflictTicket = ticketMapper.selectTicketByScheduleIdAndSeat(ticket.getScheduleId(),
                         ticket.getColumnIndex(), ticket.getRowIndex());
-                        
+
                 if (conflictTicket != null && conflictTicket.getState() != 2
                         && conflictTicket.getUserId() != ticket.getUserId()) {//新增的票和数据库有冲突，锁座失败
                     return ResponseVO.buildFailure("锁座失败！");
@@ -89,7 +89,7 @@ public class TicketServiceImpl implements TicketService {
             coupon.setName("test");
             coupon.setId(1);
              */
-            @SuppressWarnings("unchecked")
+            // @SuppressWarnings("unchecked")
             List<Coupon> coupons = couponServiceForBl.getCouponByUserId(ticketForm.getUserId());// 获取activity数据
             List<Coupon> rescoupons = new ArrayList<>();
             for (Coupon coupon : coupons) {

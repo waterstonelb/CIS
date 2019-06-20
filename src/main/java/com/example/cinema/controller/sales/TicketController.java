@@ -4,14 +4,10 @@ import com.example.cinema.bl.sales.TicketService;
 import com.example.cinema.vo.ResponseVO;
 import com.example.cinema.vo.TicketBuyForm;
 import com.example.cinema.vo.TicketForm;
-import com.example.cinema.vo.TicketBuyForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Enumeration;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
 
 /**
  * Created by liying on 2019/4/16.
