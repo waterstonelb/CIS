@@ -10,7 +10,7 @@ $(document).ready(function () {
             '/login',
             formData,
             function (res) {
-                if (res.success) {//TODO
+                if (res.success) {
 //                	alert(res);
                     sessionStorage.setItem('username', formData.username);
                     sessionStorage.setItem('id', res.content.id);

@@ -149,7 +149,6 @@ $(document).ready(function() {
                 alert(JSON.stringify(error));
             });
     }
-    // TODO:
     function getPlacingRate() {
         var date = $("#date").val();
         if(date=="")
@@ -190,7 +189,6 @@ $(document).ready(function() {
                 alert(JSON.stringify(error));
             });
     }
-    // TODO:
     function getPolularMovie() {
         var Day = $("#days").val();
         var MovieNum = $("#movieNum").val();

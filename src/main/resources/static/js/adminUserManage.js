@@ -70,7 +70,7 @@ function deleteUser(data){
         });
 }
 function getAddUserForm(){
-    //TODO
+
     return {
         "username":$("#user-name-input").val(),
         "password":$("#user-password-input").val(),
@@ -79,7 +79,7 @@ function getAddUserForm(){
     };
 }
 function getModifyUserForm(){
-    //TODO
+
     console.log(($("#userModifyModalLabel").val()));
     return {
         "username":$("#userModifyModalLabel").text().split(":")[1],

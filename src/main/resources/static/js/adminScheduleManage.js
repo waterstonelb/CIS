@@ -132,7 +132,6 @@ $(document).ready(function() {
             endTime: $("#schedule-end-date-input").val(),
             fare: $("#schedule-price-input").val()
         };
-        //TODO: 需要做一下表单验证？
 
         postRequest(
             '/schedule/add',
@@ -160,7 +159,6 @@ $(document).ready(function() {
             endTime: $("#schedule-edit-end-date-input").val(),
             fare: $("#schedule-edit-price-input").val()
         };
-        //todo 需要做一下表单验证？
 
         postRequest(
             '/schedule/update',

@@ -112,7 +112,6 @@ $(document).ready(function() {
             row: $("#edit-row").val(),
             name: $("#edit-name").val()
         };
-        //TODO: 需要做一下表单验证？
 
         postRequest(
             '/hall/update',
@@ -136,7 +135,7 @@ $(document).ready(function() {
             row: $("#add-row").val(),
             name: $("#add-name").val()
         };
-        //TODO: 需要做一下表单验证？
+
 
         postRequest(
             '/hall/add',
@@ -158,7 +157,6 @@ $(document).ready(function() {
         var form = {
             id: $("#del-hall-id").children('option:selected').val()
         };
-        //TODO: 需要做一下表单验证？
 
         postRequest(
             '/hall/del',
