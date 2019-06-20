@@ -53,13 +53,14 @@ public class TicketServiceImpl implements TicketService {
                         0);
                 Ticket conflictTicket = ticketMapper.selectTicketByScheduleIdAndSeat(ticket.getScheduleId(),
                         ticket.getColumnIndex(), ticket.getRowIndex());
+                        
                 if (conflictTicket != null && conflictTicket.getState() != 2
-                        && conflictTicket.getUserId() != ticket.getUserId()) {
+                        && conflictTicket.getUserId() != ticket.getUserId()) {//新增的票和数据库有冲突，锁座失败
                     return ResponseVO.buildFailure("锁座失败！");
                 }
                 ticketList.add(ticket);
             }
-            for (Ticket t : ticketList) {
+            for (Ticket t : ticketList) {//在数据库中插入票（状态为锁座）
                 Ticket tmpT = ticketMapper.selectTicketByScheduleIdAndSeat(t.getScheduleId(), t.getColumnIndex(),
                         t.getRowIndex());
                 if (tmpT == null || tmpT.getState() != 0) {
@@ -67,7 +68,7 @@ public class TicketServiceImpl implements TicketService {
                 }
             }
 
-            // 获取totals数据
+            // 获取totals数据，totals数据为扣款金额
             //double totals=100;
             ScheduleItem scheduleItem = scheduleServiceForBl.getScheduleItemById(ticketForm.getScheduleId());
             double totals = scheduleItem.getFare() * ticketForm.getSeats().size();
@@ -209,13 +210,14 @@ public class TicketServiceImpl implements TicketService {
      * 根据ticketID退票
      */
     @Override
+    @Transactional
     public ResponseVO cancelTicket(List<Integer> id) {
         try {
             int userId = ticketMapper.selectTicketById(id.get(0)).getUserId();
             double totals = 0;
             RefundPolicyVO rVO = refunServiceForBl.getRefundPolicyVO();
             long thisTime = new Date().getTime();
-            for (int Id : id) {
+            for (int Id : id) {//完成退票操作
                 Ticket tmpTicket = ticketMapper.selectTicketById(Id);
                 Date scheduleStart = scheduleServiceForBl.getScheduleItemById(tmpTicket.getScheduleId()).getStartTime();
                 if((scheduleStart.getTime()- thisTime)>=(long)24*3600*1000)
@@ -224,6 +226,7 @@ public class TicketServiceImpl implements TicketService {
                     totals+=tmpTicket.getRealPay()*rVO.getRefund_hour();
                 ticketMapper.updateTicketState(Id,2);
             }
+            //根据用户性质的不同返回不通VO
             if(vipServiceForBl.getCardId(userId)!=-1){
                 vipServiceForBl.returnTicket(userId, totals+vipServiceForBl.getBalance(userId));
                 System.out.println("会员");
@@ -289,6 +292,7 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
+    @Transactional
     public ResponseVO issueTicket(int ticketId) {
         try {
             ticketMapper.updateTicketState(ticketId, 3);
