@@ -17,10 +17,19 @@ public class ActivityController {
     @Autowired
     ActivityService activityService;
 
+    /**
+     * 发布活动
+     * @param activityForm
+     * @return
+     */
     @PostMapping("/publish")
     public ResponseVO publishActivity(@RequestBody ActivityForm activityForm){
         return activityService.publishActivity(activityForm);
     }
+    /**
+     * 查询活动
+     * @return
+     */
     @GetMapping("/get")
     public ResponseVO getActivities(){
         return activityService.getActivities();

@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
+ * 账户相关操作
  * @author huwen
  * @date 2019/3/23
  */

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
+ * 影厅增删改查等操作
  * @author fjj
  * @date 2019/4/11 3:46 PM
  */

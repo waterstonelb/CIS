@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
+ * 电影信息相关操作
  * @author fjj
  * @date 2019/3/12 6:26 PM
  */

@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.List;
 
-/**
+/**电影票相关操作
  * Created by liying on 2019/4/16.
  */
 @Mapper

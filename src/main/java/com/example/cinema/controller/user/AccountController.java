@@ -21,6 +21,13 @@ public class AccountController {
     private final static String ACCOUNT_INFO_ERROR="用户名或密码错误";
     @Autowired
     private AccountService accountService;
+
+    /**
+     * 登录
+     * @param userForm
+     * @param session
+     * @return
+     */
     @PostMapping("/login")
     public ResponseVO login(@RequestBody UserForm userForm, HttpSession session){
         UserVO user = accountService.login(userForm);
@@ -31,11 +38,21 @@ public class AccountController {
         session.setAttribute(InterceptorConfiguration.SESSION_KEY,userForm);
         return ResponseVO.buildSuccess(user);
     }
+    /**
+     * 注册
+     * @param userForm
+     * @return
+     */
     @PostMapping("/register")
     public ResponseVO registerAccount(@RequestBody UserForm userForm){
         return accountService.registerAccount(userForm);
     }
 
+    /**
+     * 登出
+     * @param session
+     * @return
+     */
     @PostMapping("/logout")
     public String logOut(HttpSession session){
         session.removeAttribute(InterceptorConfiguration.SESSION_KEY);

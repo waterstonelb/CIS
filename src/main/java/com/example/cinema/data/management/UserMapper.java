@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
+ * 员工增删改查相关操作
  * @author sky
  * @date 2019/6/6
  */

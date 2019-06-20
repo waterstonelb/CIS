@@ -5,6 +5,9 @@ import com.example.cinema.po.RefundPolicy;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+/**
+ * 退票策略
+ */
 @Mapper
 public interface RefundMapper{
     /**

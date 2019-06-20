@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * 排片信息相关操作
  * @author fjj
  * @date 2019/4/11 4:18 PM
  */
