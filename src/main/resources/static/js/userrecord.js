@@ -16,7 +16,6 @@ $(document).ready(function () {
             });
     }
 
-    // TODO:填空
     function renderTicketList(list) {
         var strhtml='';
         for(let scheduleItemwithSeats of list) {
@@ -42,7 +41,6 @@ $(document).ready(function () {
             });
     }
 
-    // TODO:填空
     function renderTicketList2(list) {
         var strhtml2='';
         for(let scheduleItemwithSeats of list) {
