@@ -110,6 +110,19 @@ public class MovieLikeServiceImpl implements MovieLikeService {
             return ResponseVO.buildFailure("失败");
         }
 	}
+	/*
+	 * 这是一个获取movielistpo的桩
+	@Override
+	public ResponseVO getlikemovielist() {
+        	List<MovieLikePO> movielikepolist = new ArrayList<>();
+        	MovieLikePO movielikepo1 = new MovieLikePO();
+        	movielikepo1.setLikeNum(10);
+        	movielikepo1.setmovieid(10);
+        	movielikepo1.setmoviename("black");
+        	movielikepolist.add(movielikepo1);
+            return ResponseVO.buildSuccess(MovieLikeList2DateLikeVOList(movielikepolist));
+        }
+	*/
 	
     private List<MovieLikeVO> MovieLikeList2DateLikeVOList(List<MovieLikePO> MovieLike) {
         List<MovieLikeVO> MovieLikeVOList = new ArrayList<>();

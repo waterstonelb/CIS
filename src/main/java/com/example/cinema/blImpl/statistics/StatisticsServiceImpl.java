@@ -122,6 +122,22 @@ public class StatisticsServiceImpl implements StatisticsService {
             return ResponseVO.buildFailure("查询历史消费总额失败排名");
         }
     }
+    
+    /*
+     * 桩
+     * 这是获取adminuserrecordlist的桩
+    @Override
+    public ResponseVO getAmountHistory(String startDate, String endDate) {
+        	List<AdminUserBuyRecord> adminuserbuyrecord = new ArrayList<>();
+            AdminUserBuyRecord adminuserbuyrecord1 = new AdminUserBuyRecord();
+            adminuserbuyrecord1.setRealPrice(100);
+            adminuserbuyrecord1.setUserId(10);
+            adminuserbuyrecord.add(adminuserbuyrecord1);
+            return ResponseVO.buildSuccess(amountPO2VO(adminuserbuyrecord));
+
+    }
+    */
+    
 
     private List<amountVO> amountPO2VO(List<AdminUserBuyRecord> list) {
         try {

@@ -33,6 +33,20 @@ public class UserStatisticsServiceImpl implements UserStatisticsService{
             return ResponseVO.buildFailure("失败");
         }
     }
+    /*
+     * 桩
+     * 这是返回用户消费记录的桩
+	@Override
+    public ResponseVO getUserBuyRecord(int id) {
+        	List<UserBuyRecord> userbuyrecord = new ArrayList<>();
+        	UserBuyRecord userbuyrecord1 = new UserBuyRecord();
+        	userbuyrecord1.setName("general");
+        	userbuyrecord1.setrealPrice(100.0);
+        	userbuyrecord1.settime("2019-6-20 18:00:00");
+        	userbuyrecord.add(userbuyrecord1);
+            return ResponseVO.buildSuccess(buyRecordList2buyRecordVOList(userbuyrecord));
+    }
+    */
 
     private List<UserBuyRecordVO> buyRecordList2buyRecordVOList(List<UserBuyRecord> userBuyRecord) {
         List<UserBuyRecordVO> UserBuyRecordVOList = new ArrayList<>();
@@ -50,6 +64,19 @@ public class UserStatisticsServiceImpl implements UserStatisticsService{
             return ResponseVO.buildFailure("失败");
         }
     }
+    /*
+     * 桩
+    @Override
+    public ResponseVO getUserChargeRecord(int id) {
+        	List<UserChargeRecord> userchargerecord = new ArrayList<>();
+        	UserChargeRecord userchargerecord1 = new UserChargeRecord();
+        	userchargerecord1.setchargeNum(100.0);
+        	userchargerecord1.setUserId(10);
+        	userchargerecord1.settime("2019-6-20 18:00:00");
+        	userchargerecord.add(userchargerecord1);
+        	return ResponseVO.buildSuccess(chargeRecordList2buyRecordVOList(userchargerecord));
+    }
+    */
 
     private List<UserChargeRecordVO> chargeRecordList2buyRecordVOList(List<UserChargeRecord> userChargeRecord) {
         List<UserChargeRecordVO> UserChargeRecordVOList = new ArrayList<>();
