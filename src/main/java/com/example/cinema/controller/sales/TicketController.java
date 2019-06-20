@@ -4,7 +4,7 @@ import com.example.cinema.bl.sales.TicketService;
 import com.example.cinema.vo.ResponseVO;
 import com.example.cinema.vo.TicketBuyForm;
 import com.example.cinema.vo.TicketForm;
-import com.example.cinema.vo.TicketVIPBuyForm;
+import com.example.cinema.vo.TicketBuyForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,8 +23,8 @@ public class TicketController {
     TicketService ticketService;
 
     @PostMapping("/vip/buy")
-    public ResponseVO buyTicketByVIPCard(@RequestBody TicketVIPBuyForm ticketVIPBuyForm){
-        return ticketService.completeByVIPCard(ticketVIPBuyForm);
+    public ResponseVO buyTicketByVIPCard(@RequestBody TicketBuyForm TicketBuyForm){
+        return ticketService.completeByVIPCard(TicketBuyForm);
     }
 
     @PostMapping("/lockSeat")

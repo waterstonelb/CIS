@@ -249,7 +249,6 @@ function payConfirmClick() {
     }
 }
 
-// TODO:填空
 function postPayRequest() {
     $('#order-state').css("display", "none");
     $('#success-state').css("display", "");
@@ -264,6 +263,7 @@ function postPayRequest() {
             },
             function (res) {
                 sessionStorage['balance'] = res.content;
+
             },
             function () {
             }
@@ -272,7 +272,8 @@ function postPayRequest() {
         postRequest(
             "/ticket/buy",
             order,
-            function () {
+            function (res) {
+                alert("您获得了"+res.content+"张优惠券");
             },
             function () {
             }

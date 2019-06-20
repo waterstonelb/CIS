@@ -181,24 +181,24 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     @Transactional
-    public ResponseVO completeByVIPCard(TicketVIPBuyForm ticketVIPBuyForm) {
+    public ResponseVO completeByVIPCard(TicketBuyForm TicketBuyForm) {
         try {
             //测试用数据
             //double totals = 100;
-            double totals = useCoupon(ticketVIPBuyForm.getTicketId().get(0), ticketVIPBuyForm.getCouponId(),
-                    ticketVIPBuyForm.getTicketId().size());
+            double totals = useCoupon(TicketBuyForm.getTicketId().get(0), TicketBuyForm.getCouponId(),
+                    TicketBuyForm.getTicketId().size());
             VIPAtivity vipAtivity = vipActivityServiceForBl
-                    .getVIPActivity(vipServiceForBl.getCardId(ticketVIPBuyForm.getUserId()));
+                    .getVIPActivity(vipServiceForBl.getCardId(TicketBuyForm.getUserId()));
             totals = totals * vipAtivity.getDiscount();
-            double total = totals / ticketVIPBuyForm.getTicketId().size();
+            double total = totals / TicketBuyForm.getTicketId().size();
 
-            for (Integer ticketId : ticketVIPBuyForm.getTicketId()) {
+            for (Integer ticketId : TicketBuyForm.getTicketId()) {
                 ticketMapper.updateTicketState(ticketId, 1);
                 ticketMapper.setRealPay(total, ticketId);
             }
-            vipServiceForBl.buyTicket(ticketVIPBuyForm.getUserId(), totals);
-            userGetCoupons(ticketVIPBuyForm.getTicketId().get(0));
-            double balance = vipServiceForBl.getBalance(ticketVIPBuyForm.getUserId());
+            vipServiceForBl.buyTicket(TicketBuyForm.getUserId(), totals);
+            userGetCoupons(TicketBuyForm.getTicketId().get(0));
+            double balance = vipServiceForBl.getBalance(TicketBuyForm.getUserId());
             return ResponseVO.buildSuccess(balance);
         } catch (Exception e) {
             return ResponseVO.buildFailure("vip购票失败");
@@ -246,14 +246,17 @@ public class TicketServiceImpl implements TicketService {
      */
     private int userGetCoupons(int ticketId) {
         Ticket ticket = ticketMapper.selectTicketById(ticketId);
+        int count=0;
         int scheduleId = ticket.getScheduleId();
         int movieId = scheduleServiceForBl.getScheduleItemById(scheduleId).getMovieId();
         List<Activity> activities = activityServiceForBl.getActivitiesByMovie(movieId);
         for (Activity avtivity : activities) {
-            if (avtivity.getCoupon().getLevel() == 0)
+            if (avtivity.getCoupon().getLevel() == 0) {
+                count++;
                 couponServiceForBl.insertCouponUser(avtivity.getCoupon().getId(), ticket.getUserId());
+            }
         }
-        return activities.size();
+        return count;
     }
 
     /**

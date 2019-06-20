@@ -7,6 +7,8 @@ public class TicketBuyForm {
 
     private int userId;
 
+    private int couponId;
+
     public List<Integer> getTicketId() {
         return ticketId;
     }
@@ -31,6 +33,6 @@ public class TicketBuyForm {
         this.couponId = couponId;
     }
 
-    private int couponId;
+
 
 }

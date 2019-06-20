@@ -3,9 +3,7 @@ package com.example.cinema.test;
 import com.example.cinema.CinemaApplication;
 import com.example.cinema.bl.sales.TicketService;
 import com.example.cinema.data.sales.TicketMapper;
-import com.example.cinema.vo.SeatForm;
-import com.example.cinema.vo.TicketForm;
-import com.example.cinema.vo.TicketWithCouponVO;
+import com.example.cinema.vo.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -54,15 +52,26 @@ public class TicketServiceImplTest {
         return ticketForm;
     }
 
+    private TicketBuyForm buildTicketBuyForm(int userId, int couponId, int ticket){
+        TicketBuyForm ticketBuyForm=new TicketBuyForm();
+        List<Integer> ticketId=new ArrayList<>();
+        ticketId.add(ticket);
+        ticketBuyForm.setTicketId(ticketId);
+        ticketBuyForm.setCouponId(couponId);
+        ticketBuyForm.setUserId(userId);
+        return ticketBuyForm;
+    }
+
+
     /**
      * 正常买票
      */
     @Test
     public void addTicket() {
         TicketWithCouponVO ticketWithCouponVO = (TicketWithCouponVO)ticketService.addTicket(buildTicketForm(11,83,10,10)).getContent();
-        assertEquals((int)ticketWithCouponVO.getTotal(),100);
+        assertEquals(55,(int)ticketWithCouponVO.getTotal());
         assertNotNull(ticketMapper.selectTicketByScheduleIdAndSeat(83,10,10));
-        assertEquals(ticketMapper.selectTicketByScheduleIdAndSeat(83,10,10).getState(),0);
+        assertEquals(0,ticketMapper.selectTicketByScheduleIdAndSeat(83,10,10).getState());
     }
 
     /**
@@ -71,16 +80,45 @@ public class TicketServiceImplTest {
     @Test
     public void addTicket_2() {
         ticketService.addTicket(buildTicketForm(11,83,10,10));
-        assertEquals(ticketService.addTicket(buildTicketForm(10,83,10,10)).getMessage(),"锁座失败！");
-        assertEquals(ticketMapper.selectTicketByScheduleIdAndSeat(83,10,10).getUserId(),11);
+        assertEquals("锁座失败！",ticketService.addTicket(buildTicketForm(10,83,10,10)).getMessage());
+        assertEquals(11,ticketMapper.selectTicketByScheduleIdAndSeat(83,10,10).getUserId());
+    }
+
+    /*
+     *测试
+     */
+    @Test
+    public void addTicket_3(){
+        TicketWithCouponVO ticketWithCouponVO = (TicketWithCouponVO)ticketService.addTicket(buildTicketForm(11,85,10,10)).getContent();
+        assertEquals(100,(int)ticketWithCouponVO.getTotal());
+        assertNotNull(ticketMapper.selectTicketByScheduleIdAndSeat(85,10,10));
+        assertEquals(0,ticketMapper.selectTicketByScheduleIdAndSeat(85,10,10).getState());
+    }
+
+    /*
+    测试购票
+     */
+    @Test
+    public void completeTicket() {
+        TicketWithCouponVO ticketWithCouponVO=(TicketWithCouponVO)ticketService.addTicket(buildTicketForm(11,85,1,1)).getContent();
+        assertEquals(1,ticketService.completeTicket(buildTicketBuyForm(11,1,ticketWithCouponVO.getTicketVOList().get(0).getId())).getContent());
     }
 
     @Test
-    public void completeTicket() {
-
+    public void completeTicket_2(){
+        TicketWithCouponVO ticketWithCouponVO=(TicketWithCouponVO)ticketService.addTicket(buildTicketForm(12,85,1,1)).getContent();
+        assertEquals(1,ticketService.completeTicket(buildTicketBuyForm(12,1,ticketWithCouponVO.getTicketVOList().get(0).getId())).getContent());
     }
 
     @Test
     public void completeByVIPCard() {
+        TicketWithCouponVO ticketWithCouponVO=(TicketWithCouponVO)ticketService.addTicket(buildTicketForm(10,85,1,2)).getContent();
+        assertEquals(17712.2,ticketService.completeByVIPCard(buildTicketBuyForm(10,1,ticketWithCouponVO.getTicketVOList().get(0).getId())).getContent());
+    }
+
+    @Test
+    public void completeByVIPCard_2() {
+        TicketWithCouponVO ticketWithCouponVO=(TicketWithCouponVO)ticketService.addTicket(buildTicketForm(10,85,1,3)).getContent();
+        assertEquals(17708.2,ticketService.completeByVIPCard(buildTicketBuyForm(10,0,ticketWithCouponVO.getTicketVOList().get(0).getId())).getContent());
     }
 }

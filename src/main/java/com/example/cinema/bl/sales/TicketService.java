@@ -47,7 +47,7 @@ public interface TicketService {
      * @param ticketVIPBuyFrom
      * @return
      */
-    ResponseVO completeByVIPCard(TicketVIPBuyForm ticketVIPBuyFrom);
+    ResponseVO completeByVIPCard(TicketBuyForm ticketVIPBuyFrom);
 
     /**
      * TODO:取消锁座（只有状态是"锁定中"的可以取消）
