@@ -18,6 +18,11 @@ public class CouponController {
     @Autowired
     CouponService couponService;
 
+    /**
+     * 根据用户Id查询优惠券
+     * @param userId
+     * @return
+     */
     @GetMapping("{userId}/get")
     public ResponseVO getCoupons(@PathVariable int userId){
         return couponService.getCouponsByUser(userId);
