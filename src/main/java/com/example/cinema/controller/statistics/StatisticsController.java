@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
 @RestController
 public class StatisticsController {
     @Autowired
-    private StatisticsService statisticsService;e;
+    private StatisticsService statisticsService;
     /**
      * 获取某日各影片排片率统计数据
      * @param date

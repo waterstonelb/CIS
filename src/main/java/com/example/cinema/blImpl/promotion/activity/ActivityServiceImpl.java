@@ -80,9 +80,15 @@ public class ActivityServiceImpl implements ActivityService,ActivityServiceForBl
 
     @Override
     public List<Activity> getActivitiesByMovie(int movieId){
-        List<Activity> activities=activityMapper.selectActivitiesWithoutMovie();
-        activities.addAll(activityMapper.selectActivitiesByMovie(movieId));
-        return activities;
+        try {
+            List<Activity> activities=activityMapper.selectActivitiesWithoutMovie();
+            activities.addAll(activityMapper.selectActivitiesByMovie(movieId));
+            return activities;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+
     }
 
 }

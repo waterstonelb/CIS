@@ -8,6 +8,7 @@ import com.example.cinema.vo.ResponseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +29,15 @@ public class CouponServiceImpl implements CouponService, CouponServiceForBl {
             return ResponseVO.buildFailure("失败");
         }
     }
-
+    /*为其他bl提供的桩
+    public List<Coupon> getCouponByUserId(int userId){
+        List<Coupon> coupons=new ArrayList<>();
+        Coupon coupon=new Coupon();
+        coupon.setName("test");
+        coupon.setId(1);
+        coupons.add(coupon);
+        return coupons;
+    }*/
     @Override
     public List<Coupon> getCouponByUserId(int userId){
         try {
@@ -88,6 +97,14 @@ public class CouponServiceImpl implements CouponService, CouponServiceForBl {
         }
     }
 
+    /*为其他bl提供的桩
+    public Coupon getCoupon(int couponId){
+        Coupon coupon=new Coupon();
+        coupon.setId(1);
+        coupon.setName("test");
+        return coupon;
+    }
+     */
     @Override
     public Coupon getCoupon(int couponId){
         try{

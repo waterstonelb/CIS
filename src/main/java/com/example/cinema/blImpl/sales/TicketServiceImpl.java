@@ -68,15 +68,26 @@ public class TicketServiceImpl implements TicketService {
             }
 
             // 获取totals数据
+            //double totals=100;
             ScheduleItem scheduleItem = scheduleServiceForBl.getScheduleItemById(ticketForm.getScheduleId());
             double totals = scheduleItem.getFare() * ticketForm.getSeats().size();
             List<TicketVO> ticketVOList = new ArrayList<TicketVO>();
+            //锁座
             for (int i = 0; i < ticketForm.getSeats().size(); i++) {
                 Ticket nticket = ticketMapper.selectTicketByScheduleIdAndSeat(ticketForm.getScheduleId(),
                         ticketForm.getSeats().get(i).getColumnIndex(), ticketForm.getSeats().get(i).getRowIndex());
                 ticketVOList.add(nticket.getVO());
             }
             // 获取coupon数据
+            /*
+            List<Coupon> rescoupons = new ArrayList<>();
+            Coupon coupon=new Coupon();
+            coupon.setDescription("test");
+            coupon.setLevel(0);
+            coupon.setDiscountAmount(10);
+            coupon.setName("test");
+            coupon.setId(1);
+             */
             @SuppressWarnings("unchecked")
             List<Coupon> coupons = couponServiceForBl.getCouponByUserId(ticketForm.getUserId());// 获取activity数据
             List<Coupon> rescoupons = new ArrayList<>();
@@ -107,6 +118,8 @@ public class TicketServiceImpl implements TicketService {
                 ticketMapper.updateTicketState(ticketId, 1);
                 ticketMapper.setRealPay(total, ticketId);
             }
+            //测试用数据
+            //int numOfCoupon = 2;
             int numOfCoupon = userGetCoupons(ticketBuyForm.getTicketId().get(0));
             return ResponseVO.buildSuccess(numOfCoupon);
         } catch (Exception e) {
@@ -170,6 +183,8 @@ public class TicketServiceImpl implements TicketService {
     @Transactional
     public ResponseVO completeByVIPCard(TicketVIPBuyForm ticketVIPBuyForm) {
         try {
+            //测试用数据
+            //double totals = 100;
             double totals = useCoupon(ticketVIPBuyForm.getTicketId().get(0), ticketVIPBuyForm.getCouponId(),
                     ticketVIPBuyForm.getTicketId().size());
             VIPAtivity vipAtivity = vipActivityServiceForBl

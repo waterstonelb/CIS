@@ -10,7 +10,12 @@ public interface VIPActivityService{
      * @return List<vip_activity>
      */
     ResponseVO getCards();
-
+    
+    /**
+     * 根据ID获取card
+     * @param cardId
+     * @return
+     */
     ResponseVO getCardById(int cardId);
 
     /**

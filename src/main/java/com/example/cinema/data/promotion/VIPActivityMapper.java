@@ -12,7 +12,12 @@ public interface VIPActivityMapper {
      * @return
      */
     List<VIPAtivity> getCards();
-
+    
+    /**
+     * 按照id查找card
+     * @param cardId
+     * @return
+     */
     VIPAtivity getCardById(int cardId);
 
     /**

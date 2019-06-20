@@ -27,6 +27,19 @@ public class VIPActivityServiceImpl implements VIPActivityService, VIPActivitySe
             return null;
         }
     }
+    /*桩
+    public VIPAtivity getVIPActivity(int cardId){
+        VIPAtivity vipActivity=new VIPAtivity();
+        vipActivity.setCardName("测试卡");
+        vipActivity.setCardPrice(100);
+        vipActivity.setDiscount(0.9);
+        vipActivity.setDiscountAmount(10);
+        vipActivity.setTargetAmount(200);
+        vipActivity.setId(1);
+        vipActivity.setStatus(1);
+        return VIPAtivity;
+    }
+     */
 
     @Override
     public ResponseVO getCards() {
