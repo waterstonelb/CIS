@@ -15,11 +15,20 @@ public class HallController {
     @Autowired
     private HallService hallService;
 
+    /**
+     * 查询所有影厅
+     * @return
+     */
     @RequestMapping(value = "hall/all", method = RequestMethod.GET)
     public ResponseVO searchAllHall(){
         return hallService.searchAllHall();
     }
 
+    /**
+     * 更新影厅
+     * @param updateHall
+     * @return
+     */
     @RequestMapping(value = "hall/update", method = RequestMethod.POST)
     public ResponseVO updateHall(@RequestBody HallVO updateHall){
         return hallService.updateHall(updateHall);
