@@ -161,14 +161,14 @@ public class TicketServiceImpl implements TicketService {
         try {
             List<TicketWithScheduleVO> ticketWithScheduleVOS = new ArrayList<>();
             for (Ticket ticket : ticketMapper.selectTicketByUser(userId)) {
-                if (ticket.getState() == 1 || ticket.getState() == 3) {
+                if (ticket.getState() == 1 || ticket.getState() == 3 || ticket.getState() == 0) {
                     TicketWithScheduleVO ticketWithScheduleVO = new TicketWithScheduleVO();
                     ticketWithScheduleVO.setId(ticket.getId());
                     ticketWithScheduleVO.setUserId(ticket.getUserId());
                     ticketWithScheduleVO.setSchedule(scheduleServiceForBl.getScheduleItemById(ticket.getScheduleId()));
                     ticketWithScheduleVO.setColumnIndex(ticket.getColumnIndex());
                     ticketWithScheduleVO.setRowIndex(ticket.getRowIndex());
-                    ticketWithScheduleVO.setState(ticket.getState() == 1 ? "已完成" : "已出票");
+                    ticketWithScheduleVO.setState(ticket.getState() == 1 ? "已完成" : (ticket.getState()==0 ? "已锁座":"已出票"));
                     ticketWithScheduleVO.setTime(ticket.getTime());
 
                     ticketWithScheduleVOS.add(ticketWithScheduleVO);
