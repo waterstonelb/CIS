@@ -8,12 +8,30 @@ import com.example.cinema.vo.ResponseVO;
  */
 public interface ActivityService {
     
+    /**
+     * 发布活动
+     * @param activityForm
+     * @return
+     */
     ResponseVO publishActivity(ActivityForm activityForm);
 
+    /**
+     * 获取活动
+     * @return
+     */
     ResponseVO getActivities();
 
+    /**
+     * 通过电影Id筛选活动
+     * @param movieId
+     * @return
+     */
     ResponseVO selectActivitiesByMovie(int movieId);
 
+    /**
+     * 筛选面向所有电影的活动
+     * @return
+     */
     ResponseVO selectActivitiesWithoutMovie();
 
 
