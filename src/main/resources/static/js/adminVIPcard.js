@@ -143,6 +143,10 @@ $(document).ready(function(){
        );
     });
     $("#vip-mod-btn").click(function () {
+        if($("#vip-discount-mod-input").val()>1){
+            alert("打折优惠不能超过十折");
+            return;
+        }
         var form={
             id: $("#vip-id-mod-input").val(),
             cardName: $("#vip-name-mod-input").val(),
@@ -168,6 +172,10 @@ $(document).ready(function(){
         );
     });
     $("#vip-form-btn").click(function () {
+        if($("#vip-discount-input").val()>1){
+            alert("打折优惠不能超过十折");
+            return;
+        }
         var form={
             cardName: $("#vip-name-input").val(),
             cardPrice: $("#vip-price-input").val(),
